@@ -79,4 +79,4 @@ def get_last_weekly_folder(driver, target_url):
                  f"Last created folder is {current_name} ({get_url('last_weekly', current_name)})\n" \
                  f"Better luck next time!"
 
-    return output
+    return output, current_name

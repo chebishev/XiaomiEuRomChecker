@@ -27,7 +27,7 @@ class DevicesAdmin(admin.ModelAdmin):
     list_display = ['code_name', 'market_name', 'rom_name', 'rom_options']
     filter_fields = ['code_name', 'market_name', 'rom_name', 'rom_options']
     # ordering = ['id', 'code_name', 'market_name', 'rom_name', 'rom_options']
-    ordering = ['market_name']
+    ordering = ['code_name']
     actions = [change_rom_both, change_rom_weekly, change_rom_stable]
 
 

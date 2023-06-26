@@ -64,6 +64,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'XiaomiEuRomChecker.core.processors.django_version',
+                'XiaomiEuRomChecker.core.processors.latest_weekly'
             ],
         },
     },
