@@ -1,5 +1,5 @@
 from django.contrib import admin
-from XiaomiEuRomChecker.core.models import AvailableDevicesModel
+from XiaomiEuRomChecker.core.models import AvailableDevicesModel, FoldersModel
 
 
 # next 3 functions are needed to create new actions in the admin page
@@ -35,3 +35,10 @@ admin.site.register(AvailableDevicesModel, DevicesAdmin)
 
 # changing admin header
 admin.site.site_header = "xiaomi.eu Rom Checker Admin Panel"
+
+
+class FoldersAdmin(admin.ModelAdmin):
+    list_display = ['folder_name', 'last_modification_date']
+
+
+admin.site.register(FoldersModel, FoldersAdmin)

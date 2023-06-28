@@ -4,6 +4,8 @@ from selenium.webdriver.edge.options import Options
 from selenium.webdriver.edge.service import Service as EdgeService
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
+from XiaomiEuRomChecker.core.models import FoldersModel
+
 
 def get_driver():
     # options - in order to make headless search with Edge
@@ -80,3 +82,25 @@ def get_last_weekly_folder(driver, target_url):
                  f"Better luck next time!"
 
     return output, current_name
+
+
+def update_folders_in_database():
+    current_driver = get_driver()
+    url = get_url('weekly')
+    current_driver.get(url)
+    # getting all data in the page by id 'files_list'
+    folders = current_driver.find_element("xpath", '//*[@id="files_list"]')
+    # cutting first 5 items, because are neither folder name nor date
+    all_data = folders.text.split("\n")[5:]
+    # making list with all odd items in the all_data and cutting the last 2 elements, because they are not relevant
+    all_folders = [all_data[index] for index in range(len(all_data)) if index % 2 == 0][:-2]
+
+    # inserting all folder in database
+    for item in all_folders:
+        folder_name, last_modification_date = item.split(" ")
+        print(folder_name, last_modification_date)
+        database = FoldersModel(
+            folder_name=folder_name,
+            last_modification_date=last_modification_date
+        )
+        database.save()

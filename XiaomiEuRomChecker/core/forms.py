@@ -13,8 +13,4 @@ class DevicesForm(forms.ModelForm):
 
     class Meta:
         model = AvailableDevicesModel
-        fields = ['market_name']
-
-
-
-
+        fields = ['market_name', 'choice']

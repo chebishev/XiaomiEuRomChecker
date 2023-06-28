@@ -20,3 +20,8 @@ class AvailableDevicesModel(models.Model):
 
     class Meta:
         verbose_name_plural = 'Available Devices'
+
+
+class FoldersModel(models.Model):
+    folder_name = models.CharField(max_length=20, unique=True)
+    last_modification_date = models.DateField()
