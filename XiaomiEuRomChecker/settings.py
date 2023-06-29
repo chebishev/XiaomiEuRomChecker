@@ -63,7 +63,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'XiaomiEuRomChecker.core.processors.django_version',
-                # 'XiaomiEuRomChecker.core.processors.latest_weekly',
+                'XiaomiEuRomChecker.core.processors.latest_weekly',
                 'XiaomiEuRomChecker.core.processors.all_devices',
             ],
         },
@@ -119,8 +119,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+# TODO: Do not forget to add this line when static folder is populated with files:
+# STATICFILES_DIRS = [BASE_DIR / 'static']
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Manually added, this option will provide manage.py to load data from json files in order to populate the database
+FIXTURE_DIRS = (
+    BASE_DIR / 'core.fixtures',
+)

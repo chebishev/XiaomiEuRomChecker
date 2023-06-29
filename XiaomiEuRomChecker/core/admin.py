@@ -1,9 +1,11 @@
 from django.contrib import admin
 from XiaomiEuRomChecker.core.models import AvailableDevicesModel, FoldersModel
 
+# changing admin header
+admin.site.site_header = "xiaomi.eu Rom Checker Admin Panel"
+
 
 # next 3 functions are needed to create new actions in the admin page
-
 def change_rom_both(self, request, queryset):
     queryset.update(rom_options='both')
 
@@ -23,6 +25,7 @@ change_rom_stable.short_description = 'Change rom_options to "stable"'
 
 
 # Register your models here.
+@admin.register(AvailableDevicesModel)
 class DevicesAdmin(admin.ModelAdmin):
     list_display = ['code_name', 'market_name', 'rom_name', 'rom_options']
     filter_fields = ['code_name', 'market_name', 'rom_name', 'rom_options']
@@ -31,14 +34,6 @@ class DevicesAdmin(admin.ModelAdmin):
     actions = [change_rom_both, change_rom_weekly, change_rom_stable]
 
 
-admin.site.register(AvailableDevicesModel, DevicesAdmin)
-
-# changing admin header
-admin.site.site_header = "xiaomi.eu Rom Checker Admin Panel"
-
-
+@admin.register(FoldersModel)
 class FoldersAdmin(admin.ModelAdmin):
     list_display = ['folder_name', 'last_modification_date']
-
-
-admin.site.register(FoldersModel, FoldersAdmin)

@@ -1,10 +1,13 @@
+"""
+core functionality needed for my web scrapping
+including driver, url, date checking
+"""
+
 from datetime import datetime
 from selenium import webdriver
 from selenium.webdriver.edge.options import Options
 from selenium.webdriver.edge.service import Service as EdgeService
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
-
-from XiaomiEuRomChecker.core.models import FoldersModel
 
 
 def get_driver():
@@ -24,6 +27,13 @@ def get_driver():
 
 
 def get_url(release, folder=''):
+    """
+    Gives a link for the chosen release
+    if it is 'weekly' or 'stable' second parameters isn't used,
+    otherwise it is used in order to concatenate it at the end of the generated link
+    :return: URL
+    """
+    # initial URL that can be modified with various suffixes depending on the release
     static_url = 'https://sourceforge.net/projects/xiaomi-eu-multilang-miui-roms/files/xiaomi.eu/'
 
     available_urls = {
@@ -34,18 +44,37 @@ def get_url(release, folder=''):
     return available_urls[release]
 
 
+def get_date(string):
+    """
+    Extracts year, month and day from string in format YYYY-MM-DD
+    :param string:
+    :return: list of integers [2023, 06, 29]
+    """
+    date_for_splitting = string
+    return [int(x) for x in date_for_splitting.split("-")]
+
+
+def get_date_difference(date):
+    """
+    :param date: is a string in format "2023-06-29"
+    :return: timedelta in days, seconds and microseconds as kwargs
+    """
+    # getting the difference in days (it gave something like "2 days, 14:05:28.657927", which is translated to
+    # number with ".days" in the "if" statement)
+    difference = datetime.now() - datetime(*get_date(date))
+    return difference
+
+
 def check_date(folder_date_list, new_folder_checker):
+    # folder_name is in format "V14.0.23.4.31.DEV" which is MIUI Version, and date in format yy.m.d
+    # date is a string in format "2023-04-31"
     folder_name, date = folder_date_list
 
-    # extracting year, month, day from found_date string
-    found_year, found_month, found_day = [int(x) for x in date.split("-")]
-
-    # getting the difference in days (it gaves something like "2 days, 14:05:28.657927", which is translated to
-    # number with ".days" in the "if" statement)
-    days_difference = datetime.now() - datetime(found_year, found_month, found_day)
-    if days_difference.days < 4:
+    # getting the kwargs (days="", seconds="", microseconds="") from get_date_difference function
+    difference = get_date_difference(date)
+    if difference.days < 4:
         new_folder_checker = True
-        date = f"{found_year}-{found_month}-{found_day}"
+        date = '-'.join(*get_date(date))
     return folder_name, date, new_folder_checker
 
 
@@ -81,26 +110,4 @@ def get_last_weekly_folder(driver, target_url):
                  f"Last created folder is {current_name} ({get_url('last_weekly', current_name)})\n" \
                  f"Better luck next time!"
 
-    return output, current_name
-
-
-def update_folders_in_database():
-    current_driver = get_driver()
-    url = get_url('weekly')
-    current_driver.get(url)
-    # getting all data in the page by id 'files_list'
-    folders = current_driver.find_element("xpath", '//*[@id="files_list"]')
-    # cutting first 5 items, because are neither folder name nor date
-    all_data = folders.text.split("\n")[5:]
-    # making list with all odd items in the all_data and cutting the last 2 elements, because they are not relevant
-    all_folders = [all_data[index] for index in range(len(all_data)) if index % 2 == 0][:-2]
-
-    # inserting all folder in database
-    for item in all_folders:
-        folder_name, last_modification_date = item.split(" ")
-        print(folder_name, last_modification_date)
-        database = FoldersModel(
-            folder_name=folder_name,
-            last_modification_date=last_modification_date
-        )
-        database.save()
+    return output, current_name, found_date
