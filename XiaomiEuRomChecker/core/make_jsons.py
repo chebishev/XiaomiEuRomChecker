@@ -9,12 +9,13 @@ FIXTURE_DIRS = (
 """
 import json
 import pandas as pd
-from XiaomiEuRomChecker.core.functionality import get_driver, get_url
+from XiaomiEuRomChecker.core.functionality import get_driver, get_url, get_table_by_xpath
 
 
 # gets two parameters: Value from function (as list with dictionaries) and the name of the output file
 # writes the data in json format in order to be used with /manage.py loaddata
 def write_json(data, file):
+    # if the doesn't
     with open(file, 'w') as outfile:
         json.dump(data, outfile)
         outfile.write('\n')
@@ -43,24 +44,13 @@ def excel_to_json(file):
     # devices will be used as first argument in "write_json" function
     return devices
 
-    # the code bellow won't work from this file, because of some django restrictions, so I am commenting it.
-    # and the data will be "exported" in json file instead
-
-    # device = AvailableDevicesModel(
-    #     code_name=code_name,
-    #     market_name=market_name,
-    #     rom_name=rom_name,
-    #     rom_options=rom_options
-    # )
-    # device.save()
-
 
 def list_to_json():
     current_driver = get_driver()
     url = get_url('weekly')
     current_driver.get(url)
     # getting all data in the page by id 'files_list'
-    folders = current_driver.find_element("xpath", '//*[@id="files_list"]')
+    folders = get_table_by_xpath(current_driver, '//*[@id="files_list"]')
     # cutting first 5 items, because are neither folder name nor date
     all_data = folders.text.split("\n")[5:]
     # making list with all odd items in the all_data and cutting the last 2 elements, because they are not relevant
@@ -81,16 +71,6 @@ def list_to_json():
 
     # this variable will be used in order to populate the "folders.json" using the function "write_json"
     return folders_list
-
-    # inserting all folder in database
-    # this method works only in django files such as views.py
-    # So I am commenting it. JSON file will be populated instead
-
-    # database = FoldersModel(
-    #     folder_name=folder_name,
-    #     last_modification_date=last_modification_date
-    # )
-    # database.save()
 
 
 # Both functions work properly and the json files are filled with needed data

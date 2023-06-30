@@ -8,18 +8,18 @@
             <h1>Choose your device</h1>
             <h5 class="w3-padding-32">In this dropdown menu you will find all available/supported devices that have xiaomi.eu rom. After you choose a device, you will receive info about the code name, rom name and rom options that you will have for download. Registered users will be able to conveniently save all requested links and to manage them in your profile section.</h5>
 
-            <form class="row row-cols-lg-auto g-3 align-items-center" method="post" action="{% url 'index' %}">
+            <form id="device" class="row row-cols-lg-auto g-3 align-items-center" action="{% url 'index' %}" method="post">
                 <div class="col-12">
-                    <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>
-                    <select class="form-select" id="inlineFormSelectPref" name="device" required>
-                        <option selected>Choose...</option>
+                    <label class="visually-hidden" for="device">Preference</label>
+                    <select class="form-select" id="device" name="device" required>
+                        <option selected value="0">Choose...</option>
                         {% for device in device_list %}
                         <option value="{{ device.id }}">{{ device.market_name }}</option>
                         {% endfor %}
                     </select>
                 </div>
                 <div class="col-12">
-                    <button name="get-device-info" type="submit" class="btn btn-primary">Submit</button>
+                    <input name="get-device-info" type="submit" class="btn btn-primary" value="Submit">
                 </div>
            {% csrf_token %}
             </form>
@@ -32,7 +32,8 @@
         </div>
     </div>
 </div>
-
+{% endblock %}
+{% block info %}
 <!-- Second Grid -->
 <div class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
     <div class="w3-content">

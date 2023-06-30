@@ -44,6 +44,10 @@ def get_url(release, folder=''):
     return available_urls[release]
 
 
+def get_table_by_xpath(driver, xpath):
+    return driver.find_element("xpath", xpath)
+
+
 def get_date(string):
     """
     Extracts year, month and day from string in format YYYY-MM-DD
@@ -81,7 +85,7 @@ def check_date(folder_date_list, new_folder_checker):
 def get_last_weekly_folder(driver, target_url):
     driver.get(target_url)  # opens the url in headless mode in order to get the info from sourceforge
     # this one is getting the first([1]) element of the table(by XPath) which is the last added folder
-    table = driver.find_element("xpath", '//*[@id="files_list"]/tbody/tr[1]')
+    table = get_table_by_xpath(driver, '//*[@id="files_list"]/tbody/tr[1]')
 
     # table.text returns string separated by new lines
     # splitting the string into list, because the 1st element (index 0)
@@ -111,3 +115,24 @@ def get_last_weekly_folder(driver, target_url):
                  f"Better luck next time!"
 
     return output, current_name, found_date
+
+
+def get_link_for_specific_device(device, release):
+    """
+    :param device: gets device rom name in order to search for it in the folder and to find the first match
+    :param release: is needed for the right url to be given to the driver
+    :return: download link or None
+    """
+    driver = get_driver()
+    if release == "weekly":
+        target_url = get_url('last_weekly', (get_last_weekly_folder(driver, get_url('weekly'))[1]))
+    else:
+        target_url = get_url('stable')
+    driver.get(target_url)
+    table = get_table_by_xpath(driver, '//*[@id="files_list"]')
+    for item in table.text.split("\n")[5:]:
+        if f"xiaomi.eu_{device}_V14" in item:
+            download_part = item.split(" ")[0]
+            return target_url + "/" + download_part
+    else:
+        return "Nothing found in the last weekly folder!"

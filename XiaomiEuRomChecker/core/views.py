@@ -1,11 +1,29 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from XiaomiEuRomChecker.core.functionality import get_url, get_last_weekly_folder, get_driver, \
+    get_link_for_specific_device
 from XiaomiEuRomChecker.core.models import AvailableDevicesModel
 
 
 def index(request):
     if request.method == 'POST':
-        chosen_device = AvailableDevicesModel.objects.filter(pk=request.POST.get('device')).get()
-        return render(request, 'device_info.html', {'chosen_device': chosen_device})
+        if request.POST.get('device') == "0":
+            request.method = 'GET'
+        else:
+            chosen_device = AvailableDevicesModel.objects.get(id=request.POST.get('device'))
+            return render(request, 'device_info.html', {'chosen_device': chosen_device})
 
     return render(request, 'index.html')
+
+
+def downloads(request, pk):
+    device = AvailableDevicesModel.objects.get(id=pk)
+    links = {
+        'stable': get_url('stable'),
+        'weekly': get_url('weekly'),
+        'last_weekly': get_link_for_specific_device(device.rom_name, 'weekly'),
+        'last_stable': get_link_for_specific_device(device.rom_name, 'stable'),
+        'device': device
+    }
+    if request.method == 'POST':
+        return render(request, 'downloads.html', links)
