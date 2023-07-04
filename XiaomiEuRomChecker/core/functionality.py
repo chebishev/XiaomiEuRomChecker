@@ -78,7 +78,7 @@ def check_date(folder_date_list, new_folder_checker):
     difference = get_date_difference(date)
     if difference.days < 4:
         new_folder_checker = True
-        date = '-'.join(*get_date(date))
+        date = '-'.join(str(x) for x in get_date(date))
     return folder_name, date, new_folder_checker
 
 
