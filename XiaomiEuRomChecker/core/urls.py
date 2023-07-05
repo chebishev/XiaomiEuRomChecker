@@ -3,5 +3,5 @@ from .views import index, downloads
 
 urlpatterns = [
     path('', index, name='index'),
-    path('downloads/<int:pk>', downloads, name='downloads'),
+    path('downloads/<int:pk>/', downloads, name='downloads'),
 ]

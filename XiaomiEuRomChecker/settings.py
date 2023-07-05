@@ -35,7 +35,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'XiaomiEuRomChecker.core'
+    'XiaomiEuRomChecker.core',
+    'XiaomiEuRomChecker.auth_app',
 ]
 
 MIDDLEWARE = [

@@ -1,7 +1,5 @@
-from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
-from XiaomiEuRomChecker.core.functionality import get_url, get_last_weekly_folder, get_driver, \
-    get_link_for_specific_device
+from XiaomiEuRomChecker.core.functionality import get_url, get_link_for_specific_device
 from XiaomiEuRomChecker.core.models import AvailableDevicesModel
 
 

@@ -130,9 +130,9 @@ def get_link_for_specific_device(device, release):
         target_url = get_url('stable')
     driver.get(target_url)
     table = get_table_by_xpath(driver, '//*[@id="files_list"]')
-    for item in table.text.split("\n")[5:]:
-        if f"xiaomi.eu_{device}_V14" in item:
-            download_part = item.split(" ")[0]
-            return target_url + "/" + download_part
+    for item in table.text.split()[5:]:
+        if f"xiaomi.eu_multi_{device}_V14" in item:
+            return target_url + "/" + item
     else:
-        return "Nothing found in the last weekly folder!"
+        return f"Nothing found in the last {release} folder!"
+
