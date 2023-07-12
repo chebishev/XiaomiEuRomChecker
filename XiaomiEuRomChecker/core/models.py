@@ -25,3 +25,9 @@ class AvailableDevicesModel(models.Model):
 class FoldersModel(models.Model):
     folder_name = models.CharField(max_length=20, unique=True)
     last_modification_date = models.DateField()
+
+    def __str__(self):
+        return self.folder_name
+
+    class Meta:
+        verbose_name_plural = "Weekly Folders"

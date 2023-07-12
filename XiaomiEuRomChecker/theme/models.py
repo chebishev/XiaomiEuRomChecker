@@ -31,6 +31,7 @@ class ThemeModel(models.Model):
         ('dark-grey', 'dark-grey'),
         ('black', 'black'),
     )
+    theme_name = models.CharField(max_length=30, default="Custom Colors")
     navbar = models.CharField(max_length=20, choices=OPTIONS, default="w3-red",
                               verbose_name="Navbar")
     small_screens_navbar = models.CharField(max_length=20, choices=OPTIONS, default="w3-white",
@@ -56,4 +57,4 @@ class ThemeModel(models.Model):
         return "Color options"
 
     class Meta:
-        verbose_name_plural = 'Theme'
+        verbose_name_plural = 'Themes'
