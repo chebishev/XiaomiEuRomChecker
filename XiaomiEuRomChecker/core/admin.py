@@ -37,3 +37,5 @@ class DevicesAdmin(admin.ModelAdmin):
 @admin.register(FoldersModel)
 class FoldersAdmin(admin.ModelAdmin):
     list_display = ['folder_name', 'last_modification_date']
+    # To show newest folders first, because the name contains Rom version and date
+    ordering = ['-folder_name']

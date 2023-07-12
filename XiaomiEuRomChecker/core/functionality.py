@@ -135,4 +135,3 @@ def get_link_for_specific_device(device, release):
             return target_url + "/" + item
     else:
         return f"Nothing found in the last {release} folder!"
-

@@ -33,6 +33,7 @@
 <body>
 
 <!-- Navbar -->
+{# TODO Add variable instead of hardcoded color #}
 <div class="w3-top">
     <div class="w3-bar w3-red w3-card w3-left-align w3-large">
         <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red"
@@ -46,6 +47,7 @@
     </div>
 
     <!-- Navbar on small screens -->
+    {# TODO Add variable instead of hardcoded color #}
     <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
         <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
         <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
@@ -55,6 +57,7 @@
 </div>
 
 <!-- Header -->
+{# TODO Add variable instead of hardcoded color #}
 <header class="w3-container w3-red w3-center" style="padding:128px 16px">
     <h1 class="w3-margin w3-jumbo">Find latest xiaomi.eu rom for your device</h1>
     <p class="w3-xlarge">Currently supported MIUI 14 Weekly and Stable</p>
@@ -67,6 +70,7 @@
 {% block info %}
 {% endblock %}
 
+{# TODO Add variable instead of hardcoded color #}
 <div class="w3-container w3-black w3-center w3-opacity w3-padding-64">
     <h1 class="w3-margin w3-xlarge">Latest weekly rom: {{ current_folder }}</h1>
 </div>
@@ -80,8 +84,8 @@
         <a href="https://t.me/chebisheff"><i class="fa fa-telegram w3-hover-opacity"></i></a>
     </div>
     <p>Powered by Django {{ django_current_version }} and chebishev™</p>
-    <a class="w3-button w3-round-xxlarge w3-black w3-margin-bottom" href="{% url 'index' %}" target="_blank">Back to the
-        top</a>
+    {# TODO Add variable instead of hardcoded color #}
+    <a class="w3-button w3-round-xxlarge w3-{{ theme.back_home_button }} w3-margin-bottom" href="{% url 'index' %}" target="_blank">Back home</a>
     <!-- Footer end. -->
 </footer>
 
