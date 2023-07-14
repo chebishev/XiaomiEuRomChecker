@@ -14,7 +14,7 @@ def index(request):
     return render(request, 'index.html')
 
 
-def downloads(request, pk):
+def downloads(request, pk, slug):
     device = AvailableDevicesModel.objects.get(id=pk)
     links = {
         'stable': get_url('stable'),

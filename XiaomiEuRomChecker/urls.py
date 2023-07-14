@@ -21,5 +21,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('XiaomiEuRomChecker.core.urls')),
     path('auth/', include('XiaomiEuRomChecker.auth_app.urls')),
-    path('theme/', include('XiaomiEuRomChecker.theme.urls')),
 ]

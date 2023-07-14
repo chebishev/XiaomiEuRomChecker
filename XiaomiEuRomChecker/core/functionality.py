@@ -4,6 +4,8 @@ including driver, url, date checking
 """
 
 from datetime import datetime
+import random
+
 from selenium import webdriver
 from selenium.webdriver.edge.options import Options
 from selenium.webdriver.edge.service import Service as EdgeService

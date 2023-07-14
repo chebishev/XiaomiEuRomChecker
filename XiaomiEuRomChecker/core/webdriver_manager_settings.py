@@ -4,7 +4,7 @@ import os
 # import logging
 # os.environ['WDM_LOG'] = str(logging.NOTSET)
 
-# To turn of the progress bar which is displayed on downloads:
+# To turn off the progress bar which is displayed on downloads:
 # os.environ['WDM_PROGRESS'] = str(0)
 
 # To save binaries to project.root/.wdm.:

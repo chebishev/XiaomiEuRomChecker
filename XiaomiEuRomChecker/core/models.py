@@ -1,4 +1,5 @@
 from django.db import models
+from django.template.defaultfilters import slugify
 
 
 # Create your models here.
@@ -14,6 +15,9 @@ class AvailableDevicesModel(models.Model):
             ('both', 'both'),
         ]
     )
+
+    def slug(self):
+        return slugify(self.market_name)
 
     def __str__(self):
         return self.market_name

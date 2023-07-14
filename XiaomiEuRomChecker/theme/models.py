@@ -31,30 +31,44 @@ class ThemeModel(models.Model):
         ('dark-grey', 'dark-grey'),
         ('black', 'black'),
     )
-    theme_name = models.CharField(max_length=30, default="Custom Colors")
-    navbar = models.CharField(max_length=20, choices=OPTIONS, default="w3-red",
+    navbar = models.CharField(max_length=20, choices=OPTIONS, default="red",
                               verbose_name="Navbar")
-    small_screens_navbar = models.CharField(max_length=20, choices=OPTIONS, default="w3-white",
+    navbar_hover = models.CharField(max_length=20, choices=OPTIONS, default="white",
+                                    verbose_name="Navbar hover color")
+    small_screens_navbar = models.CharField(max_length=20, choices=OPTIONS, default="white",
                                             verbose_name="Navbar on small screens")
-    header = models.CharField(max_length=20, choices=OPTIONS, default="w3-red",
+    small_screens_menu = models.CharField(max_length=20, choices=OPTIONS, default="red",
+                                          verbose_name="Menu color on small screens")
+    small_screens_menu_hover = models.CharField(max_length=20, choices=OPTIONS, default="white",
+                                                verbose_name="Menu hover color on small screens")
+    header = models.CharField(max_length=20, choices=OPTIONS, default="red",
                               verbose_name="Header")
-    first_grid_icon = models.CharField(max_length=20, choices=OPTIONS, default="w3-red",
+    first_grid_icon = models.CharField(max_length=20, choices=OPTIONS, default="red",
                                        verbose_name="First grid icon")
-    second_grid_icon = models.CharField(max_length=20, choices=OPTIONS, default="w3-red",
+    second_grid_icon = models.CharField(max_length=20, choices=OPTIONS, default="red",
                                         verbose_name="Second grid icon")
-    second_grid_background = models.CharField(max_length=20, choices=OPTIONS, default="w3-light-grey",
+    second_grid_background = models.CharField(max_length=20, choices=OPTIONS, default="light-grey",
                                               verbose_name="Second grid background")
-    second_grid_p_color = models.CharField(max_length=20, choices=OPTIONS, default="w3-grey",
+    second_grid_p_color = models.CharField(max_length=20, choices=OPTIONS, default="grey",
                                            verbose_name="Second grid text color")
-    rom_version_container = models.CharField(max_length=20, choices=OPTIONS, default="w3-black",
+    rom_version_container = models.CharField(max_length=20, choices=OPTIONS, default="black",
                                              verbose_name="Rom version container")
-    back_home_button = models.CharField(max_length=20, choices=OPTIONS, default="w3-black",
+    back_home_button = models.CharField(max_length=20, choices=OPTIONS, default="black",
                                         verbose_name="Back home button")
-
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return "Color options"
 
     class Meta:
         verbose_name_plural = 'Themes'
+
+
+class TipOfTheDayModel(models.Model):
+    main_text = models.TextField(verbose_name="Main text")
+    additional_text = models.TextField(verbose_name="Second text")
+
+    def __str__(self):
+        return "Tip of the day"
+
+    class Meta:
+        verbose_name_plural = 'Tip of the day'
