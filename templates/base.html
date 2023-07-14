@@ -59,17 +59,18 @@
 </div>
 
 <!-- Header -->
-{# TODO Add variable instead of hardcoded color #}
 <header class="w3-container w3-{{ color.header }} w3-center" style="padding:128px 16px">
     <h1 class="w3-margin w3-jumbo">Find latest xiaomi.eu rom for your device</h1>
     <p class="w3-xlarge">Currently supported MIUI 14 Weekly and Stable</p>
-    <button class="w3-button w3-black w3-padding-large w3-large w3-margin-top">Get Started</button>
+    {# TODO: eventual adding of option to change the button color from the admin panel #}
+    <button class="w3-button w3-black w3-padding-large w3-large w3-margin-top" onclick="window.location.href='https://xiaomi.eu/';">Visit xiaomi.eu</button>
 </header>
 
 {% block grids %}
 {% endblock %}
 
 <!-- Second Grid -->
+{# TODO Check if this is the background color option and add the variable insted of hardcoded value  #}
 <div class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
     <div class="w3-content">
         <div class="w3-third w3-center">
@@ -78,7 +79,7 @@
         </div>
 
         <div class="w3-twothird">
-            <h1>Tip of the day:</h1>
+            <h1>Did you know?</h1>
             <h5 class="w3-padding-32">{{ tip.main_text }}</h5>
 
             <p class="w3-text-{{ colors.second_grid_p_color }}">{{ tip.additional_text }}</p>
