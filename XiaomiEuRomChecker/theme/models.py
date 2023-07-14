@@ -30,6 +30,7 @@ class ThemeModel(models.Model):
         ('grey', 'grey'),
         ('dark-grey', 'dark-grey'),
         ('black', 'black'),
+        ('white', 'white')
     )
     navbar = models.CharField(max_length=20, choices=OPTIONS, default="red",
                               verbose_name="Navbar")
