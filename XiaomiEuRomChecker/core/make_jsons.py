@@ -28,7 +28,7 @@ def excel_to_json(file):
     devices = []
 
     for row in excel_data.itertuples():
-        code_name, market_name, rom_name, rom_options = row[1], row[2], row[3], row[4]
+        code_name, market_name, rom_name, rom_options, slug = row[1], row[2], row[3], row[4], row[5]
         devices.append(
             {
                 'model': 'core.AvailableDevicesModel',
@@ -36,7 +36,8 @@ def excel_to_json(file):
                     'code_name': code_name,
                     'market_name': market_name,
                     'rom_name': rom_name,
-                    'rom_options': rom_options
+                    'rom_options': rom_options,
+                    'slug': slug,
                 }
             }
         )
@@ -75,5 +76,5 @@ def list_to_json():
 
 # Both functions work properly and the json files are filled with needed data
 
-# write_json(excel_to_json('initial_devices_list.xlsx'), 'fixtures/devices.json')
+write_json(excel_to_json('initial_devices_list.xlsx'), 'fixtures/devices.json')
 # write_json(list_to_json(), 'fixtures/folders.json')

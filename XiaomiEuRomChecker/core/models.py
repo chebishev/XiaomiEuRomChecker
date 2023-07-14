@@ -15,12 +15,16 @@ class AvailableDevicesModel(models.Model):
             ('both', 'both'),
         ]
     )
-
-    def slug(self):
-        return slugify(self.market_name)
+    slug = models.SlugField(editable=False)
 
     def __str__(self):
         return self.market_name
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if not self.slug:
+            self.slug = slugify(self.market_name)
+        return super().save(*args, **kwargs)
 
     class Meta:
         verbose_name_plural = 'Available Devices'

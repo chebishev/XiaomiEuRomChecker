@@ -7,7 +7,7 @@
         <li><h4>Device code name: </h4>{{ chosen_device.code_name }}</li>
         <li><h5>Device rom name: </h5>{{ chosen_device.rom_name }}</li>
         <li><h6>Device rom options: </h6>{{ chosen_device.rom_options }}</li>
-        <form method="post" action="{% url 'downloads' pk=chosen_device.pk %}">
+        <form method="post" action="{% url 'downloads' pk=chosen_device.pk slug=chosen_device.slug %}">
             <button class="w3-button w3-black w3-padding-large w3-large w3-margin-top w3-center" type="submit">Get
                 download options
             </button>

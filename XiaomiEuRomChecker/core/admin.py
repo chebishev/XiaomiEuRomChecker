@@ -27,8 +27,8 @@ change_rom_stable.short_description = 'Change rom_options to "stable"'
 # Register your models here.
 @admin.register(AvailableDevicesModel)
 class DevicesAdmin(admin.ModelAdmin):
-    list_display = ['code_name', 'market_name', 'rom_name', 'rom_options']
-    filter_fields = ['code_name', 'market_name', 'rom_name', 'rom_options']
+    list_display = ['code_name', 'market_name', 'rom_name', 'rom_options', 'slug']
+    filter_fields = ['code_name', 'market_name', 'rom_name', 'rom_options', 'slug']
     # ordering = ['id', 'code_name', 'market_name', 'rom_name', 'rom_options']
     ordering = ['code_name']
     actions = [change_rom_both, change_rom_weekly, change_rom_stable]
