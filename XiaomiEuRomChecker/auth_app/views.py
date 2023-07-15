@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.contrib.auth.views import LogoutView, LoginView
+from django.shortcuts import render, redirect
 from django.contrib.auth import views as auth_views, login
 from django.contrib.auth import forms as auth_forms
 from django.urls import reverse_lazy
@@ -19,9 +20,14 @@ class RegisterUserView(views.CreateView):
         return result
 
 
-class LoginUserView(views.View):
-    pass
+class LoginUserView(LoginView):
+    template_name = 'auth_app/login.html'
 
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect(self.request.GET.get('next', reverse_lazy('index')))
+        return super().dispatch(request, *args, **kwargs)
 
-class LogoutUserView(views.View):
-    pass
+class LogoutUserView(LogoutView):
+    redirect_url = reverse_lazy('index')
+

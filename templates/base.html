@@ -41,20 +41,35 @@
            href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i
                 class="fa fa-bars"></i></a>
         <a href="{% url 'index' %}" class="w3-bar-item w3-button w3-padding-large w3-{{ color.navbar_hover }}">Home</a>
-        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-{{ color.navbar_hover }}">Link
-            1</a>
-        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-{{ color.navbar_hover }}">Link
-            2</a>
-        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-{{ color.navbar_hover }}">Link
-            3</a>
+        {% if request.user.is_authenticated %}
+            <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-{{ color.navbar_hover }}">My
+                links</a>
+            <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-{{ color.navbar_hover }}">My device</a>
+            <a href="{% url 'logout' %}"
+               class="w3-right w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-{{ color.navbar_hover }}">Sign
+                out</a>
+            <a class="w3-right w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Hello, <span id="wait"></span></a>
+
+
+        {% else %}
+            <a href="{% url 'register' %}"
+               class="w3-right w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-{{ color.navbar_hover }}">Register</a>
+            <a href="{% url 'login' %}"
+               class="w3-right w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-{{ color.navbar_hover }}">Login</a>
+        {% endif %}
     </div>
 
     <!-- Navbar on small screens -->
     <div id="navDemo"
          class="w3-bar-block w3-{{ color.small_screens_navbar }} w3-hide w3-hide-large w3-hide-medium w3-large">
-        <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
-        <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
-        <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
+        {% if request.user.is_authenticated %}
+        <a href="#" class="w3-bar-item w3-button w3-padding-large">My links</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding-large">My device</a>
+        <a href="{% url 'logout' %}" class="w3-bar-item w3-button w3-padding-large">Sign out</a>
+        {% else %}
+        <a href="{% url 'register' %}" class="w3-bar-item w3-button w3-padding-large">Register</a>
+        <a href="{% url 'login' %}" class="w3-bar-item w3-button w3-padding-large">Login</a>
+        {% endif %}
     </div>
 </div>
 
@@ -63,7 +78,9 @@
     <h1 class="w3-margin w3-jumbo">Find latest xiaomi.eu rom for your device</h1>
     <p class="w3-xlarge">Currently supported MIUI 14 Weekly and Stable</p>
     {# TODO: eventual adding of option to change the button color from the admin panel #}
-    <button class="w3-button w3-black w3-padding-large w3-large w3-margin-top" onclick="window.location.href='https://xiaomi.eu/';">Visit xiaomi.eu</button>
+    <button class="w3-button w3-black w3-padding-large w3-large w3-margin-top"
+            onclick="window.location.href='https://xiaomi.eu/';">Visit xiaomi.eu
+    </button>
 </header>
 
 {% block grids %}
@@ -71,23 +88,22 @@
 
 {# in case of missing tips in the data base #}
 {% if tip %}
-<!-- Second Grid -->
-{# TODO Check if this is the background color option and add the variable insted of hardcoded value  #}
-<div class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
-    <div class="w3-content">
-        <div class="w3-third w3-center">
+    <!-- Second Grid -->
+    <div class="w3-row-padding w3-{{ color.second_grid_background }} w3-padding-64 w3-container">
+        <div class="w3-content">
+            <div class="w3-third w3-center">
 
-            <i class="fa fa-info w3-padding-64 w3-text-{{ color.second_grid_icon }} w3-margin-right"></i>
-        </div>
+                <i class="fa fa-info w3-padding-64 w3-text-{{ color.second_grid_icon }} w3-margin-right"></i>
+            </div>
 
-        <div class="w3-twothird">
-            <h1>Did you know?</h1>
-            <h5 class="w3-padding-32">{{ tip.main_text }}</h5>
+            <div class="w3-twothird">
+                <h1>Did you know?</h1>
+                <h5 class="w3-padding-32">{{ tip.main_text }}</h5>
 
-            <p class="w3-text-{{ colors.second_grid_p_color }}">{{ tip.additional_text }}</p>
+                <p class="w3-text-{{ colors.second_grid_p_color }}">{{ tip.additional_text }}</p>
+            </div>
         </div>
     </div>
-</div>
 {% endif %}
 <div class="w3-container w3-{{ color.rom_version_container }} w3-center w3-opacity w3-padding-64">
     <h1 class="w3-margin w3-xlarge">Latest weekly rom: {{ current_folder }}</h1>
@@ -116,6 +132,25 @@
             x.className = x.className.replace(" w3-show", "");
         }
     }
+
+    {# This it the code for the floating username #}
+    const usernameLength = {{ request.user.username|length }};
+    const username = "{{ request.user }}";
+    let index = 0
+    const dots = window.setInterval(function () {
+        const wait = document.getElementById("wait");
+        if (wait.innerHTML.length >= usernameLength) {
+            wait.innerHTML = "";
+            index = 0;
+        } else {
+            if (index > usernameLength - 1) {
+                index = 0
+        }
+        wait.innerHTML += username[index];
+        index++;
+        }
+
+    }, 1000);
 </script>
 
 </body>

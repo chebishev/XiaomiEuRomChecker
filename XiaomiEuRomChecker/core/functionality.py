@@ -59,6 +59,18 @@ def get_date(string):
     date_for_splitting = string
     return [int(x) for x in date_for_splitting.split("-")]
 
+def get_date_as_string(date):
+    """
+    :param date: it can be a string in format "2023-06-29" or string in format "< n hours ago"
+    :return: string in format "2023-06-29"
+    """
+    # just in case if the rom "modified" field doesn't contain date
+    # it will have something like: "< 5 hours ago" so I am converting it to today's date
+    # in order to have a date in the format "2023-06-29"
+    if "hours" in date:
+        return f"{datetime.now().year}-{datetime.now().month}-{datetime.now().day}"
+
+    return date
 
 def get_date_difference(date):
     """

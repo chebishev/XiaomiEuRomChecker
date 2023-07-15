@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from XiaomiEuRomChecker.core.functionality import get_url, get_link_for_specific_device
 from XiaomiEuRomChecker.core.models import AvailableDevicesModel
@@ -13,7 +14,7 @@ def index(request):
 
     return render(request, 'index.html')
 
-
+@login_required(login_url='login')
 def downloads(request, pk, slug):
     device = AvailableDevicesModel.objects.get(id=pk)
     links = {
