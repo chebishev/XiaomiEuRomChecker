@@ -23,11 +23,7 @@ class RegisterUserView(views.CreateView):
 class LoginUserView(LoginView):
     template_name = 'auth_app/login.html'
 
-    def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            return redirect(self.request.GET.get('next', reverse_lazy('index')))
-        return super().dispatch(request, *args, **kwargs)
 
 class LogoutUserView(LogoutView):
-    redirect_url = reverse_lazy('index')
+    pass
 

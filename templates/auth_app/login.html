@@ -5,6 +5,8 @@
 
             {% csrf_token %}
             {{ form }}
+            <input type="hidden" value="{{ next }}" name="next">
+
             <button type="submit" class="w3-button w3-orange w3-padding-large w3-large w3-margin-top w3-center">Login</button>
 
         </div>

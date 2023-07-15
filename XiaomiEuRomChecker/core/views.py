@@ -24,5 +24,5 @@ def downloads(request, pk, slug):
         'last_stable': get_link_for_specific_device(device.rom_name, 'stable'),
         'device': device
     }
-    if request.method == 'POST':
-        return render(request, 'downloads.html', links)
+
+    return render(request, 'downloads.html', links)
