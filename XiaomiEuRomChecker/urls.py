@@ -19,6 +19,13 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    # path to core_app all urls
     path('', include('XiaomiEuRomChecker.core.urls')),
-    path('auth/', include('XiaomiEuRomChecker.auth_app.urls')),
+
+    # path to auth_app all urls
+    path('', include('XiaomiEuRomChecker.auth_app.urls')),
+
+    # path to links_app all urls
+    path('', include('XiaomiEuRomChecker.links.urls')),
 ]
