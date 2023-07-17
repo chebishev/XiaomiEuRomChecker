@@ -5,9 +5,7 @@
     3. {{ object.first_name }}
     4. {{ object.last_name }}
     5. {{ object.preferred_device }}
-    {% for link in object.links %}
-        7. {{ link }}
-    {% endfor %}
+
     <a href="{% url 'profile_edit' pk=request.user.id %}">Edit</a>
     <a href="{% url 'profile_delete' pk=request.user.id %}">Delete</a>
 {% endblock %}
