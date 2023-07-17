@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
 {% block grids %}
-    <form class="w3-center form-horizontal" method="post" action="{% url 'login' %}">
-        <div class="form-group">
-
+    <form class="form-horizontal" method="post" action="{% url 'login' %}">
+        <div class="form-group w3-center">
+            <h2>Login</h2>
+            <br>
             {% csrf_token %}
             {{ form.as_p }}
 
             {# get the last page in order to redirect ot it after successful login #}
             <input type="hidden" value="{{ next }}" name="next">
 
-            <button type="submit" class="w3-button w3-orange w3-padding-large w3-medium w3-margin-top w3-center">Login</button>
+            <button type="submit" class="w3-button w3-green w3-padding-large w3-medium w3-margin-top w3-center">Login</button>
 
         </div>
     </form>

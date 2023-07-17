@@ -1,9 +1,9 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% block grids %}
-    <form class="form-inline w3-center" method="post" action="{% url 'register' %}">
+   <form class="form-inline w3-center" method="post" action="{% url 'profile_edit' pk=request.user.id %}">
 
         {% csrf_token %}
-        <h2>Register</h2>
+        <h2>Edit info</h2>
         <br>
         {% for field in form %}
             <p>
@@ -17,7 +17,6 @@
             {{ field.label_tag }} <br> {{ field }}
             </p>
         {% endfor %}
-        <button class="w3-button w3-blue w3-padding-large w3-large w3-margin-top w3-center" type="submit">Register
-        </button>
-    </form>
+    <button type="submit" class="w3-button w3-blue w3-padding-large w3-large w3-margin-top w3-center">Edit</button>
+</form>
 {% endblock %}

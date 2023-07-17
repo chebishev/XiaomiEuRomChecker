@@ -14,6 +14,7 @@ def index(request):
 
     return render(request, 'index.html')
 
+
 @login_required(login_url='login')
 def downloads(request, pk, slug):
     device = AvailableDevicesModel.objects.get(id=pk)

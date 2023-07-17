@@ -1,6 +1,7 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 
+
 # Create your models here.
 class AvailableDevicesModel(models.Model):
     code_name = models.CharField(max_length=20)

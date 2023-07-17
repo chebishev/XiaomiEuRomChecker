@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block grids %}
+    <form class="form-horizontal" method="post" action="{% url 'profile_delete' pk=request.user.id %}">
+        <div class="form-group">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="w3-button w3-orange w3-padding-large w3-large w3-margin-top w3-center">Delete</button>
+        </div>
+    </form>
+{% endblock %}
