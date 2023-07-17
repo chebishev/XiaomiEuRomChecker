@@ -137,6 +137,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Manually added, this option will provide manage.py to load data from json files in order to populate the database
 FIXTURE_DIRS = (
     BASE_DIR / 'core.fixtures',
+    BASE_DIR / 'theme.fixtures',
 )
 
 LOGIN_REDIRECT_URL = reverse_lazy('index')
