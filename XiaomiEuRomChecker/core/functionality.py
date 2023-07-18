@@ -9,13 +9,18 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def files_list_info(url):
+def files_list_info(url, tag, class_name):
+    # it gets url for weekly or stable folder of sourceforge server
     page = requests.get(url)
+
     # BeautifulSoup instance that gets url and parser as arguments
     soup = BeautifulSoup(page.content, "html.parser")
 
     # getting the info directly from the html by id of the table
-    return soup.find(id="files_list")
+    result = soup.find(id="files_list")
+
+    # returns all tags with the class name provided
+    return result.find_all(tag, class_=class_name)
 
 
 def get_url(release, folder=''):
@@ -85,10 +90,9 @@ def check_date(folder_found, date_found, new_folder_checker):
 
 
 def get_last_weekly_folder(target_url):
-    results = files_list_info(target_url)
-
     # getting all table rows with this class in order to get the folder name and last modification date (or hours)
-    folders = results.find_all('tr', class_="folder")
+    folders = files_list_info(target_url, "tr", "folder")
+
     # this variable will contain the result of the first valid row
     # (that isn't contain "Parent Folder" or other irrelevant information)
     full_info = ""
@@ -133,8 +137,8 @@ def get_link_for_specific_device(device, release):
     else:
         target_url = get_url('stable')
 
-    results = files_list_info(target_url)
-    device_roms = results.find_all("tr", class_="file")
+    device_roms = files_list_info(target_url, 'tr', "file")
+    #device_roms = results.find_all("tr", class_="file")
 
     for rom in device_roms:
         current_rom = rom.text

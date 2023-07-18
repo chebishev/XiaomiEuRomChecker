@@ -70,6 +70,7 @@ TEMPLATES = [
                 'XiaomiEuRomChecker.core.processors.django_version',
                 'XiaomiEuRomChecker.core.processors.latest_weekly',
                 'XiaomiEuRomChecker.core.processors.all_devices',
+                'XiaomiEuRomChecker.theme.processors.theme_colors',
                 'XiaomiEuRomChecker.theme.processors.tip_of_the_day',
             ],
         },

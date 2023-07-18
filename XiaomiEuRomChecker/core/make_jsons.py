@@ -49,10 +49,10 @@ def excel_to_json(file):
 def list_to_json():
 
     url = get_url('weekly')
-    results = files_list_info(url)
-    # all folders names from
+
+    # all folder names from
     # "https://sourceforge.net/projects/xiaomi-eu-multilang-miui-roms/files/xiaomi.eu/MIUI-WEEKLY-RELEASES/"
-    folders = results.find_all("tr", class_="folder")
+    folders = files_list_info(url, "tr", "folder")
     folders_list = []
 
     for folder in folders:

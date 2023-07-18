@@ -1,5 +1,12 @@
 import random
-from XiaomiEuRomChecker.theme.models import TipOfTheDayModel
+
+from XiaomiEuRomChecker.theme.models import ThemeModel, TipOfTheDayModel
+
+
+def theme_colors(request):
+    color = ThemeModel.objects.first()
+    return {'color': color}
+
 
 def tip_of_the_day(request):
     all_tips = TipOfTheDayModel.objects.all()
