@@ -77,5 +77,3 @@ def list_to_json():
 
 # write_json(excel_to_json('initial_devices_list.xlsx'), 'fixtures/devices.json')
 # write_json(list_to_json(), 'fixtures/folders.json')
-
-print(list_to_json())
