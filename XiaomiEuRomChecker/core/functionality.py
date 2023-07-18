@@ -4,28 +4,18 @@ including driver, url, date checking
 """
 
 from datetime import datetime
-import random
 
-from selenium import webdriver
-from selenium.webdriver.edge.options import Options
-from selenium.webdriver.edge.service import Service as EdgeService
-from webdriver_manager.microsoft import EdgeChromiumDriverManager
+import requests
+from bs4 import BeautifulSoup
 
 
-def get_driver():
-    # options - in order to make headless search with Edge
-    options = Options()
-    options.use_chromium = True
-    options.add_argument("--headless")
-    options.add_argument("--disable-gpu")
-    options.add_argument('--allow-running-insecure-content')
-    options.add_argument('--ignore-certificate-errors')
-    options.add_argument('--log-level=3')  # remove errors about "Error with Feature-Policy header
+def files_list_info(url):
+    page = requests.get(url)
+    # BeautifulSoup instance that gets url and parser as arguments
+    soup = BeautifulSoup(page.content, "html.parser")
 
-    # get and install the newest, needed driver in .root/.wdm
-    service = EdgeService(EdgeChromiumDriverManager().install())
-
-    return webdriver.Edge(service=service, options=options)
+    # getting the info directly from the html by id of the table
+    return soup.find(id="files_list")
 
 
 def get_url(release, folder=''):
@@ -46,10 +36,6 @@ def get_url(release, folder=''):
     return available_urls[release]
 
 
-def get_table_by_xpath(driver, xpath):
-    return driver.find_element("xpath", xpath)
-
-
 def get_date(string):
     """
     Extracts year, month and day from string in format YYYY-MM-DD
@@ -58,6 +44,7 @@ def get_date(string):
     """
     date_for_splitting = string
     return [int(x) for x in date_for_splitting.split("-")]
+
 
 def get_date_as_string(date):
     """
@@ -72,6 +59,7 @@ def get_date_as_string(date):
 
     return date
 
+
 def get_date_difference(date):
     """
     :param date: is a string in format "2023-06-29"
@@ -83,10 +71,10 @@ def get_date_difference(date):
     return difference
 
 
-def check_date(folder_date_list, new_folder_checker):
+def check_date(folder_found, date_found, new_folder_checker):
     # folder_name is in format "V14.0.23.4.31.DEV" which is MIUI Version, and date in format yy.m.d
     # date is a string in format "2023-04-31"
-    folder_name, date = folder_date_list
+    folder_name, date = folder_found, date_found
 
     # getting the kwargs (days="", seconds="", microseconds="") from get_date_difference function
     difference = get_date_difference(date)
@@ -96,30 +84,33 @@ def check_date(folder_date_list, new_folder_checker):
     return folder_name, date, new_folder_checker
 
 
-def get_last_weekly_folder(driver, target_url):
-    driver.get(target_url)  # opens the url in headless mode in order to get the info from sourceforge
-    # this one is getting the first([1]) element of the table(by XPath) which is the last added folder
-    table = get_table_by_xpath(driver, '//*[@id="files_list"]/tbody/tr[1]')
+def get_last_weekly_folder(target_url):
+    results = files_list_info(target_url)
 
-    # table.text returns string separated by new lines
-    # splitting the string into list, because the 1st element (index 0)
-    # contains the last folder name and last date of modification
-    full_info = table.text.split("\n")[0]
+    # getting all table rows with this class in order to get the folder name and last modification date (or hours)
+    folders = results.find_all('tr', class_="folder")
+    # this variable will contain the result of the first valid row
+    # (that isn't contain "Parent Folder" or other irrelevant information)
+    full_info = ""
+
+    # getting all the rows, but we need only the first valid one since it is the folder that we are checking
+    for folder in folders:
+        if "Parent" in folder.text:
+            continue
+        full_info = folder.text.split()
+        break
 
     # creating variables for the founded elements - folder, date (or hours) since last modification
     current_name = ""
     found_date = ""
-
-    # this will change if the folder is newly created
     new_folder_found = False
 
     # checking if the folder is newly created ( last 24 hours )
     if " < " in full_info:
-        current_name, found_date = full_info.split(" < ")
+        current_name, found_date = full_info[0], full_info[1]
         new_folder_found = True
     else:
-        current_name, found_date, new_folder_found = check_date(full_info.split(), new_folder_found)
-
+        current_name, found_date, new_folder_found = check_date(full_info[0], full_info[1], new_folder_found)
     if new_folder_found:
         output = f"Modified folder found!\nName: {current_name}\nDate: {found_date}\n" \
                  f""f"Download link: {target_url + current_name}"
@@ -137,15 +128,17 @@ def get_link_for_specific_device(device, release):
     :param release: is needed for the right url to be given to the driver
     :return: download link or None
     """
-    driver = get_driver()
     if release == "weekly":
-        target_url = get_url('last_weekly', (get_last_weekly_folder(driver, get_url('weekly'))[1]))
+        target_url = get_url('last_weekly', (get_last_weekly_folder(get_url('weekly'))[1]))
     else:
         target_url = get_url('stable')
-    driver.get(target_url)
-    table = get_table_by_xpath(driver, '//*[@id="files_list"]')
-    for item in table.text.split()[5:]:
-        if f"xiaomi.eu_multi_{device}_V14" in item:
-            return target_url + "/" + item
+
+    results = files_list_info(target_url)
+    device_roms = results.find_all("tr", class_="file")
+
+    for rom in device_roms:
+        current_rom = rom.text
+        if f"xiaomi.eu_multi_{device}_V14" in current_rom:
+            return target_url + "/" + current_rom.split()[0]
     else:
         return f"Nothing found in the last {release} folder!"

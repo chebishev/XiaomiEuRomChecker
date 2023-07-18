@@ -9,7 +9,7 @@ FIXTURE_DIRS = (
 """
 import json
 import pandas as pd
-from XiaomiEuRomChecker.core.functionality import get_driver, get_url, get_table_by_xpath
+from XiaomiEuRomChecker.core.functionality import get_url, files_list_info
 
 
 # gets two parameters: Value from function (as list with dictionaries) and the name of the output file
@@ -47,19 +47,17 @@ def excel_to_json(file):
 
 
 def list_to_json():
-    current_driver = get_driver()
+
     url = get_url('weekly')
-    current_driver.get(url)
-    # getting all data in the page by id 'files_list'
-    folders = get_table_by_xpath(current_driver, '//*[@id="files_list"]')
-    # cutting first 5 items, because are neither folder name nor date
-    all_data = folders.text.split("\n")[5:]
-    # making list with all odd items in the all_data and cutting the last 2 elements, because they are not relevant
-    all_folders = [all_data[index] for index in range(len(all_data)) if index % 2 == 0][:-2]
+    results = files_list_info(url)
+    # all folders names from
+    # "https://sourceforge.net/projects/xiaomi-eu-multilang-miui-roms/files/xiaomi.eu/MIUI-WEEKLY-RELEASES/"
+    folders = results.find_all("tr", class_="folder")
     folders_list = []
 
-    for item in all_folders:
-        folder_name, last_modification_date = item.split(" ")
+    for folder in folders:
+        info = folder.text.split()
+        folder_name, last_modification_date = info[0], info[1]
         folders_list.append(
             {
                 'model': 'core.FoldersModel',
@@ -71,10 +69,13 @@ def list_to_json():
         )
 
     # this variable will be used in order to populate the "folders.json" using the function "write_json"
-    return folders_list
+    # the first element (folders_list[0]) is "Parent folder" and we don't need it, so we skip it
+    return folders_list[1:]
 
 
 # Both functions work properly and the json files are filled with needed data
 
 # write_json(excel_to_json('initial_devices_list.xlsx'), 'fixtures/devices.json')
 # write_json(list_to_json(), 'fixtures/folders.json')
+
+print(list_to_json())

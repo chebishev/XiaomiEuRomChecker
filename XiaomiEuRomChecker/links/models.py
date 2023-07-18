@@ -6,7 +6,7 @@ UserModel = get_user_model()
 
 # Create your models here.
 class LinksModel(models.Model):
-    user = models.OneToOneField(UserModel, on_delete=models.CASCADE, related_name="links")
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name="links")
     link_name = models.CharField(max_length=40, verbose_name="Link name")
     link_url = models.URLField(max_length=100, verbose_name="Link URL")
     short_link = models.URLField(max_length=100, blank=True, null=True, verbose_name="Short link URL")

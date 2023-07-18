@@ -27,5 +27,5 @@ urlpatterns = [
     path('', include('XiaomiEuRomChecker.auth_app.urls')),
 
     # path to links_app all urls
-    path('', include('XiaomiEuRomChecker.links.urls')),
+    path('links/', include('XiaomiEuRomChecker.links.urls')),
 ]

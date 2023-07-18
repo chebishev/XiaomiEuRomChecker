@@ -9,6 +9,7 @@ from django.views import generic as views
 
 from XiaomiEuRomChecker.auth_app.forms import RegistrationForm, ProfileEditForm
 from XiaomiEuRomChecker.core.models import AvailableDevicesModel
+from XiaomiEuRomChecker.links.models import LinksModel
 
 
 # Create your views here.
@@ -52,20 +53,29 @@ class BaseProfileView(views.View):
     success_url = reverse_lazy('index')
 
 
-class ProfileDetailsView(BaseProfileView, LoginRequiredMixin, views.DetailView):
-    template_name = 'auth_app/profile.html'
-    pk_url_kwarg = 'pk'
+@login_required(login_url='login')
+def profile_details(request, pk):
+    current_user = UserModel.objects.get(pk=pk)
+    links = LinksModel.objects.filter(user_id=pk).all()
+    context = {
+        "user": current_user,
+        'links': links
+    }
+    return render(request, 'auth_app/profile.html', context)
 
 
 @login_required(login_url='login')
 def profile_edit(request, pk):
-    current_user = UserModel.objects.get(id=pk)
+    current_user = UserModel.objects.get(pk=pk)
     form = ProfileEditForm(request.POST or None, instance=current_user)
 
     if form.is_valid():
+        instance = form.save(commit=False)
         chosen_device = form.cleaned_data['change_preferred_device']
-        current_user.preferred_device = chosen_device
-        current_user.save()
+        if not chosen_device:
+            chosen_device = "No Device"
+        instance.preferred_device = chosen_device
+        instance.save()
         return redirect('profile_details', pk=pk)
     else:
         form.fields['preferred_device'].widget.attrs['disabled'] = True

@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 {% block grids %}
-    1. {{ object.username }}
-    2. {{ object.email }}
-    3. {{ object.first_name }}
-    4. {{ object.last_name }}
-    5. {{ object.preferred_device }}
+    <h1>Profile info for user {{ user.username }}:</h1>
 
-    <a href="{% url 'profile_edit' pk=request.user.id %}">Edit</a>
-    <a href="{% url 'profile_delete' pk=request.user.id %}">Delete</a>
+   <h2>Current preferred device: {{ user.preferred_device }}</h2>  <a type="submit" href="{% url 'profile_edit' pk=request.user.id %}">Edit</a>
+
+    <h2>Saved links: {{ links.all.count }}</h2>   <a type="submit" href="{% url 'links' %}">Show</a>
+    <div class="list-group">{% for item in links.all %}
+    <li>{{ item.link_name }} <button class="button" href="{% url 'link_edit' %}">Edit</button>  </li>
+    {% endfor %}</div>
+
+    <a type="submit" href="{% url 'profile_delete' pk=request.user.id %}">Delete Profile</a>
 {% endblock %}

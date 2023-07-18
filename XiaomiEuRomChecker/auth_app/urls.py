@@ -1,6 +1,6 @@
 from django.urls import path, include
 from .views import RegisterUserView, LoginUserView, LogoutUserView, \
-    ProfileDetailsView, profile_edit, ProfileDeleteView
+    profile_details, profile_edit, ProfileDeleteView
 
 urlpatterns = [
     path("auth/", include([
@@ -9,7 +9,7 @@ urlpatterns = [
         path('logout/', LogoutUserView.as_view(), name='logout'),
     ])),
     path("profile/<int:pk>/", include([
-        path('', ProfileDetailsView.as_view(), name='profile_details'),
+        path('', profile_details, name='profile_details'),
         path('edit/', profile_edit, name='profile_edit'),
         path("delete/", ProfileDeleteView.as_view(), name='profile_delete'),
     ]))

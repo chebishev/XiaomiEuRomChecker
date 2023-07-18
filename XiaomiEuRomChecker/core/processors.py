@@ -5,7 +5,7 @@ The results from both are added to the context
 
 import django
 from XiaomiEuRomChecker.core.models import AvailableDevicesModel, FoldersModel
-from XiaomiEuRomChecker.core.functionality import get_last_weekly_folder, get_driver, get_url, get_date_as_string
+from XiaomiEuRomChecker.core.functionality import get_last_weekly_folder, get_url, get_date_as_string
 from datetime import datetime
 
 
@@ -25,7 +25,7 @@ def latest_weekly(request):
 
     difference = datetime.now() - datetime(year, month, day)
     if difference.days > 4:
-        info_from_scrapping = get_last_weekly_folder(get_driver(), get_url('weekly'))
+        info_from_scrapping = get_last_weekly_folder(get_url('weekly'))
         new_folder = info_from_scrapping[1]
         if new_folder not in FoldersModel.objects.values_list('folder_name', flat=True):
             new_date = get_date_as_string(info_from_scrapping[2])
