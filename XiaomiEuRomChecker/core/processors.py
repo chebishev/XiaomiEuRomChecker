@@ -40,6 +40,7 @@ def latest_weekly(request):
 
 
 # I am using it for the choices dropdown menu, but it can be replaced with form in the future
+# TODO try to use the model from the auth_app/forms.py in order to not give this to the context everytime
 def all_devices(request):
     device_list = AvailableDevicesModel.objects.all().order_by('market_name')
     return {'device_list': device_list}

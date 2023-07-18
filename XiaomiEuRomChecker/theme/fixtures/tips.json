@@ -30,7 +30,7 @@
   {
     "model": "theme.TipOfTheDayModel",
     "fields": {
-      "main_text": "ack in time all that you need for installing xiaomi.eu ROM was TWRP, but nowadays it isn't that easy to get it. Back in 2015, following android security policy, Xiaomi started to lock the bootloaders of the new devices. The first batch was Mi Note Pro, Mi 4c, Redmi Note 3 MTK, etc. So, to install custom recovery you need to unlock your device's bootloader, which was connected with waiting from 0 to 30 days in order to receive permission to unlock.",
+      "main_text": "Back in time all that you need for installing xiaomi.eu ROM was TWRP, but nowadays it isn't that easy to get it. Back in 2015, following android security policy, Xiaomi started to lock the bootloaders of the new devices. The first batch was Mi Note Pro, Mi 4c, Redmi Note 3 MTK, etc. So, to install custom recovery you need to unlock your device's bootloader, which was connected with waiting from 0 to 30 days in order to receive permission to unlock.",
       "additional_text": "In 2023 we have hybrid ROM that works for installation with TWRP or fastboot. Of course the unlocking of the device is still necessary, and Mediatek devices are not supported, because of a lot of bricked phones that are using their chipsets"
     }
   }
