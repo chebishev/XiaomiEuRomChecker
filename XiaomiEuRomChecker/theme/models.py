@@ -19,6 +19,7 @@ class ThemeModel(models.Model):
         ('green', 'green'),
         ('light-green', 'light-green'),
         ('lime', 'lime'),
+        ('sand', 'sand'),
         ('khaki', 'khaki'),
         ('yellow', 'yellow'),
         ('amber', 'amber'),
@@ -29,6 +30,10 @@ class ThemeModel(models.Model):
         ('light-grey', 'light-grey'),
         ('grey', 'grey'),
         ('dark-grey', 'dark-grey'),
+        ('pale-red', 'pale-red'),
+        ('pale-pink', 'pale-yellow'),
+        ('pale-green', 'pale-green'),
+        ('pale-blue', 'pale-blue'),
         ('black', 'black'),
         ('white', 'white')
     )

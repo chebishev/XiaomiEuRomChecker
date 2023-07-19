@@ -48,7 +48,7 @@
         {% if request.user.is_authenticated %}
             <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-{{ color.navbar_hover }}">My
                 links</a>
-            <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-{{ color.navbar_hover }}">My
+            <a href="{% url 'my_device' pk=request.user.id %}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-{{ color.navbar_hover }}">My
                 device</a>
             <a href="{% url 'logout' %}"
                class="w3-right w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-{{ color.navbar_hover }}">Sign
@@ -69,7 +69,7 @@
          class="w3-bar-block w3-{{ color.small_screens_navbar }} w3-hide w3-hide-large w3-hide-medium w3-large">
         {% if request.user.is_authenticated %}
             <a href="#" class="w3-bar-item w3-button w3-padding-large">My links</a>
-            <a href="#" class="w3-bar-item w3-button w3-padding-large">My device</a>
+            <a href="{% url 'my_device' pk=request.user.id %}" class="w3-bar-item w3-button w3-padding-large">My device</a>
             <a href="{% url 'profile_details' pk=request.user.id %}" class="w3-bar-item w3-button w3-padding-large">My
                 profile</a>
             <a href="{% url 'logout' %}" class="w3-bar-item w3-button w3-padding-large">Sign out</a>
@@ -83,11 +83,10 @@
 <!-- Header -->
 <header class="w3-container w3-{{ color.header }} w3-center" style="padding:128px 16px">
     <h1 class="w3-margin w3-jumbo">Find latest xiaomi.eu rom for your device</h1>
-    <p class="w3-xlarge">Currently supported MIUI 14 Weekly and Stable</p>
-    {# TODO: eventual adding of option to change the button color from the admin panel #}
-    <button class="w3-button w3-black w3-padding-large w3-large w3-margin-top"
-            onclick="window.location.href='https://xiaomi.eu/';">Visit xiaomi.eu
-    </button>
+
+    {% block button %}
+
+    {% endblock %}
 </header>
 
 {% block grids %}

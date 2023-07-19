@@ -48,11 +48,6 @@ class LogoutUserView(LogoutView):
 UserModel = get_user_model()
 
 
-class BaseProfileView(views.View):
-    model = UserModel
-    success_url = reverse_lazy('index')
-
-
 @login_required(login_url='login')
 def profile_details(request, pk):
     current_user = UserModel.objects.get(pk=pk)
@@ -83,6 +78,18 @@ def profile_edit(request, pk):
     return render(request, 'auth_app/profile_edit.html', {'form': form})
 
 
-class ProfileDeleteView(BaseProfileView, LoginRequiredMixin, views.DeleteView):
+class ProfileDeleteView(LoginRequiredMixin, views.DeleteView):
+    model = UserModel
     template_name = 'auth_app/profile_delete.html'
     pk_url_kwarg = 'pk'
+
+
+@login_required(login_url='login')
+def my_device(request, pk):
+    user = UserModel.objects.get(pk=request.user.id)
+    user_device = user.preferred_device
+    if user_device == "No Device":
+        return redirect('index')
+    else:
+        chosen_device = AvailableDevicesModel.objects.get(market_name=user_device)
+        return render(request, 'device_info.html', {'chosen_device': chosen_device})
