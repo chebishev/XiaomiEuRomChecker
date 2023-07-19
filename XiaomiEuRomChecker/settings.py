@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 from django.urls import reverse_lazy
@@ -24,9 +24,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-z46i-f#3$yybgl8b2_jgx^pahq6)qj8)zv&)ufyzq77app^59e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = os.environ.get("DEBUG", False)
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(" ")
 
 # Application definition
 
@@ -82,17 +84,26 @@ WSGI_APPLICATION = 'XiaomiEuRomChecker.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "xiaomi.eu_rom_checker_db",
+#         "USER": "postgres-user",
+#         "PASSWORD": "password",
+#         "HOST": "127.0.0.1",
+#         "PORT": "5432",
+#     }
+# }
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "xiaomi.eu_rom_checker_db",
-        "USER": "postgres-user",
-        "PASSWORD": "password",
-        "HOST": "127.0.0.1",
-        "PORT": "5432",
+        "NAME": os.getenv("DB_NAME", None),
+        "USER": os.getenv("DB_USER", None),
+        "PASSWORD": os.getenv("DB_PASSWORD", None),
+        "HOST": os.getenv("DB_HOST", None),
+        "PORT": os.getenv("DB_PORT", "5432"),
     }
 }
-
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
