@@ -25,3 +25,14 @@ services:
       PGDATA: /var/lib/postgresql/data
     volumes:
       - ./postgresql:/var/lib/postgresql/data
+  nginx:
+    image: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /tmp/XiaomiEuRomChecker/static":/home/XiaomiEuRomChecker/web/static
+      - ./nginx/conf.d:/etc/nginx/nginx.conf.d
+      - ./nginx/logs:/var/log/nginx
+      - ./certbot/www:/var/www/certbot/:ro
+      - ./certbot/conf:/etc/nginx/ssl/:ro
