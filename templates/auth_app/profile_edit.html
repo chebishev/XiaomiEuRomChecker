@@ -1,22 +1,35 @@
 {% extends "base.html" %}
 {% block grids %}
-   <form class="form-inline w3-center" method="post" action="{% url 'profile_edit' pk=request.user.id %}">
+    <!-- First Grid -->
+    <div class="w3-row-padding w3-padding-64 w3-container">
+        <div class="w3-content">
+            <div class="w3-twothird">
+                <form class="form-inline w3-center" method="post" action="{% url 'profile_edit' pk=request.user.id %}">
 
-        {% csrf_token %}
-        <h2>Edit info</h2>
-        <br>
-        {% for field in form %}
-            <p>
-                {% if field.errors %}
-                    <ul class="errors">
-                        {% for error in field.errors %}
-                            <li style="list-style: none">{{ error }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            {{ field.label_tag }} <br> {{ field }}
-            </p>
-        {% endfor %}
-    <button type="submit" class="w3-button w3-blue w3-padding-large w3-large w3-margin-top w3-center">Edit</button>
-</form>
+                    {% csrf_token %}
+                    <h2>Edit info</h2>
+                    <br>
+                    {% for field in form %}
+                        <p>
+                            {% if field.errors %}
+                                <ul class="errors">
+                                    {% for error in field.errors %}
+                                        <li style="list-style: none">{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        {{ field.label_tag }} <br> {{ field }}
+                        </p>
+                    {% endfor %}
+                    <button type="submit" class="w3-button w3-blue w3-padding-large w3-large w3-margin-top w3-center">
+                        Edit
+                    </button>
+                </form>
+            </div>
+            <div class="w3-third w3-center">
+
+                <i class="fa fa-size fa-pencil-square-o w3-padding-64 w3-text-{{ color.first_grid_icon }}"></i>
+            </div>
+        </div>
+    </div>
 {% endblock %}

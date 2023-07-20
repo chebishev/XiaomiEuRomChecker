@@ -1,45 +1,39 @@
 {% extends 'base.html' %}
-{% block button %}
-<p class="w3-xlarge">Currently supported MIUI 14 Weekly and Stable</p>
-        <button class="w3-button w3-black w3-padding-large w3-large w3-margin-top"
-                onclick="window.location.href='https://xiaomi.eu/';">Visit xiaomi.eu
-        </button>
-{% endblock %}
+
 
 {% block grids %}
 
+    <div class="w3-twothird">
+        <h1>Choose your device</h1>
+        <h5 class="w3-padding-32">In this dropdown menu you will find all available/supported devices that have
+            xiaomi.eu rom. After you choose a device, you will receive info about the code name, rom name and rom
+            options that you will have for download.</h5>
 
-<!-- First Grid -->
-<div class="w3-row-padding w3-padding-64 w3-container">
-    <div class="w3-content">
-        <div class="w3-twothird">
-            <h1>Choose your device</h1>
-            <h5 class="w3-padding-32">In this dropdown menu you will find all available/supported devices that have xiaomi.eu rom. After you choose a device, you will receive info about the code name, rom name and rom options that you will have for download.</h5>
-
-            <form id="device" class="row row-cols-lg-auto g-3 align-items-center" action="{% url 'index' %}" method="post">
-                <div class="col-12">
-                    <label class="visually-hidden" for="device">Preference</label>
-                    <select class="form-select" id="device" name="device" required>
-                        <option selected value="0">Choose...</option>
-                        {% for device in device_list %}
+        <form id="device" class="row row-cols-lg-auto g-3 align-items-center" action="{% url 'index' %}" method="post">
+            <div class="col-12">
+                <label class="visually-hidden" for="device">Preference</label>
+                <select class="form-select" id="device" name="device" required>
+                    <option selected value="0">Choose...</option>
+                    {% for device in device_list %}
                         <option value="{{ device.id }}">{{ device.market_name }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="col-12">
-                    <input name="get-device-info" type="submit" class="btn btn-primary w3-{{ color.first_grid_icon }}" value="Submit">
-                </div>
-           {% csrf_token %}
-            </form>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-12">
+                <input name="get-device-info" type="submit" class="btn btn-primary w3-{{ color.first_grid_icon }}"
+                       value="Submit">
+            </div>
+            {% csrf_token %}
+        </form>
         <br>
 
-            <p class="w3-text-grey">Registered users will be able to conveniently view and save all requested links, and to manage them in their profile section.</p>
-        </div>
-
-        <div class="w3-third w3-center">
-
-            <i class="fa fa-mobile w3-padding-64 w3-text-{{ color.first_grid_icon }}"></i>
-        </div>
+        <p class="w3-text-grey">Registered users will be able to conveniently view and save all requested links, and to
+            manage them in their profile section.</p>
     </div>
-</div>
+
+    <div class="w3-third w3-center">
+
+        <i class="fa fa-size fa-mobile w3-padding-64 w3-text-{{ color.first_grid_icon }}"></i>
+    </div>
+
 {% endblock %}

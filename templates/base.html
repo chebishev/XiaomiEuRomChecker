@@ -21,9 +21,14 @@
             font-family: "Montserrat", sans-serif
         }
 
-        {# how big are the two icons from Font Awesome #}
-        .fa-mobile, .fa-info {
+        {# how big are the icons from Font Awesome #}
+        .fa-size{
             font-size: 200px
+        }
+
+        {# delete font awesom icon size #}
+        .fa-times {
+            font-size: 100px
         }
 
         a {
@@ -48,7 +53,8 @@
         {% if request.user.is_authenticated %}
             <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-{{ color.navbar_hover }}">My
                 links</a>
-            <a href="{% url 'my_device' pk=request.user.id %}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-{{ color.navbar_hover }}">My
+            <a href="{% url 'my_device' pk=request.user.id %}"
+               class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-{{ color.navbar_hover }}">My
                 device</a>
             <a href="{% url 'logout' %}"
                class="w3-right w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-{{ color.navbar_hover }}">Sign
@@ -69,7 +75,8 @@
          class="w3-bar-block w3-{{ color.small_screens_navbar }} w3-hide w3-hide-large w3-hide-medium w3-large">
         {% if request.user.is_authenticated %}
             <a href="#" class="w3-bar-item w3-button w3-padding-large">My links</a>
-            <a href="{% url 'my_device' pk=request.user.id %}" class="w3-bar-item w3-button w3-padding-large">My device</a>
+            <a href="{% url 'my_device' pk=request.user.id %}" class="w3-bar-item w3-button w3-padding-large">My
+                device</a>
             <a href="{% url 'profile_details' pk=request.user.id %}" class="w3-bar-item w3-button w3-padding-large">My
                 profile</a>
             <a href="{% url 'logout' %}" class="w3-bar-item w3-button w3-padding-large">Sign out</a>
@@ -81,16 +88,23 @@
 </div>
 
 <!-- Header -->
-<header class="w3-container w3-{{ color.header }} w3-center" style="padding:128px 16px">
+<header class="w3-container w3-{{ color.header }} w3-center" style="padding:80px 10px">
     <h1 class="w3-margin w3-jumbo">Find latest xiaomi.eu rom for your device</h1>
+    <p class="w3-xlarge">Currently supported MIUI 14 Weekly and Stable</p>
 
-    {% block button %}
+    {# optional button that can lead to registration, login, xiaomi.eu etc #}
+    {#        <button class="w3-button w3-black w3-padding-large w3-large w3-margin-top"#}
+    {#                onclick="window.location.href='https://xiaomi.eu/';">Visit xiaomi.eu#}
+    {#        </button>#}
 
-    {% endblock %}
 </header>
-
-{% block grids %}
-{% endblock %}
+<!-- First Grid -->
+<div class="w3-row-padding w3-padding-64 w3-container">
+    <div class="w3-content">
+        {% block grids %}
+        {% endblock %}
+    </div>
+</div>
 
 {# in case of missing tips in the data base #}
 {% if tip %}
@@ -99,7 +113,7 @@
         <div class="w3-content">
             <div class="w3-third w3-center">
 
-                <i class="fa fa-info w3-padding-64 w3-text-{{ color.second_grid_icon }} w3-margin-right"></i>
+                <i class="fa fa-size fa-info w3-padding-64 w3-text-{{ color.second_grid_icon }} w3-margin-right"></i>
             </div>
 
             <div class="w3-twothird">

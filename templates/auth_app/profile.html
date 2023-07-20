@@ -1,48 +1,58 @@
 {% extends "base.html" %}
 {% block grids %}
-    <div class="w3-center">
-        <table class="w3-table-all w3-card-4 w3-rest">
-            <tr>
-                <td><h2>Username:</h2></td>
-                <td><h1 class="w3-center">{{ user.username }}</h1></td>
-                <td>
-                    <button class="w3-btn w3-red" type="submit"
-                            onclick="window.location.href='{% url 'profile_delete' pk=request.user.id %}';">Delete
-                        Profile
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td><h2>Device:</h2></td>
-                <td><h1 class="w3-center"> {{ user.preferred_device }}</h1></td>
-                <td>
-                    <button class="w3-btn w3-orange" type="submit"
-                            onclick="window.location.href='{% url 'profile_edit' pk=request.user.id %}';">Edit Device
-                    </button>
-                </td>
-            </tr>
-        </table>
-     <button class="w3-button w3-green w3-padding-large w3-large w3-margin-top w3-center" onclick="document.getElementById('id01').style.display='block';">Show saved links
-             </button>
-    </div>
+    <!-- First Grid -->
+    <div class="w3-row-padding w3-padding-64 w3-container">
+        <div class="w3-content">
+            <div class="w3-center">
+                <table class="w3-table-all w3-card-4 w3-rest">
+                    <tr>
+                        <td><h2>Username:</h2></td>
+                        <td><h1 class="w3-center">{{ user.username }}</h1></td>
+                        <td>
+                            <button class="w3-btn w3-red" type="submit"
+                                    onclick="window.location.href='{% url 'profile_delete' pk=request.user.id %}';">
+                                Delete
+                                Profile
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><h2>Device:</h2></td>
+                        <td><h1 class="w3-center"> {{ user.preferred_device }}</h1></td>
+                        <td>
+                            <button class="w3-btn w3-orange" type="submit"
+                                    onclick="window.location.href='{% url 'profile_edit' pk=request.user.id %}';">Edit
+                                Device
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+                <button class="w3-button w3-green w3-padding-large w3-large w3-margin-top w3-center"
+                        onclick="document.getElementById('id01').style.display='block';">Show saved links
+                </button>
+            </div>
 
-    <br>
+            <br>
 
 
-    <div id="id01" class="w3-panel w3-light-grey w3-display-container" style="display:none">
+            <div id="id01" class="w3-panel w3-light-grey w3-display-container" style="display:none">
   <span onclick="this.parentElement.style.display='none'"
         class="w3-button w3-display-topright">X</span>
-        {% if not links.all %}
-            <h3>No saved links</h3>
+                {% if not links.all %}
+                    <h3>No saved links</h3>
 
-        {% endif %}
+                {% endif %}
 
-            <ul class="w3-ul w3-hoverable w3-center" style="list-style: none">
-                {% for item in links.all %}
-                    <a href="{% url 'link_details' slug=item.slug %}"><li>{{ item.link_name }} </li></a>
-                {% endfor %}
-            </ul>
+                <ul class="w3-ul w3-hoverable w3-center" style="list-style: none">
+                    {% for item in links.all %}
+                        <a href="{% url 'link_details' slug=item.slug %}">
+                            <li>{{ item.link_name }} </li>
+                        </a>
+                    {% endfor %}
+                </ul>
 
+            </div>
+        </div>
     </div>
     </div>
 

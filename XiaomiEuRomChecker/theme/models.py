@@ -30,10 +30,6 @@ class ThemeModel(models.Model):
         ('light-grey', 'light-grey'),
         ('grey', 'grey'),
         ('dark-grey', 'dark-grey'),
-        ('pale-red', 'pale-red'),
-        ('pale-pink', 'pale-yellow'),
-        ('pale-green', 'pale-green'),
-        ('pale-blue', 'pale-blue'),
         ('black', 'black'),
         ('white', 'white')
     )
