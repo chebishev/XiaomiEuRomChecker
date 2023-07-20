@@ -4,7 +4,7 @@ services:
   web:
     image: xiaomi_eu_rom_checker
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn --bind 0.0.0.0:8000 XiaomiEuRomChecker.wsgi:application
     ports:
       - "8000:8000"
     env_file:
