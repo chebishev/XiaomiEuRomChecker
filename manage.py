@@ -2,21 +2,6 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-import re
-
-
-def load_env():
-    """Load envs from .env file."""
-    try:
-        with open('./envs/.env') as f:
-            content = f.read()
-    except IOError:
-        content = ''
-    for line in content.splitlines():
-        m = re.match(r'\A([A-Za-z_0-9]+)=(.*)\Z', line)
-        if m:
-            key, val = m.group(1), m.group(2)
-            os.environ.setdefault(key, val)
 
 
 def main():
@@ -34,5 +19,4 @@ def main():
 
 
 if __name__ == '__main__':
-    load_env()
     main()

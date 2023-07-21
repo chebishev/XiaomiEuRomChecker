@@ -1,10 +1,10 @@
 from django.contrib import admin
+from django.contrib.auth import get_user_model
 
-from XiaomiEuRomChecker.auth_app.models import AuthUser
+UserModel = get_user_model()
 
 
-# Register your models here.
-@admin.register(AuthUser)
+@admin.register(UserModel)
 class AuthUserAdmin(admin.ModelAdmin):
     list_display = ['username', 'last_login' , 'is_superuser', 'is_staff', 'is_active', 'date_joined']
     ordering = ['date_joined']

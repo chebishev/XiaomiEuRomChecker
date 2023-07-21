@@ -5,7 +5,7 @@ from django.contrib.auth.views import LogoutView, LoginView
 from django.shortcuts import redirect, render
 from django.contrib.auth import login, get_user_model
 from django.urls import reverse_lazy
-from django.views import generic as views
+from django.views.generic import CreateView
 
 from XiaomiEuRomChecker.auth_app.forms import RegistrationForm, ProfileEditForm
 from XiaomiEuRomChecker.core.models import AvailableDevicesModel
@@ -13,7 +13,7 @@ from XiaomiEuRomChecker.links.models import LinksModel
 
 
 # Create your views here.
-class RegisterUserView(views.CreateView):
+class RegisterUserView(CreateView):
     template_name = 'auth_app/register.html'
     form_class = RegistrationForm
     success_url = reverse_lazy('index')
@@ -25,10 +25,11 @@ class RegisterUserView(views.CreateView):
 
         return result
 
-    def dispatch(self, request_method, *args, **kwargs):
-        if request_method.user.is_authenticated:
-            return redirect('index')
-        return super().dispatch(request_method, *args, **kwargs)
+    # TODO: to be deleted
+    # def dispatch(self, request_method, *args, **kwargs):
+    #     if request_method.user.is_authenticated:
+    #         return redirect('index')
+    #     return super().dispatch(request_method, *args, **kwargs)
 
 
 class LoginUserView(LoginView):
@@ -48,7 +49,7 @@ class LogoutUserView(LogoutView):
 UserModel = get_user_model()
 
 
-@login_required(login_url='login')
+@login_required
 def profile_details(request, pk):
     current_user = UserModel.objects.get(pk=pk)
     links = LinksModel.objects.filter(user_id=pk).all()
@@ -59,7 +60,7 @@ def profile_details(request, pk):
     return render(request, 'auth_app/profile.html', context)
 
 
-@login_required(login_url='login')
+@login_required
 def profile_edit(request, pk):
     current_user = UserModel.objects.get(pk=pk)
     form = ProfileEditForm(request.POST or None, instance=current_user)
@@ -82,9 +83,10 @@ class ProfileDeleteView(LoginRequiredMixin, views.DeleteView):
     model = UserModel
     template_name = 'auth_app/profile_delete.html'
     pk_url_kwarg = 'pk'
+    success_url = reverse_lazy('index')
 
 
-@login_required(login_url='login')
+@login_required
 def my_device(request, pk):
     user = UserModel.objects.get(pk=request.user.id)
     user_device = user.preferred_device

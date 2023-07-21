@@ -10,7 +10,7 @@ from XiaomiEuRomChecker.links.models import LinksModel
 UserModel = get_user_model()
 
 
-@login_required(login_url="login")
+@login_required
 def link_details(request, slug):
     link = LinksModel.objects.get(slug=slug)
     return render(request, 'links/link_details.html', {
