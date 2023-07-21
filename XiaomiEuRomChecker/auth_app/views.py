@@ -18,6 +18,7 @@ class RegisterUserView(CreateView):
     form_class = RegistrationForm
     success_url = reverse_lazy('index')
 
+    # autologin after registration
     def form_valid(self, form):
         result = super().form_valid(form)
 
@@ -25,11 +26,14 @@ class RegisterUserView(CreateView):
 
         return result
 
-    # TODO: to be deleted
-    # def dispatch(self, request_method, *args, **kwargs):
-    #     if request_method.user.is_authenticated:
-    #         return redirect('index')
-    #     return super().dispatch(request_method, *args, **kwargs)
+    # return to the previous page after login
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['next'] = self.request.GET.get('next', "")
+
+    def get_success_url(self):
+        return self.request.POST.get('next', self.success_url)
 
 
 class LoginUserView(LoginView):
