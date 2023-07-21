@@ -5,7 +5,7 @@ from django.contrib.auth.views import LogoutView, LoginView
 from django.shortcuts import redirect, render
 from django.contrib.auth import login, get_user_model
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DeleteView
 
 from XiaomiEuRomChecker.auth_app.forms import RegistrationForm, ProfileEditForm
 from XiaomiEuRomChecker.core.models import AvailableDevicesModel
@@ -83,7 +83,7 @@ def profile_edit(request, pk):
     return render(request, 'auth_app/profile_edit.html', {'form': form})
 
 
-class ProfileDeleteView(LoginRequiredMixin, views.DeleteView):
+class ProfileDeleteView(LoginRequiredMixin, DeleteView):
     model = UserModel
     template_name = 'auth_app/profile_delete.html'
     pk_url_kwarg = 'pk'

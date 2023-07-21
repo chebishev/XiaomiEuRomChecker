@@ -18,12 +18,18 @@ def index(request):
 @login_required
 def downloads(request, pk, slug):
     device = AvailableDevicesModel.objects.get(id=pk)
+    roms_result = {
+        'stable':
+            {get_url('stable'): get_link_for_specific_device(device.rom_name, 'stable')},
+        'weekly':
+            {get_url('weekly'): get_link_for_specific_device(device.rom_name, 'weekly')},
+    }
     links = {
-        'stable': get_url('stable'),
-        'weekly': get_url('weekly'),
-        'last_weekly': get_link_for_specific_device(device.rom_name, 'weekly'),
-        'last_stable': get_link_for_specific_device(device.rom_name, 'stable'),
+        'roms': roms_result,
         'device': device
     }
 
     return render(request, 'downloads.html', links)
+
+def page_not_found(request, exception=None):
+    return redirect('index')

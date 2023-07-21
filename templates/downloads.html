@@ -7,21 +7,19 @@
                     <br>
                     <p><span class="w3-tag w3-red">Valid ROM link for {{ device.market_name }} MUST CONTAIN </span><span
                             class="w3-tag w3-green">_{{ device.rom_name }}_</span></p>
-
-                    <li><h4>Stable roms link: </h4>{{ stable }}</li>
+                    {% for name, value in roms.items %}
+                        {% for folder, zip in value.items %}
+                            <li><h4>Latest {{ name }} rom: </h4><a href="{{ zip }}">{{ zip }}</a></li>
                     <li style="border-width: 4px">
                         <button class="w3-button w3-orange w3-padding-large w3-large w3-margin-top w3-center"
-                                type="submit">Visit folder
+                                type="submit" onclick="window.location.href='{{ folder }}';">Visit folder
                         </button>
                         <button class="w3-button w3-green w3-padding-large w3-large w3-margin-top w3-center"
                                 type="submit" onclick="window.location.href='{% url 'link_add' %}';">Save to my links
                         </button>
                     </li>
-
-                    <li><h4>Weekly roms link: </h4>{{ weekly }}</li>
-
-                    <li><h4>Latest stable rom: </h4>{{ last_stable }}</li>
-                    <li><h4>Latest weekly rom: </h4>{{ last_weekly }}</li>
+                            {% endfor %}
+                    {% endfor %}
                 </ul>
             </div>
             <div class="w3-third w3-center">

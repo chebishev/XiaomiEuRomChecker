@@ -29,3 +29,4 @@ urlpatterns = [
     # path to links_app all urls
     path('links/', include('XiaomiEuRomChecker.links.urls')),
 ]
+handler404 = 'XiaomiEuRomChecker.core.views.page_not_found'
