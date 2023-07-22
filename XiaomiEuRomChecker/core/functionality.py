@@ -48,6 +48,8 @@ def get_date(string):
     :return: list of integers [2023, 06, 29]
     """
     date_for_splitting = string
+    if "<" in date_for_splitting:
+        date_for_splitting = datetime.today().strftime("%Y-%m-%d")
     return [int(x) for x in date_for_splitting.split("-")]
 
 
