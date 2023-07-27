@@ -1,7 +1,11 @@
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from XiaomiEuRomChecker.core.functionality import get_url, get_link_for_specific_device
 from XiaomiEuRomChecker.core.models import AvailableDevicesModel
+from XiaomiEuRomChecker.links.models import LinksModel
+
+UserModel = get_user_model()
 
 
 def index(request):
@@ -28,7 +32,11 @@ def downloads(request, pk, slug):
         'roms': roms_result,
         'device': device
     }
-    # TODO try to get the link from the form in 'donwload.hmtl'
+    if request.method == 'POST':
+        if request.POST.get('save_link'):
+            request.session['uid'] = request.POST.get('save_link')
+            return redirect('link_add', request.user.id)
+
     return render(request, 'downloads.html', links)
 
 def page_not_found(request, exception=None):

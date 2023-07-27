@@ -31,11 +31,15 @@ class LinkDetailsView(LoginRequiredMixin, DetailView):
 class LinkCreateView(LoginRequiredMixin, CreateView):
     model = LinksModel
     template_name = 'links/link_create.html'
-    fields = ['link_name', 'link_url', 'link_description']
+    fields = ['link_name']
 
     def form_valid(self, form):
         form.instance.user = self.request.user
+        form.instance.link_url = self.request.session['uid']
         return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('profile_details', self.request.user.id)
 
 
 class LinkEditView(LoginRequiredMixin, UpdateView):

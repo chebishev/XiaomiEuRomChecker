@@ -14,7 +14,8 @@
                         <button class="w3-button w3-orange w3-padding-large w3-large w3-margin-top w3-center"
                                 type="submit" onclick="window.location.href='{{ folder }}';">Visit folder
                         </button>
-                        <form method="POST" action="{% url 'link_add' request.user.id %}">
+                        {% if not "!" in zip %}
+                        <form method="POST">
 
                             {% csrf_token %}
                             <input type="hidden" name="save_link" value="{{ zip }}">
@@ -22,6 +23,7 @@
                                     type="submit">Save to my links
                             </button>
                         </form>
+                    {% endif %}
                     </li>
 
                 {% endfor %}

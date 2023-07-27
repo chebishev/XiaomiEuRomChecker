@@ -2,6 +2,8 @@
 {% block grids %}
     <div class="w3-twothird">
     <form method="post">
+        <h2>Save link</h2>
+        <br>
     {% csrf_token %}
     {{ form.as_p }}
     <button class="w3-button w3-green w3-padding-large w3-large w3-margin-top" type="submit">Add link to My Links</button>

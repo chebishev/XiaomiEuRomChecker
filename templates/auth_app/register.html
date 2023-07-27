@@ -6,18 +6,20 @@
         {% csrf_token %}
         <h2>Register</h2>
         <br>
-        {% for field in form %}
-            <p>
-                {% if field.errors %}
-                    <ul class="errors">
-                        {% for error in field.errors %}
-                            <li style="list-style: none">{{ error }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            {{ field.label_tag }} <br> {{ field }}
-            </p>
-        {% endfor %}
+
+    {{ form.as_p }}
+{#        {% for field in form %}#}
+{#            <p>#}
+{#                {% if field.errors %}#}
+{#                    <ul class="errors">#}
+{#                        {% for error in field.errors %}#}
+{#                            <li style="list-style: none">{{ error }}</li>#}
+{#                        {% endfor %}#}
+{#                    </ul>#}
+{#                {% endif %}#}
+{#            {{ field.label_tag }} <br> {{ field }}#}
+{#            </p>#}
+{#        {% endfor %}#}
         <button class="w3-button w3-blue w3-padding-large w3-large w3-margin-top w3-center" type="submit">Register
         </button>
     </form>
