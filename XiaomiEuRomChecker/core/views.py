@@ -28,7 +28,7 @@ def downloads(request, pk, slug):
         'roms': roms_result,
         'device': device
     }
-
+    # TODO try to get the link from the form in 'donwload.hmtl'
     return render(request, 'downloads.html', links)
 
 def page_not_found(request, exception=None):

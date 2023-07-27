@@ -2,33 +2,36 @@
 
 {% block grids %}
 
-            <div class="w3-twothird">
-                <ul class="w3-ul">
-                    <br>
-                    <p><span class="w3-tag w3-red">Valid ROM link for {{ device.market_name }} MUST CONTAIN </span><span
-                            class="w3-tag w3-green">_{{ device.rom_name }}_</span></p>
-                    {% for name, value in roms.items %}
-                        {% for folder, zip in value.items %}
-                            <li><h4>Latest {{ name }} rom: </h4><a href="{{ zip }}">{{ zip }}</a></li>
+    <div class="w3-twothird">
+        <ul class="w3-ul">
+            <br>
+            <p><span class="w3-tag w3-red">Valid ROM link for {{ device.market_name }} MUST CONTAIN </span><span
+                    class="w3-tag w3-green">_{{ device.rom_name }}_</span></p>
+            {% for name, value in roms.items %}
+                {% for folder, zip in value.items %}
+                    <li><h4>Latest {{ name }} rom: </h4><a href="{{ zip }}">{{ zip }}</a></li>
                     <li style="border-width: 4px">
                         <button class="w3-button w3-orange w3-padding-large w3-large w3-margin-top w3-center"
                                 type="submit" onclick="window.location.href='{{ folder }}';">Visit folder
                         </button>
-                        <form method="POST" name="save_link">
+                        <form method="POST" action="{% url 'link_add' request.user.id %}">
+
                             {% csrf_token %}
-                        <button class="w3-button w3-green w3-padding-large w3-large w3-margin-top w3-center"
-                                type="submit" onclick="window.location.href='{% url 'link_add' user_id=request.user.id %}';">Save to my links
-                        </button>
+                            <input type="hidden" name="save_link" value="{{ zip }}">
+                            <button class="w3-button w3-green w3-padding-large w3-large w3-margin-top w3-center"
+                                    type="submit">Save to my links
+                            </button>
                         </form>
                     </li>
-                            {% endfor %}
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="w3-third w3-center">
 
-                <i class="fa fa-size fa-download w3-padding-64 w3-text-{{ color.first_grid_icon }}"></i>
-            </div>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="w3-third w3-center">
+
+        <i class="fa fa-size fa-download w3-padding-64 w3-text-{{ color.first_grid_icon }}"></i>
+    </div>
 
     {#    <!-- Second Grid -->#}
     {#<div class="w3-row-padding w3-light-grey w3-padding-64 w3-container">#}

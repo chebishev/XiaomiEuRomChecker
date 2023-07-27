@@ -33,9 +33,6 @@ class LinkCreateView(LoginRequiredMixin, CreateView):
     template_name = 'links/link_create.html'
     fields = ['link_name', 'link_url', 'link_description']
 
-    def dispatch(self, request, *args, **kwargs):
-        test = request.POST.get('save_link')
-        return super().dispatch(request, *args, **kwargs)
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
