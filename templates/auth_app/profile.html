@@ -46,7 +46,7 @@
 
                 <ul class="w3-ul w3-hoverable w3-center" style="list-style: none">
                     {% for item in links.all %}
-                        <a href="{% url 'link_details' slug=item.slug %}">
+                        <a href="{% url 'link_details' user_id=request.user.id slug=item.slug %}">
                             <li>{{ item.link_name }} </li>
                         </a>
                     {% endfor %}

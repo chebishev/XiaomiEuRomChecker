@@ -2,12 +2,12 @@
 {% block grids %}
     <div class="w3-twothird">
 <ul class="w3-ul" style="list-style: none">
-<li>Link name: {{ link.link_name }}</li>
-<li><a href="{{ link.link_url }}">{{ link.link_url }}</a><button type="submit">Copy to clipboard</button></li>
-<li>Description: {{ link.link_description }}</li>
-<li>Short link: {% if link.short_link %}{{ link.short_link}}<button type="submit">Copy to clipboard</button>{{% else %}<button type="submit">Create short link</button>{% endif %}</li>
-<li>Link created ad: {{ link.created_at }}</li>
-<li>Last link update: {{ link.updated_at }}</li>
+<li>Link name: {{ object.link_name }}</li>
+<li><a href="{{ object.link_url }}">{{ object.link_url }}</a><button type="submit">Copy to clipboard</button></li>
+<li>Description: {{ object.link_description }}</li>
+<li>Short link: {% if object.short_link %}{{ object.short_link}}<button type="submit">Copy to clipboard</button>{{% else %}<button type="submit">Create short link</button>{% endif %}</li>
+<li>Link created ad: {{ object.created_at }}</li>
+<li>Last link update: {{ object.updated_at }}</li>
 
     <button class="w3-button w3-orange w3-padding-large w3-large w3-margin-top w3-center" type="submit">Edit</button>
     <button class="w3-button w3-red w3-padding-large w3-large w3-margin-top w3-center" type="submit">Delete</button>

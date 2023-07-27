@@ -14,9 +14,12 @@
                         <button class="w3-button w3-orange w3-padding-large w3-large w3-margin-top w3-center"
                                 type="submit" onclick="window.location.href='{{ folder }}';">Visit folder
                         </button>
+                        <form method="POST" name="save_link">
+                            {% csrf_token %}
                         <button class="w3-button w3-green w3-padding-large w3-large w3-margin-top w3-center"
-                                type="submit" onclick="window.location.href='{% url 'link_add' %}';">Save to my links
+                                type="submit" onclick="window.location.href='{% url 'link_add' user_id=request.user.id %}';">Save to my links
                         </button>
+                        </form>
                     </li>
                             {% endfor %}
                     {% endfor %}
