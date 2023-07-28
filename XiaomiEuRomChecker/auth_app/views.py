@@ -1,12 +1,12 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LogoutView, LoginView
 from django.shortcuts import redirect, render
 from django.contrib.auth import login, get_user_model
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView
-from XiaomiEuRomChecker.auth_app.forms import ProfileEditForm, RegistrationForm
+from XiaomiEuRomChecker.auth_app.forms import ProfileEditForm
 from XiaomiEuRomChecker.core.models import AvailableDevicesModel
 from XiaomiEuRomChecker.links.models import LinksModel
 
@@ -14,9 +14,10 @@ UserModel = get_user_model()
 
 # Create your views here.
 class RegisterUserView(CreateView):
+    model = UserModel
     template_name = 'auth_app/register.html'
     success_url = reverse_lazy('index')
-    form_class = RegistrationForm
+    form = UserCreationForm
 
     # autologin after registration
     def form_valid(self, form):
@@ -48,10 +49,6 @@ class LoginUserView(LoginView):
 
 class LogoutUserView(LogoutView):
     pass
-
-
-UserModel = get_user_model()
-
 
 @login_required
 def profile_details(request, pk):

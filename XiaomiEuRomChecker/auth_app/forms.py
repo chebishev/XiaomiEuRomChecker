@@ -5,13 +5,6 @@ from XiaomiEuRomChecker.core.models import AvailableDevicesModel
 
 UserModel = get_user_model()
 
-
-class RegistrationForm(UserCreationForm):
-    class Meta:
-        model = UserModel
-        fields = ('username', 'password1', 'password2')
-
-
 class ProfileEditForm(forms.ModelForm):
     devices_query = AvailableDevicesModel.objects.values_list('market_name', flat=True).distinct()
     devices_query_choices = [
