@@ -1,4 +1,23 @@
 {% extends 'base.html' %}
 {% block grids %}
-<h4>Edit link must be here</h4>
+    <form class="form-inline w3-center" method="post"
+          action="{% url 'link_edit' user_id=request.user.id slug=link.slug %}">
+        <h2>Link Edit</h2>
+        <br>
+        {% for field in form %}
+            <p>
+                {% if field.errors %}
+                    <ul class="errors">
+                        {% for error in field.errors %}
+                            <li style="list-style: none">{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {{ field.label_tag }} <br> {{ field }}
+            </p>
+        {% endfor %}
+        {% csrf_token %}
+        <button class="w3-button w3-blue w3-padding-large w3-large w3-margin-top w3-center" type="submit">Edit
+        </button>
+    </form>
 {% endblock %}
