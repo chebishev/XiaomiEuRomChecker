@@ -30,7 +30,9 @@ class LinkCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('profile_details', self.request.user.id)
+        return reverse('profile_details', kwargs={
+            "user_id": self.request.user.id
+        })
 
 
 class LinkEditView(LoginRequiredMixin, UpdateView):
