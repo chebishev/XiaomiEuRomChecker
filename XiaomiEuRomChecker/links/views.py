@@ -1,12 +1,7 @@
 from django.contrib.auth import get_user_model
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import request
-from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
-
-from XiaomiEuRomChecker.links.forms import LinkEditForm
 from XiaomiEuRomChecker.links.models import LinksModel
 
 UserModel = get_user_model()
@@ -21,7 +16,7 @@ class LinkDetailsView(LoginRequiredMixin, DetailView):
         return context
 
     def get_success_url(self):
-        return reverse('links:link_details', kwargs={'user_id': self.kwargs['user_id'], 'slug': self.kwargs['slug']})
+        return reverse('link_details', kwargs={'user_id': self.kwargs['user_id'], 'slug': self.kwargs['slug']})
 
 
 class LinkCreateView(LoginRequiredMixin, CreateView):
@@ -43,8 +38,22 @@ class LinkEditView(LoginRequiredMixin, UpdateView):
     template_name = 'links/link_edit.html'
     fields = ['link_name', 'link_description']
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['link'] = LinksModel.objects.get(slug=self.kwargs[self.slug_url_kwarg])
+        return context
+
     def get_success_url(self):
-        return reverse('link_details', self.request.user.id)
-class LinkDeleteView(DeleteView):
+        return reverse('link_details', kwargs={'user_id': self.kwargs['user_id'], 'slug': self.kwargs['slug']})
+
+class LinkDeleteView(LoginRequiredMixin, DeleteView):
     model = LinksModel
     template_name = 'links/link_delete.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['link'] = LinksModel.objects.get(slug=self.kwargs[self.slug_url_kwarg])
+        return context
+
+    def get_success_url(self):
+        return reverse('link_details', kwargs={'user_id': self.kwargs['user_id'], 'slug': self.kwargs['slug']})

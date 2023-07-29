@@ -17,7 +17,7 @@
                     onclick="window.location.href='{% url 'link_edit' user_id=request.user.id slug=object.slug %}';">
                 Edit
             </button>
-            <button class="w3-button w3-red w3-padding-large w3-large w3-margin-top w3-center" type="submit">Delete
+            <button class="w3-button w3-red w3-padding-large w3-large w3-margin-top w3-center" type="submit" onclick="window.location.href='{% url 'link_delete' user_id=request.user.id slug=object.slug %}';">Delete
             </button>
         </ul>
     </div>
