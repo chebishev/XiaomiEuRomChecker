@@ -1,19 +1,28 @@
 {% extends 'base.html' %}
 {% block grids %}
 
-    <form class="form-horizontal" method="post" action="{% url 'login' %}">
-        <div class="form-group w3-center">
-            <h2>Login</h2>
-            <br>
-            {% csrf_token %}
-            {{ form.as_p }}
+    <form class="form-inline w3-center" method="post" action="{% url 'login' %}">
+        <h2>Login</h2>
+        <br>
+        {% for field in form %}
+            <p>
+                {% if field.errors %}
+                    <ul class="errors">
+                        {% for error in field.errors %}
+                            <li style="list-style: none">{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {{ field.label_tag }} <br> {{ field }}
+            </p>
+        {% endfor %}
+        {% csrf_token %}
 
-            {# get the last page in order to redirect ot it after successful login #}
-            <input type="hidden" value="{{ next }}" name="next">
+        {# get the last page in order to redirect ot it after successful login #}
+        <input type="hidden" value="{{ next }}" name="next">
 
-            <button type="submit" class="w3-button w3-green w3-padding-large w3-medium w3-margin-top w3-center">Login</button>
-
-        </div>
+        <button type="submit" class="w3-button w3-green w3-padding-large w3-medium w3-margin-top w3-center">Login
+        </button>
     </form>
 
 {% endblock %}

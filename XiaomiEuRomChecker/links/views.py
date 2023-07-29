@@ -43,8 +43,13 @@ class LinkCreateView(LoginRequiredMixin, CreateView):
 
 
 class LinkEditView(LoginRequiredMixin, UpdateView):
-    pass
+    model = LinksModel
+    template_name = 'links/link_edit.html'
+
+    def get_success_url(self):
+        return reverse('link_edit', kwargs={'user_id': self.request.user.id, 'slug': self.kwargs['slug']})
 
 
 class LinkDeleteView(DeleteView):
-    pass
+    model = LinksModel
+    template_name = 'links/link_delete.html'

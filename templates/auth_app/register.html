@@ -2,7 +2,7 @@
 {% block grids %}
 
     <form class="form-inline w3-center" method="post" action="{% url 'register' %}">
-    <h2>Register</h2>
+        <h2>Register</h2>
         <br>
         {% for field in form %}
             <p>
@@ -16,7 +16,7 @@
             {{ field.label_tag }} <br> {{ field }}
             </p>
         {% endfor %}
-    {% csrf_token %}
+        {% csrf_token %}
         <button class="w3-button w3-blue w3-padding-large w3-large w3-margin-top w3-center" type="submit">Register
         </button>
     </form>

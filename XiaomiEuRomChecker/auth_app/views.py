@@ -1,12 +1,11 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LogoutView, LoginView
 from django.shortcuts import redirect, render
 from django.contrib.auth import login, get_user_model
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView
-from XiaomiEuRomChecker.auth_app.forms import ProfileEditForm, RegisterUserForm
+from XiaomiEuRomChecker.auth_app.forms import ProfileEditForm, RegisterUserForm, LoginUserForm
 from XiaomiEuRomChecker.core.models import AvailableDevicesModel
 from XiaomiEuRomChecker.links.models import LinksModel
 
@@ -40,7 +39,7 @@ class RegisterUserView(CreateView):
 
 class LoginUserView(LoginView):
     template_name = 'auth_app/login.html'
-    form_class = AuthenticationForm
+    form_class = LoginUserForm
 
     def dispatch(self, request_method, *args, **kwargs):
         if request_method.user.is_authenticated:

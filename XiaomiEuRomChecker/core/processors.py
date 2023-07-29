@@ -24,7 +24,7 @@ def latest_weekly(request):
     year, month, day = current_date.year, current_date.month, current_date.day
 
     difference = datetime.now() - datetime(year, month, day)
-    if difference.days < 4:
+    if difference.days > 4:
         info_from_scrapping = get_last_weekly_folder(get_url('weekly'))
         new_folder = info_from_scrapping[1]
         if new_folder not in FoldersModel.objects.values_list('folder_name', flat=True):

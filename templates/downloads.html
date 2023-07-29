@@ -9,7 +9,12 @@
                     class="w3-tag w3-green">_{{ device.rom_name }}_</span></p>
             {% for name, value in roms.items %}
                 {% for folder, zip in value.items %}
-                    <li><h4>Latest {{ name }} rom: </h4><a href="{{ zip }}">{{ zip }}</a></li>
+                    <li><h4>Latest {{ name }} rom: </h4>
+                        {% if not 'zip' in zip %}
+                        {{ zip }}</li>
+                    {% else %}
+                    <a href="{{ zip }}">{{ zip }}</a></li>
+                    {% endif %}
                     <li style="border-width: 4px">
                         <button class="w3-button w3-orange w3-padding-large w3-large w3-margin-top w3-center"
                                 type="submit" onclick="window.location.href='{{ folder }}';">Visit folder
