@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block grids %}
+    <div class="w3-row-padding w3-padding-64 w3-container">
+        <div class="w3-content">
+            <div class="w3-twothird">
+                <ul class="w3-ul" style="list-style: none">
+                {% for link in links %}
+                    <li>{{ link.name }} - {{ link.description }}</li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
