@@ -3,14 +3,16 @@
     <div class="w3-twothird">
         <ul class="w3-ul" style="list-style: none">
             <li>Link name: {{ object.link_name }}</li>
-            <li><a href="{{ object.link_url }}">{{ object.link_url }}</a>
-                <button type="submit">Copy to clipboard</button>
-            </li>
-            <li>Description: {{ object.link_description }}</li>
-            <li>Short link: {% if object.short_link %}{{ object.short_link }}
-                <button type="submit">Copy to clipboard</button>
-                {% else %}
-                <button type="submit" onclick="window.location.href='{% url 'shorten_link' user_id=request.user.id slug=link.slug %}';">Create short link</button>{% endif %}</li>
+            <li>Link URL: <a href="{{ object.link_url }}">{{ object.link_url }}</a></li>
+            <li>Description: {% if object.link_description %}{{ object.link_description }}{% else %}
+                <button type="submit" onclick="window.location.href='{% url 'link_edit' user_id=request.user.id slug=link.slug %}';">Add description</button>{% endif %}</li>
+            <li>Short link: {% if object.short_link %}
+                <a href="{{ object.short_link }}">{{ object.short_link }}</a>
+            {% else %}
+                <button type="submit"
+                        onclick="window.location.href='{% url 'shorten_link' user_id=request.user.id slug=link.slug %}';">
+                    Create short link
+                </button>{% endif %}</li>
 
             <li>Link created ad: {{ object.created_at }}</li>
 

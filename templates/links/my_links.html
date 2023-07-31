@@ -16,7 +16,7 @@
       {% for link in links %}
     <tr onclick="window.location.href='{% url 'link_details' user_id=request.user.id slug=link.slug %}';">
       <td>{{ link.link_name }}</td>
-      <td>{{ link.link_description|truncatechars:30 }}</td>
+      <td>{% if link.link_description %}{{ link.link_description|truncatechars:30 }}{% endif %}</td>
       <td>{{ link.created_at }}</td>
       <td>{{ link.updated_at }}</td>
     </tr>
