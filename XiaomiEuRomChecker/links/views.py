@@ -83,12 +83,6 @@ class MyLinksView(LoginRequiredMixin, ListView):
 
 
 @login_required
-def copy_link_to_clipboard(request, link):
-    copy(request.META['HTTP_HOST'] + resolve_url('link_details', link))
-    return redirect(request.META['HTTP_REFERER'] + f'#{link}')
-
-
-@login_required
 def create_short_link(request, user_id, slug):
     link = LinksModel.objects.get(slug=slug)
     link.short_link = shorten_url(link.link_url)
