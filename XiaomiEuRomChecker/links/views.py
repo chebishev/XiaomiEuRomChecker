@@ -1,7 +1,13 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import resolve_url, redirect, render
 from django.urls import reverse
+from django.views import View
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView, ListView
+from pyperclip import copy
+
+from XiaomiEuRomChecker.links.functionality import shorten_url
 from XiaomiEuRomChecker.links.models import LinksModel
 
 UserModel = get_user_model()
@@ -74,3 +80,17 @@ class MyLinksView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['links'] = LinksModel.objects.filter(user=self.request.user).order_by('-created_at').all()
         return context
+
+
+@login_required
+def copy_link_to_clipboard(request, link):
+    copy(request.META['HTTP_HOST'] + resolve_url('link_details', link.slug))
+    return redirect(request.META['HTTP_REFERER'] + f'#{link}')
+
+
+@login_required
+def create_short_link(request, user_id, slug):
+    link = LinksModel.objects.get(slug=slug)
+    link.short_link = shorten_url(link.link_url)
+    link.save()
+    return redirect("link_details", user_id=request.user.id, slug=link.slug)

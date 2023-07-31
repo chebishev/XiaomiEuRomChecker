@@ -140,7 +140,7 @@ def get_link_for_specific_device(device, release):
         target_url = get_url('stable')
 
     device_roms = files_list_info(target_url, 'tr', "file")
-    #device_roms = results.find_all("tr", class_="file")
+    # device_roms = results.find_all("tr", class_="file")
 
     for rom in device_roms:
         current_rom = rom.text

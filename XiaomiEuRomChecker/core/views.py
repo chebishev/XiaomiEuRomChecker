@@ -39,5 +39,6 @@ def downloads(request, pk, slug):
 
     return render(request, 'core/downloads.html', links)
 
+
 def page_not_found(request, exception=None):
     return redirect('index')

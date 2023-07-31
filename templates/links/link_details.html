@@ -8,16 +8,21 @@
             </li>
             <li>Description: {{ object.link_description }}</li>
             <li>Short link: {% if object.short_link %}{{ object.short_link }}
-                <button type="submit">Copy to clipboard</button>{{% else %}
-                <button type="submit">Create short link</button>{% endif %}</li>
+                <button type="submit">Copy to clipboard</button>
+                {% else %}
+                <button type="submit" onclick="window.location.href='{% url 'shorten_link' user_id=request.user.id slug=link.slug %}';">Create short link</button>{% endif %}</li>
+
             <li>Link created ad: {{ object.created_at }}</li>
+
             <li>Last link update: {{ object.updated_at }}</li>
 
             <button class="w3-button w3-orange w3-padding-large w3-large w3-margin-top w3-center" type="submit"
                     onclick="window.location.href='{% url 'link_edit' user_id=request.user.id slug=link.slug %}';">
                 Edit
             </button>
-            <button class="w3-button w3-red w3-padding-large w3-large w3-margin-top w3-center" type="submit" onclick="window.location.href='{% url 'link_delete' user_id=request.user.id slug=link.slug %}';">Delete
+            <button class="w3-button w3-red w3-padding-large w3-large w3-margin-top w3-center" type="submit"
+                    onclick="window.location.href='{% url 'link_delete' user_id=request.user.id slug=link.slug %}';">
+                Delete
             </button>
         </ul>
     </div>
