@@ -11,6 +11,7 @@ from XiaomiEuRomChecker.links.models import LinksModel
 
 UserModel = get_user_model()
 
+
 # Create your views here.
 class RegisterUserView(CreateView):
     template_name = 'auth_app/register.html'
@@ -24,6 +25,12 @@ class RegisterUserView(CreateView):
         login(self.request, self.object)
 
         return result
+
+    # in order to prevent logged users to access register page:
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('index')
+        return super().dispatch(request, *args, **kwargs)
 
     # return to the previous page after login
     def get_context_data(self, **kwargs):
@@ -49,6 +56,7 @@ class LoginUserView(LoginView):
 
 class LogoutUserView(LogoutView):
     pass
+
 
 @login_required
 def profile_details(request, pk):
@@ -95,4 +103,4 @@ def my_device(request, pk):
         return redirect('index')
     else:
         chosen_device = AvailableDevicesModel.objects.get(market_name=user_device)
-        return render(request, 'device_info.html', {'chosen_device': chosen_device})
+        return render(request, 'core/device_info.html', {'chosen_device': chosen_device})

@@ -14,9 +14,9 @@ def index(request):
             request.method = 'GET'
         else:
             chosen_device = AvailableDevicesModel.objects.get(id=request.POST.get('device'))
-            return render(request, 'device_info.html', {'chosen_device': chosen_device})
+            return render(request, 'core/device_info.html', {'chosen_device': chosen_device})
 
-    return render(request, 'index.html')
+    return render(request, 'core/index.html')
 
 
 @login_required
@@ -37,7 +37,7 @@ def downloads(request, pk, slug):
             request.session['uid'] = request.POST.get('save_link')
             return redirect('link_add', request.user.id)
 
-    return render(request, 'downloads.html', links)
+    return render(request, 'core/downloads.html', links)
 
 def page_not_found(request, exception=None):
     return redirect('index')

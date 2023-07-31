@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block grids %}
-
+{% for message in messages %}
+    <div class="alert alert-info">{{message}}</div>
+{% endfor %}
     <form class="form-inline w3-center" method="post" action="{% url 'login' %}">
         <h2>Login</h2>
         <br>
@@ -16,6 +18,7 @@
             {{ field.label_tag }} <br> {{ field }}
             </p>
         {% endfor %}
+
         {% csrf_token %}
 
         {# get the last page in order to redirect ot it after successful login #}

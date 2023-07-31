@@ -17,6 +17,7 @@ class LoginUserForm(AuthenticationForm):
         model = UserModel
         fields = ('username', 'password')
 
+
 class ProfileEditForm(forms.ModelForm):
     devices_query = AvailableDevicesModel.objects.order_by('market_name').values_list('market_name', flat=True)
     devices_query_choices = [

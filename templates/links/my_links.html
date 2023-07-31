@@ -1,14 +1,29 @@
 {% extends 'base.html' %}
 {% block grids %}
-    <div class="w3-row-padding w3-padding-64 w3-container">
-        <div class="w3-content">
-            <div class="w3-twothird">
-                <ul class="w3-ul" style="list-style: none">
-                {% for link in links %}
-                    <li>{{ link.name }} - {{ link.description }}</li>
-                {% endfor %}
-                </ul>
-            </div>
-        </div>
-    </div>
+   <div class="w3-container">
+  <h2 class="w3-center">Saved links</h2>
+   <br>
+    {% if links %}
+  <table class="w3-table-all w3-hoverable">
+    <thead>
+      <tr class="w3-light-grey">
+        <th>Name</th>
+        <th>Description</th>
+        <th>Created on</th>
+        <th>Last edit</th>
+      </tr>
+    </thead>
+      {% for link in links %}
+    <tr onclick="window.location.href='{% url 'link_details' user_id=request.user.id slug=link.slug %}';">
+      <td>{{ link.link_name }}</td>
+      <td>{{ link.link_description|truncatechars:30 }}</td>
+      <td>{{ link.created_at }}</td>
+      <td>{{ link.updated_at }}</td>
+    </tr>
+      {% endfor %}
+  </table>
+    {% else %}
+    <h3>No saved links</h3>
+    {% endif %}
+</div>
 {% endblock %}

@@ -1,11 +1,11 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import request
 from django.urls import reverse
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView, ListView
 from XiaomiEuRomChecker.links.models import LinksModel
 
 UserModel = get_user_model()
+
 
 class LinkDetailsView(LoginRequiredMixin, DetailView):
     model = LinksModel
@@ -49,6 +49,7 @@ class LinkEditView(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         return reverse('link_details', kwargs={'user_id': self.kwargs['user_id'], 'slug': self.kwargs['slug']})
 
+
 class LinkDeleteView(LoginRequiredMixin, DeleteView):
     model = LinksModel
     template_name = 'links/link_delete.html'
@@ -59,13 +60,12 @@ class LinkDeleteView(LoginRequiredMixin, DeleteView):
         return context
 
     def get_success_url(self):
-        return reverse('link_details', kwargs={'user_id': self.kwargs['user_id'], 'slug': self.kwargs['slug']})
+        return reverse('', kwargs={'user_id': self.kwargs['user_id'], 'slug': self.kwargs['slug']})
 
 
 class MyLinksView(LoginRequiredMixin, ListView):
     model = LinksModel
     template_name = 'links/my_links.html'
-    paginate_by = 3
 
     def get_success_url(self):
         return reverse('my_links', kwargs={'user_id': self.request.user.id})
