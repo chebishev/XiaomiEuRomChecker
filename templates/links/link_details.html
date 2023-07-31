@@ -2,11 +2,11 @@
 {% block grids %}
     <div class="w3-twothird">
         <ul class="w3-ul" style="list-style: none">
-            <li>Link name: {{ object.link_name }}</li>
-            <li>Link URL: <a href="{{ object.link_url }}">{{ object.link_url }}</a></li>
-            <li>Description: {% if object.link_description %}{{ object.link_description }}{% else %}
+            <li><h4>Link name: </h4> {{ object.link_name }}</li>
+            <li><h4>Link URL: </h4> <a href="{{ object.link_url }}">{{ object.link_url }}</a></li>
+            <li><h4>Description: </h4> {% if object.link_description %}{{ object.link_description }}{% else %}
                 <button type="submit" onclick="window.location.href='{% url 'link_edit' user_id=request.user.id slug=link.slug %}';">Add description</button>{% endif %}</li>
-            <li>Short link: {% if object.short_link %}
+            <li><h4>Short link: </h4> {% if object.short_link %}
                 <a href="{{ object.short_link }}">{{ object.short_link }}</a>
             {% else %}
                 <button type="submit"
@@ -14,9 +14,9 @@
                     Create short link
                 </button>{% endif %}</li>
 
-            <li>Link created ad: {{ object.created_at }}</li>
+            <li><h4>Link created at: </h4> {{ object.created_at }}</li>
 
-            <li>Last link update: {{ object.updated_at }}</li>
+            <li><h4>Last link update: </h4> {{ object.updated_at }}</li>
 
             <button class="w3-button w3-orange w3-padding-large w3-large w3-margin-top w3-center" type="submit"
                     onclick="window.location.href='{% url 'link_edit' user_id=request.user.id slug=link.slug %}';">

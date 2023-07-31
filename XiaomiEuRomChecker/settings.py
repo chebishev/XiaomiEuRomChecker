@@ -20,12 +20,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-z46i-f#3$yybgl8b2_jgx^pahq6)qj8)zv&)ufyzq77app^59e'
+SECRET_KEY = os.environ.get('SECRET_KEY', None)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(' ')
 
 # Application definition
 
@@ -84,11 +84,11 @@ WSGI_APPLICATION = 'XiaomiEuRomChecker.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "xiaomi.eu_rom_checker_db",
-        "USER": "postgres-user",
-        "PASSWORD": "password",
-        "HOST": "127.0.0.1",
-        "PORT": "5432",
+        "NAME": os.environ.get("DB_NAME", None),
+        "USER": os.environ.get("DB_USER", None),
+        "PASSWORD": os.environ.get("DB_PASSWORD", None),
+        "HOST": os.environ.get("DB_HOST", None),
+        "PORT": os.environ.get("DB_PORT", 5432),
     }
 }
 
