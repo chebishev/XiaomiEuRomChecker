@@ -1,12 +1,9 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import resolve_url, redirect, render
+from django.shortcuts import redirect
 from django.urls import reverse
-from django.views import View
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView, ListView
-from pyperclip import copy
-
 from XiaomiEuRomChecker.links.functionality import shorten_url
 from XiaomiEuRomChecker.links.models import LinksModel
 
