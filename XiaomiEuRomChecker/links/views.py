@@ -64,7 +64,7 @@ class LinkDeleteView(LoginRequiredMixin, DeleteView):
         return context
 
     def get_success_url(self):
-        return reverse('', kwargs={'user_id': self.kwargs['user_id'], 'slug': self.kwargs['slug']})
+        return reverse('my_links', kwargs={'user_id': self.kwargs['user_id']})
 
 
 class MyLinksView(LoginRequiredMixin, ListView):
