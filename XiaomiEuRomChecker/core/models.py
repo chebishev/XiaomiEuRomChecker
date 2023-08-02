@@ -1,19 +1,38 @@
+from enum import Enum
+
 from django.db import models
 from django.template.defaultfilters import slugify
 
 
+class ChoicesMixin:
+    @classmethod
+    def choices(cls):
+        return [(choice.value, choice.value) for choice in cls]
+
+
+class ChoicesStringMixin(ChoicesMixin):
+    @classmethod
+    def max_length(cls):
+        return max(len(x.value) for x in cls)
+
+
+class RomOptions(ChoicesStringMixin, Enum):
+    STABLE = 'stable'
+    WEEKLY = 'weekly'
+    BOTH = 'both'
+
+
 # Create your models here.
 class AvailableDevicesModel(models.Model):
-    code_name = models.CharField(max_length=20)
-    market_name = models.CharField(max_length=40, unique=True)
-    rom_name = models.CharField(max_length=30)
+    CODE_NAME_MAX_LENGTH = 20
+    MARKET_NAME_MAX_LENGTH = 40
+    ROM_NAME_MAX_LENGTH = 30
+    code_name = models.CharField(max_length=CODE_NAME_MAX_LENGTH)
+    market_name = models.CharField(max_length=MARKET_NAME_MAX_LENGTH, unique=True)
+    rom_name = models.CharField(max_length=ROM_NAME_MAX_LENGTH)
     rom_options = models.CharField(
-        max_length=6,
-        choices=[
-            ('stable', 'stable'),
-            ('weekly', 'weekly'),
-            ('both', 'both'),
-        ]
+        max_length=RomOptions.max_length(),
+        choices=RomOptions.choices(),
     )
     slug = models.SlugField(editable=False)
 

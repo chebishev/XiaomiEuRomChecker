@@ -2,6 +2,8 @@
 
 import os
 import pyshorteners
+from dotenv import load_dotenv
+load_dotenv()
 
 
 def shorten_url(url):

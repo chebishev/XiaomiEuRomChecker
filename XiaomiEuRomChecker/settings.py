@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 from django.urls import reverse_lazy
+from dotenv import load_dotenv
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -83,7 +85,7 @@ WSGI_APPLICATION = 'XiaomiEuRomChecker.wsgi.application'
 
 DATABASES = {
     "default": {
-        "ENGINE": os.environ.get('DB_ENGINE', None),
+        "ENGINE": os.getenv("DB_ENGINE", None),
         "NAME": os.environ.get("DB_NAME", None),
         "USER": os.environ.get("DB_USER", None),
         "PASSWORD": os.environ.get("DB_PASSWORD", None),
