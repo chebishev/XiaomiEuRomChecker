@@ -39,8 +39,7 @@ def latest_weekly(request):
     return {'current_folder': current_folder}
 
 
-# I am using it for the choices dropdown menu, but it can be replaced with form in the future
-# TODO try to use the model from the auth_app/forms.py in order to not give this to the context everytime
+# It gives me access to all devices as list in the templates. Currently used in index.html
 def all_devices(request):
     device_list = AvailableDevicesModel.objects.all().order_by('market_name')
     return {'device_list': device_list}

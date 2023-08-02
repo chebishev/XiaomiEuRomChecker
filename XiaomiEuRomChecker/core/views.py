@@ -40,5 +40,7 @@ def downloads(request, pk, slug):
     return render(request, 'core/downloads.html', links)
 
 
+# in Debug=False it redirects all wrong pages (404) to index
+# there is a reference to this view in XiaomiEuRomChecker\urls.py
 def page_not_found(request, exception=None):
     return redirect('index')

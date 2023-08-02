@@ -14,8 +14,7 @@ class RegisterUserForm(UserCreationForm):
 
 class ProfileEditForm(forms.ModelForm):
     devices_query = AvailableDevicesModel.objects.order_by('market_name').values_list('market_name', flat=True)
-    devices_query_choices = [
-                                ("", 'No Device')] + [(market_name, market_name) for market_name in devices_query]
+    devices_query_choices = [("", 'No Device')] + [(market_name, market_name) for market_name in devices_query]
     change_preferred_device = forms.ChoiceField(choices=devices_query_choices, required=False, widget=forms.Select)
 
     class Meta:

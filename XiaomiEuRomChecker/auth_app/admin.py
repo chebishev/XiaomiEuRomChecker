@@ -11,6 +11,8 @@ class AuthUserAdmin(admin.ModelAdmin):
     ordering = ['date_joined']
     filter_fields = ['username', 'last_login', 'is_superuser', 'is_staff', 'is_active', 'date_joined']
 
+    # in order to save the password properly when the user is added via admin panel
+    # without this method, the password is not hashed can be seen as is in the admin panel and in the db
     def save_model(self, request, obj, form, change):
         obj.set_password(form.data['password'])
         obj.save()
