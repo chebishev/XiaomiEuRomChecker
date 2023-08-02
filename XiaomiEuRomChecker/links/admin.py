@@ -9,3 +9,4 @@ class LinksModelAdmin(admin.ModelAdmin):
     list_display = ['link_name', 'user']
     ordering = ['link_name']
     filter_fields = ['link_name', 'user']
+    list_per_page = 20

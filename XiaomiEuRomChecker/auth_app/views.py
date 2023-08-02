@@ -61,11 +61,13 @@ class LogoutUserView(LogoutView):
 
 @login_required
 def profile_details(request, pk):
+    links_to_show = 5
     current_user = UserModel.objects.get(pk=pk)
-    links = LinksModel.objects.filter(user_id=pk).all()
+    links = LinksModel.objects.filter(user_id=pk).order_by('-updated_at').all()[:links_to_show]
     context = {
         "user": current_user,
-        'links': links
+        'links': links,
+        'links_to_show': links_to_show
     }
     return render(request, 'auth_app/profile.html', context)
 
