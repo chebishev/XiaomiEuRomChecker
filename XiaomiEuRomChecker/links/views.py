@@ -4,6 +4,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView, ListView
+from pyshorteners.exceptions import ShorteningErrorException
+
 from XiaomiEuRomChecker.links.functionality import shorten_url
 from XiaomiEuRomChecker.links.models import LinksModel
 
@@ -82,6 +84,13 @@ class MyLinksView(LoginRequiredMixin, ListView):
 @login_required
 def create_short_link(request, user_id, slug):
     link = LinksModel.objects.get(slug=slug)
-    link.short_link = shorten_url(link.link_url)
-    link.save()
+
+    try:
+        link.short_link = shorten_url(link.link_url)
+        link.save()
+    except AttributeError:
+        pass
+    except ShorteningErrorException:
+        pass
+
     return redirect("link_details", user_id=request.user.id, slug=link.slug)
