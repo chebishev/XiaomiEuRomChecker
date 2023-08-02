@@ -1,7 +1,10 @@
 from datetime import datetime
 
 from django.test import TestCase
+from django.urls import reverse
+
 from .functionality import get_date, get_date_as_string
+from .views import index
 
 
 # Create your tests here.
@@ -13,6 +16,7 @@ class TestFunctionality(TestCase):
     def test_get_date(self):
         # if it works correctly it has to convert the string into a list of integers representing the date in format:
         # [year, month, day]
+        # there is no case that anything different from yyyy-mm-dd will be passed
         self.assertEqual(get_date(self.second_string), [2022, 1, 1])
 
     def test_get_date_as_string(self):
@@ -22,4 +26,5 @@ class TestFunctionality(TestCase):
                          f"{datetime.now().year}-{datetime.now().month}-{datetime.now().day}")
 
         # else the function must return the input string
-        self.assertEqual(get_date_as_string(self.second_string), self.second_string)
+        self.assertEqual(get_date_as_string(self.second_string),
+                         self.second_string)
