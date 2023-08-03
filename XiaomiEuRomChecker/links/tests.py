@@ -1,9 +1,7 @@
+from django.contrib.auth import get_user_model
 from django.test import TestCase
 from pyshorteners.exceptions import ShorteningErrorException
-
 from .functionality import shorten_url
-from .models import LinksModel
-from ..auth_app.models import AuthUser
 
 
 # Create your tests here.
