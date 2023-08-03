@@ -13,6 +13,7 @@ import os
 from pathlib import Path
 from django.urls import reverse_lazy
 from dotenv import load_dotenv
+
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -59,8 +60,7 @@ ROOT_URLCONF = 'XiaomiEuRomChecker.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -85,11 +85,11 @@ WSGI_APPLICATION = 'XiaomiEuRomChecker.wsgi.application'
 
 DATABASES = {
     "default": {
-        "ENGINE": os.getenv("DB_ENGINE", None),
-        "NAME": os.getenv("DB_NAME", None),
-        "USER": os.getenv("DB_USER", None),
-        "PASSWORD": os.getenv("DB_PASSWORD", None),
-        "HOST": os.getenv("DB_HOST", None),
+        "ENGINE": 'django.db.backends.postgresql',
+        "NAME": os.getenv("DB_NAME", 'xiaomi.eu_rom_checker_db'),
+        "USER": os.getenv("DB_USER", 'postgres-user'),
+        "PASSWORD": os.getenv("DB_PASSWORD", 'password'),
+        "HOST": os.getenv("DB_HOST", "127.0.0.1"),
         "PORT": os.getenv("DB_PORT", 5432),
     }
 }

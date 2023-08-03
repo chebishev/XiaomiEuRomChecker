@@ -3,7 +3,6 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from XiaomiEuRomChecker.core.functionality import get_url, get_link_for_specific_device
 from XiaomiEuRomChecker.core.models import AvailableDevicesModel
-from XiaomiEuRomChecker.links.models import LinksModel
 
 UserModel = get_user_model()
 
