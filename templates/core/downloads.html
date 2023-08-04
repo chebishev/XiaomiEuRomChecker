@@ -13,7 +13,7 @@
                         {{ link }} <br>
                         </li>
                     {% else %}
-                        <a href="{{ link }}">{{ link }}</a>
+                        <a href="{{ link }}" target="_blank" rel="noopener noreferrer">{{ link }}</a>
                         <form method="POST">
                             {% csrf_token %}
                             <input type="hidden" name="save_link" value="{{ link }}">
