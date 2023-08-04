@@ -14,7 +14,7 @@ def django_version(request):
     return {'django_current_version': django.__version__}
 
 
-# First checks current date with the last date in the database if there is difference (4 days or more)
+# First checks current date with the last date in the database if there is difference (more than 4 days)
 # gets the latest added folder in the database and compares it with the current last folder in Sourceforge
 # returns the value for the section above the footer
 def latest_weekly(request):
@@ -39,7 +39,7 @@ def latest_weekly(request):
     return {'current_folder': current_folder}
 
 
-# It gives me access to all devices as list in the templates. Currently used in index.html
+# It gives me access to all devices as a list in the templates. Currently used in index.html
 def all_devices(request):
     device_list = AvailableDevicesModel.objects.all().order_by('market_name')
     return {'device_list': device_list}

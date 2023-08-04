@@ -23,7 +23,7 @@ def write_json(data, file):
 
 def excel_to_json(file):
     # at this time we have only this one: 'XiaomiEuRomChecker/core/initial_devices_list.xlsx'
-    # initially this file contains all available devices with four columns of data
+    # initially this file contains all available devices with five columns of data
     excel_data = pd.read_excel(file)
     devices = []
 
@@ -70,10 +70,10 @@ def list_to_json():
 
     # this variable will be used in order to populate the "folders.json" using the function "write_json"
     # the first element (folders_list[0]) is "Parent folder" and we don't need it, so we skip it
-    return folders_list[1:]
+    return folders_list[1:][::-1]
 
 
 # Both functions work properly and the json files are filled with needed data
 
 # write_json(excel_to_json('initial_devices_list.xlsx'), 'fixtures/devices.json')
-# write_json(list_to_json(), 'fixtures/folders.json')
+write_json(list_to_json(), 'fixtures/folders.json')
