@@ -4,7 +4,6 @@ including driver, url, date checking
 """
 
 from datetime import datetime
-
 import requests
 from bs4 import BeautifulSoup
 
@@ -78,54 +77,18 @@ def get_date_difference(date):
     return difference
 
 
-def check_date(folder_found, date_found, new_folder_checker):
-    # folder_name is in format "V14.0.23.4.31.DEV" which is MIUI Version, and date in format yy.m.d
-    # date is a string in format "2023-04-31"
-    folder_name, date = folder_found, date_found
-
-    # getting the kwargs (days="", seconds="", microseconds="") from get_date_difference function
-    difference = get_date_difference(date)
-    if difference.days < 4:
-        new_folder_checker = True
-        date = '-'.join(str(x) for x in get_date(date))
-    return folder_name, date, new_folder_checker
-
-
 def get_last_weekly_folder(target_url):
     # getting all table rows with this class in order to get the folder name and last modification date (or hours)
     folders = files_list_info(target_url, "tr", "folder")
-
-    # this variable will contain the result of the first valid row
-    # (that isn't contain "Parent Folder" or other irrelevant information)
-    full_info = ""
 
     # getting all the rows, but we need only the first valid one since it is the folder that we are checking
     for folder in folders:
         if "Parent" in folder.text:
             continue
-        full_info = folder.text.split()
-        break
-
-    # creating variables for the founded elements - folder, date (or hours) since last modification
-    current_name = ""
-    found_date = ""
-    new_folder_found = False
-
-    # checking if the folder is newly created ( last 24 hours )
-    if " < " in full_info:
-        current_name, found_date = full_info[0], full_info[1]
-        new_folder_found = True
-    else:
-        current_name, found_date, new_folder_found = check_date(full_info[0], full_info[1], new_folder_found)
-    if new_folder_found:
-        output = f"Modified folder found!\nName: {current_name}\nDate: {found_date}\n" \
-                 f""f"Download link: {target_url + current_name}"
-    else:
-        output = f"Everything is the same as in {found_date}\n" \
-                 f"Last created folder is {current_name} ({get_url('last_weekly', current_name)})\n" \
-                 f"Better luck next time!"
-
-    return output, current_name, found_date
+        # after finding the row that contains folder name and date, we break the loop
+        # and return the first two elements of the row:
+        # folder name in format "V14.0.23.4.31.DEV" and date in format "2023-04-31 or < 5 hours ago"
+        return folder.text.split()[:2]
 
 
 def get_link_for_specific_device(device, release):
@@ -135,7 +98,7 @@ def get_link_for_specific_device(device, release):
     :return: download link or None
     """
     if release == "weekly":
-        target_url = get_url('last_weekly', (get_last_weekly_folder(get_url('weekly'))[1]))
+        target_url = get_url('last_weekly', (get_last_weekly_folder(get_url('weekly'))[0]))
     else:
         target_url = get_url('stable')
 
@@ -147,4 +110,4 @@ def get_link_for_specific_device(device, release):
         if f"xiaomi.eu_multi_{device}_V14" in current_rom:
             return target_url + "/" + current_rom.split()[0]
     else:
-        return f"Nothing found in the last {release} folder!"
+        return f"Sorry, no links for device with code name {device} in the {release} folder!"

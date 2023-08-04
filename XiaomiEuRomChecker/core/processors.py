@@ -26,9 +26,9 @@ def latest_weekly(request):
     difference = datetime.now() - datetime(year, month, day)
     if difference.days > 4:
         info_from_scrapping = get_last_weekly_folder(get_url('weekly'))
-        new_folder = info_from_scrapping[1]
+        new_folder = info_from_scrapping[0]
         if new_folder not in FoldersModel.objects.values_list('folder_name', flat=True):
-            new_date = get_date_as_string(info_from_scrapping[2])
+            new_date = get_date_as_string(info_from_scrapping[1])
 
             # saving this data into the database
             FoldersModel.objects.create(
