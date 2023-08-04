@@ -492,6 +492,26 @@
   {
     "model": "core.AvailableDevicesModel",
     "fields": {
+      "code_name": "peux",
+      "market_name": "Redmi Note 11 Pro+ 5G (India)",
+      "rom_name": "VEUXG",
+      "rom_options": "stable",
+      "slug": "redmi-note-11-pro-5g-india"
+    }
+  },
+  {
+    "model": "core.AvailableDevicesModel",
+    "fields": {
+      "code_name": "peux_p",
+      "market_name": "POCO X4 Pro 5G (India 64MP)",
+      "rom_name": "VEUXG",
+      "rom_options": "stable",
+      "slug": "poco-x4-pro-5g-india-64mp"
+    }
+  },
+  {
+    "model": "core.AvailableDevicesModel",
+    "fields": {
       "code_name": "psyche",
       "market_name": "Xiaomi 12X",
       "rom_name": "XM12X",
