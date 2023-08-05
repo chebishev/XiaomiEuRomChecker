@@ -60,7 +60,7 @@ def get_date_as_string(date):
     # just in case if the rom "modified" field doesn't contain date
     # it will have something like: "< 5 hours ago" so I am converting it to today's date
     # in order to have a date in the format "2023-06-29"
-    if "hours" in date:
+    if "<" in date:
         return f"{datetime.now().year}-{datetime.now().month}-{datetime.now().day}"
 
     return date
@@ -87,7 +87,7 @@ def get_last_weekly_folder(target_url):
             continue
         # after finding the row that contains folder name and date, we break the loop
         # and return the first two elements of the row:
-        # folder name in format "V14.0.23.4.31.DEV" and date in format "2023-04-31 or < 5 hours ago"
+        # folder name in format "V14.0.23.4.31.DEV" and date in format "2023-04-31 or '<', because of the splitting"
         return folder.text.split()[:2]
 
 

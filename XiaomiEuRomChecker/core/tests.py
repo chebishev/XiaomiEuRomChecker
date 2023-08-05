@@ -10,7 +10,7 @@ from .views import index
 # Create your tests here.
 class TestFunctionality(TestCase):
     def setUp(self) -> None:
-        self.first_string = "updated < 4 hours ago"
+        self.first_string = "<"
         self.second_string = "2022-01-01"
 
     def test_get_date(self):
