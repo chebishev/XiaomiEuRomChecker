@@ -11,7 +11,6 @@ class AuthUserAdmin(admin.ModelAdmin):
     ordering = ['date_joined']
     filter_fields = ['username', 'last_login', 'is_superuser', 'is_active', 'date_joined']
     list_filter = ['is_staff']
-    list_display_links = None
     list_editable = ['is_active']
     # limit user fields in the panel to the following ones:
     fields = ['username', 'password', 'is_superuser', 'is_staff', 'is_active', 'groups']
