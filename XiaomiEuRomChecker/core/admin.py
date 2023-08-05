@@ -38,6 +38,7 @@ class DevicesAdmin(admin.ModelAdmin):
     # ordering = ['id', 'code_name', 'market_name', 'rom_name', 'rom_options']
     list_filter = ['rom_options']
     ordering = ['code_name']
+    search_fields = ['code_name', 'market_name', 'rom_name']
     actions = [change_rom_both, change_rom_weekly, change_rom_stable]
     list_per_page = ITEMS_PER_PAGE
 
@@ -47,4 +48,5 @@ class FoldersAdmin(admin.ModelAdmin):
     list_display = ['folder_name', 'last_modification_date']
     # To show newest folders first, because the name contains Rom version and date
     ordering = ['-last_modification_date']
+    search_fields = ['folder_name']
     list_per_page = ITEMS_PER_PAGE

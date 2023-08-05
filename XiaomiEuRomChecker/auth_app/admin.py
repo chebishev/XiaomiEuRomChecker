@@ -7,10 +7,14 @@ UserModel = get_user_model()
 @admin.register(UserModel)
 class AuthUserAdmin(admin.ModelAdmin):
 
-    list_display = ['username', 'last_login', 'is_superuser', 'is_staff', 'is_active', 'date_joined']
+    list_display = ['username', 'last_login', 'is_superuser', 'is_active', 'date_joined']
     ordering = ['date_joined']
-    filter_fields = ['username', 'last_login', 'is_superuser', 'is_staff', 'is_active', 'date_joined']
+    filter_fields = ['username', 'last_login', 'is_superuser', 'is_active', 'date_joined']
     list_filter = ['is_staff']
+    list_display_links = None
+    list_editable = ['is_active']
+    # limit user fields in the panel to the following ones:
+    fields = ['username', 'password', 'is_superuser', 'is_staff', 'is_active', 'groups']
 
     # in order to save the password properly when the user is added via admin panel
     # without this method, the password is not hashed can be seen as is in the admin panel and in the db
