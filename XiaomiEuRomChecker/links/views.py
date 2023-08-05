@@ -35,9 +35,12 @@ class LinkCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('profile_details', kwargs={
-            "pk": self.request.user.id
-        })
+        return reverse('my_links', kwargs={'user_id': self.request.user.id})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['links'] = LinksModel.objects.filter(user=self.request.user).order_by('-created_at').all()
+        return context
 
 
 class LinkEditView(LoginRequiredMixin, UpdateView):
