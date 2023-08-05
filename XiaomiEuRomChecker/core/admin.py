@@ -3,6 +3,10 @@ from XiaomiEuRomChecker.core.models import AvailableDevicesModel, FoldersModel
 
 # changing admin header
 admin.site.site_header = "xiaomi.eu Rom Checker Admin Panel"
+# changing admin title
+admin.site.site_title = "xiaomi.eu Rom Checker"
+# changing admin index title
+admin.site.index_title = "Manage models and groups"
 
 ITEMS_PER_PAGE = 20
 
@@ -32,6 +36,7 @@ class DevicesAdmin(admin.ModelAdmin):
     list_display = ['code_name', 'market_name', 'rom_name', 'rom_options', 'slug']
     filter_fields = ['code_name', 'market_name', 'rom_name', 'rom_options', 'slug']
     # ordering = ['id', 'code_name', 'market_name', 'rom_name', 'rom_options']
+    list_filter = ['rom_options']
     ordering = ['code_name']
     actions = [change_rom_both, change_rom_weekly, change_rom_stable]
     list_per_page = ITEMS_PER_PAGE
