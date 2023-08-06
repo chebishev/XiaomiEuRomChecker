@@ -5,6 +5,7 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView, ListView
 from pyshorteners.exceptions import ShorteningErrorException
+from XiaomiEuRomChecker.links.forms import SaveLinkForm, EditLinkForm
 from XiaomiEuRomChecker.links.functionality import shorten_url
 from XiaomiEuRomChecker.links.models import LinksModel
 
@@ -27,7 +28,7 @@ class LinkDetailsView(LoginRequiredMixin, DetailView):
 class LinkCreateView(LoginRequiredMixin, CreateView):
     model = LinksModel
     template_name = 'links/link_create.html'
-    fields = ['link_name']
+    form_class = SaveLinkForm
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -46,7 +47,7 @@ class LinkCreateView(LoginRequiredMixin, CreateView):
 class LinkEditView(LoginRequiredMixin, UpdateView):
     model = LinksModel
     template_name = 'links/link_edit.html'
-    fields = ['link_name', 'link_description']
+    form_class = EditLinkForm
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

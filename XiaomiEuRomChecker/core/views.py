@@ -20,12 +20,23 @@ def index(request):
 
 @login_required
 def downloads(request, pk, slug):
+    # get required device by pk
     device = AvailableDevicesModel.objects.get(id=pk)
-    roms_result = {
-        'stable': get_link_for_specific_device(device.rom_name, 'stable'),
-        'weekly': get_link_for_specific_device(device.rom_name, 'weekly'),
-    }
-    links = {
+    if device.rom_options == "both":
+        # this dictionary saves information for both types of roms, and it is used in the template
+        # as iterable in order to have more dynamic content
+        roms_result = {
+            'stable': get_link_for_specific_device(device.rom_name, 'stable'),
+            'weekly': get_link_for_specific_device(device.rom_name, 'weekly'),
+        }
+    else:
+        # here we dynamically get the supported rom version for the device without showing unnecessary
+        # information in the template
+        roms_result = {
+            device.rom_options: get_link_for_specific_device(device.rom_name, device.rom_options)
+        }
+
+    context = {
         'roms': roms_result,
         'device': device
     }
@@ -34,7 +45,7 @@ def downloads(request, pk, slug):
             request.session['uid'] = request.POST.get('save_link')
             return redirect('link_add', request.user.id)
 
-    return render(request, 'core/downloads.html', links)
+    return render(request, 'core/downloads.html', context)
 
 
 # in Debug=False it redirects all wrong pages (404) to index
