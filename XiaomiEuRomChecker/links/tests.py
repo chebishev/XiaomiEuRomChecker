@@ -3,6 +3,8 @@ from django.test import TestCase
 from pyshorteners.exceptions import ShorteningErrorException
 from .functionality import shorten_url
 
+UserModel = get_user_model()
+
 
 # Create your tests here.
 class TestLinkShortener(TestCase):
