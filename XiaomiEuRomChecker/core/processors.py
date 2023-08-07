@@ -9,14 +9,14 @@ from XiaomiEuRomChecker.core.functionality import get_last_weekly_folder, get_ur
 from datetime import datetime
 
 
-# just returns current django version for the footer
+# just returns current installed django version for the footer
 def django_version(request):
     return {'django_current_version': django.__version__}
 
 
 # First checks current date with the last date in the database if there is difference (more than 4 days)
 # gets the latest added folder in the database and compares it with the current last folder in Sourceforge
-# returns the value for the section above the footer
+# returns the folder name and link to it for the section above the footer
 def latest_weekly(request):
     last_object = FoldersModel.objects.last()
     current_folder = last_object.folder_name
@@ -36,7 +36,16 @@ def latest_weekly(request):
                 last_modification_date=new_date
             )
             current_folder = new_folder
-    return {'current_folder': current_folder, "folder_link": get_url('last_weekly', current_folder)}
+
+    context = {
+        # passing the name of the folder
+        'current_folder': current_folder,
+
+        # passing xiaomi.eu link to that folder
+        "folder_link": get_url('last_weekly', current_folder)
+    }
+
+    return context
 
 
 # It gives me access to all devices as a list in the templates. Currently used in index.html
