@@ -28,3 +28,10 @@ class TestFunctionality(TestCase):
         # else the function must return the input string
         self.assertEqual(get_date_as_string(self.second_string),
                          self.second_string)
+
+
+class TestViews(TestCase):
+    def test_index_loads_properly(self):
+        """The index page loads properly"""
+        response = self.client.get('localhost:8000')
+        self.assertEqual(response.status_code, 302)

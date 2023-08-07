@@ -36,7 +36,7 @@ def latest_weekly(request):
                 last_modification_date=new_date
             )
             current_folder = new_folder
-    return {'current_folder': current_folder}
+    return {'current_folder': current_folder, "folder_link": get_url('last_weekly', current_folder)}
 
 
 # It gives me access to all devices as a list in the templates. Currently used in index.html
