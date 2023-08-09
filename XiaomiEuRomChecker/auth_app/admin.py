@@ -13,7 +13,7 @@ class AuthUserAdmin(admin.ModelAdmin):
     list_filter = ['is_staff']
     list_editable = ['is_active']
     # limit user fields in the panel to the following ones:
-    fields = ['username', 'is_superuser', 'is_staff', 'is_active', 'groups']
+    fields = ['username', 'password', 'is_superuser', 'is_staff', 'is_active', 'groups']
 
     # in order to save the password properly when the user is added via admin panel
     # without this method, the password is not hashed can be seen as is in the admin panel and in the db
