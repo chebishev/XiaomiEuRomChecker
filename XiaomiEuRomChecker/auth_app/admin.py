@@ -18,5 +18,6 @@ class AuthUserAdmin(admin.ModelAdmin):
     # in order to save the password properly when the user is added via admin panel
     # without this method, the password is not hashed can be seen as is in the admin panel and in the db
     def save_model(self, request, obj, form, change):
-        obj.set_password(form.data['password'])
+        if not change:  # Check if this is a new user being created
+            obj.set_password(form.cleaned_data['password'])  # Use cleaned_data to get the password
         obj.save()
