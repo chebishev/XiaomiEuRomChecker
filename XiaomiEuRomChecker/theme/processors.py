@@ -1,5 +1,4 @@
 import random
-
 from XiaomiEuRomChecker.theme.models import ThemeModel, TipOfTheDayModel
 
 
@@ -20,4 +19,3 @@ def tip_of_the_day(request):
     # if there is nothing in the database send None to the context
     except TipOfTheDayModel.DoesNotExist:
         return {'tip': None}
-

@@ -15,7 +15,7 @@ from XiaomiEuRomChecker.core.functionality import get_url, files_list_info
 # gets two parameters: Value from function (as list with dictionaries) and the name of the output file
 # writes the data in json format in order to be used with /manage.py loaddata
 def write_json(data, file):
-    # if the doesn't
+    # if the file doesn't exist it will be automatically created
     with open(file, 'w') as outfile:
         json.dump(data, outfile)
         outfile.write('\n')
