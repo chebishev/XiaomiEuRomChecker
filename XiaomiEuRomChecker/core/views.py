@@ -18,7 +18,7 @@ def index(request):
     return render(request, 'core/index.html')
 
 
-@login_required
+@login_required  # TODO: remove this and ask for login on link save
 def downloads(request, pk, slug):
     # get required device by pk
     device = AvailableDevicesModel.objects.get(id=pk)
