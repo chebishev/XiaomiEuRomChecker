@@ -1,5 +1,4 @@
 from django.contrib.auth import get_user_model
-from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from XiaomiEuRomChecker.core.functionality import get_link_for_specific_device
 from XiaomiEuRomChecker.core.models import AvailableDevicesModel
@@ -18,7 +17,6 @@ def index(request):
     return render(request, 'core/index.html')
 
 
-@login_required  # TODO: remove this and ask for login on link save
 def downloads(request, pk, slug):
     # get required device by pk
     device = AvailableDevicesModel.objects.get(id=pk)
@@ -43,7 +41,7 @@ def downloads(request, pk, slug):
     if request.method == 'POST':
         if request.POST.get('save_link'):
             request.session['uid'] = request.POST.get('save_link')
-            return redirect('link_add', request.user.id)
+            return redirect('link_add')
 
     return render(request, 'core/downloads.html', context)
 

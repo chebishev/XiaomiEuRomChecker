@@ -33,8 +33,7 @@ class LinkCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         form.instance.link_url = self.request.session['uid']
-        # TODO: check if it needed to be deleted
-        # del self.request.session['uid']
+        del self.request.session['uid']
         return super().form_valid(form)
 
     def get_success_url(self):

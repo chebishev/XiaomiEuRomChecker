@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block grids %}
     <div class="w3-twothird">
-    <form method="post" action="{% url 'link_add' user_id=request.user.id %}">
+    <form method="post" action="{% url 'link_add' %}">
         <h2>Save link</h2>
         <br>
     {% csrf_token %}
