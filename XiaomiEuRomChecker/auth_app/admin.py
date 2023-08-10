@@ -1,11 +1,25 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.contrib.auth import get_user_model
 
 UserModel = get_user_model()
 
 
+class CustomUserChangeForm(UserChangeForm):
+    class Meta(UserChangeForm.Meta):
+        model = UserModel
+
+
+class CustomUserCreationForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        model = UserModel
+
+
 @admin.register(UserModel)
-class AuthUserAdmin(admin.ModelAdmin):
+class AuthUserAdmin(UserAdmin):
+    form = CustomUserChangeForm
+    add_form = CustomUserCreationForm
 
     list_display = ['username', 'last_login', 'is_superuser', 'is_active', 'date_joined']
     ordering = ['date_joined']
@@ -13,11 +27,16 @@ class AuthUserAdmin(admin.ModelAdmin):
     list_filter = ['is_staff']
     list_editable = ['is_active']
     # limit user fields in the panel to the following ones:
-    fields = ['username', 'password', 'is_superuser', 'is_staff', 'is_active', 'groups']
+    fieldsets = (
+        (None, {'fields': ('username', 'password')}),
+        ('Permissions', {'fields': ('is_superuser', 'is_staff', 'is_active', 'groups')}),
+    )
 
-    # in order to save the password properly when the user is added via admin panel
-    # without this method, the password is not hashed can be seen as is in the admin panel and in the db
     def save_model(self, request, obj, form, change):
         if not change:  # Check if this is a new user being created
             obj.set_password(form.cleaned_data['password'])  # Use cleaned_data to get the password
+        else:
+            user = UserModel.objects.get(pk=obj.pk)
+            if form.cleaned_data['password'] != user.password:
+                obj.set_password(form.cleaned_data['password'])
         obj.save()
