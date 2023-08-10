@@ -12,6 +12,5 @@ Registered users will have additional options:
 
 Staff users will have an option to use Admin panel based on their permissions
 
-####################################################################
+
  You can check the demo here: https://chebishev.pythonanywhere.com/
-####################################################################
