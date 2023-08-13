@@ -62,6 +62,12 @@ class LogoutUserView(LogoutView):
 def profile_details(request, pk):
     links_to_show = 5
     current_user = UserModel.objects.get(pk=pk)
+
+    # Check if the logged-in user matches the requested user's profile or has appropriate permissions.
+    if request.user != current_user:
+        # You can customize the error message or response as needed.
+        return redirect('index')
+
     links = LinksModel.objects.filter(user_id=pk).order_by('-updated_at').all()[:links_to_show]
     context = {
         "user": current_user,
