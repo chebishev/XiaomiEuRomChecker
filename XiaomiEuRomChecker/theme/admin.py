@@ -13,8 +13,8 @@ class ThemesAdmin(admin.ModelAdmin):
          {'fields': ['navbar', 'header', 'first_grid_icon', 'second_grid_icon', 'rom_version_container']}),
 
         ('Secondary colors',
-         {'fields': ['navbar_hover', 'small_screens_navbar', 'small_screens_menu', 'small_screens_menu_hover',
-                     'second_grid_background', 'second_grid_p_color', 'back_home_button']}),
+         {'fields': ['header_button', 'navbar_hover', 'small_screens_navbar', 'small_screens_menu',
+                     'small_screens_menu_hover', 'second_grid_background', 'second_grid_p_color', 'back_home_button']}),
     ]
 
     # To disable adding of more than one theme:

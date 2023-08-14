@@ -58,6 +58,8 @@ class ThemeModel(models.Model):
                                                 verbose_name="Menu hover color on small screens")
     header = models.CharField(max_length=Color.max_length(), choices=Color.choices(), default="red",
                               verbose_name="Header")
+    header_button = models.CharField(max_length=Color.max_length(), choices=Color.choices(), default="black",
+                                     verbose_name="Header button ")
     first_grid_icon = models.CharField(max_length=Color.max_length(), choices=Color.choices(), default="red",
                                        verbose_name="First grid icon")
     second_grid_icon = models.CharField(max_length=Color.max_length(), choices=Color.choices(), default="red",

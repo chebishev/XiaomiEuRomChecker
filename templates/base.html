@@ -35,6 +35,60 @@
             text-decoration: none;
             color: black;
         }
+
+        .w3-button:hover {
+            color: #fff !important;
+            background-color: #707070 ! important;
+        }
+
+        .w3-black, .w3-hover-black:hover {
+            color: #000 !important;
+            background-color: #ccc !important;
+            border-radius: 8px;
+        }
+
+        .form-select:focus {
+            border-color: #8bc34a;
+            outline: 0;
+            box-shadow: 0 0 0 0.25rem #8bc34a57;
+        }
+
+        .form-select {
+            display: block;
+            width: 100%;
+            padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+            -moz-padding-start: calc(0.75rem - 3px);
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #212529;
+            transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgb(0 0 0 / 20%);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-primary {
+            color: #fff;
+            background-color: #0d6efd;
+            border-color: #8bc34a;
+        }
+
+        .w3-twothird {
+            background: rgb(255 255 255 / 0.2%);
+            border-radius: 8px;
+            box-shadow: 0 4px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 20px;
+        }
     </style>
 </head>
 <body>
@@ -131,20 +185,25 @@
     </div>
 {% endif %}
 <div class="w3-container w3-{{ color.rom_version_container }} w3-center w3-opacity w3-padding-64">
-    <h1 class="w3-margin w3-xlarge">Latest weekly rom: <a href="{{ folder_link }}"
-                                                          style="color: white">{{ current_folder }}</a></h1>
+    <h1 class="w3-margin w3-xlarge">Latest weekly rom: <a href="{{ folder_link }}">{{ current_folder }}</a></h1>
 </div>
 
 <footer class="w3-container w3-padding-64 w3-center w3-opacity">
     <div class="w3-xlarge w3-padding-32">
-       <a href="https://github.com/chebishev" target="_blank" rel="noopener noreferrer"><i class="fa fa-github w3-hover-opacity"></i></a>
-        <a href="https://chebishev.github.io/" target="_blank" rel="noopener noreferrer"><i class="fa fa-link w3-hover-opacity"></i></a>
-        <a href="https://www.linkedin.com/in/atanas-chebishev" target="_blank" rel="noopener noreferrer"><i class="fa fa-linkedin w3-hover-opacity"></i></a>
-        <a href="https://facebook.com/atanas.chebishev" target="_blank" rel="noopener noreferrer"><i class="fa fa-facebook w3-hover-opacity"></i></a>
-        <a href="https://t.me/chebisheff" target="_blank" rel="noopener noreferrer"><i class="fa fa-telegram w3-hover-opacity"></i></a>
+        <a href="https://github.com/chebishev" target="_blank" rel="noopener noreferrer"><i
+                class="fa fa-github w3-hover-opacity"></i></a>
+        <a href="https://chebishev.github.io/" target="_blank" rel="noopener noreferrer"><i
+                class="fa fa-link w3-hover-opacity"></i></a>
+        <a href="https://www.linkedin.com/in/atanas-chebishev" target="_blank" rel="noopener noreferrer"><i
+                class="fa fa-linkedin w3-hover-opacity"></i></a>
+        <a href="https://facebook.com/atanas.chebishev" target="_blank" rel="noopener noreferrer"><i
+                class="fa fa-facebook w3-hover-opacity"></i></a>
+        <a href="https://t.me/chebisheff" target="_blank" rel="noopener noreferrer"><i
+                class="fa fa-telegram w3-hover-opacity"></i></a>
     </div>
     <p>Powered by Django {{ django_current_version }} and chebishev™</p>
-    <a class="w3-button w3-round-xxlarge w3-{{ color.back_home_button }} w3-margin-bottom" href="{% url 'index' %}">Back home</a>
+    <a class="w3-button w3-round-xxlarge w3-{{ color.back_home_button }} w3-margin-bottom" href="{% url 'index' %}">Back
+        home</a>
 </footer>
 
 <script>
