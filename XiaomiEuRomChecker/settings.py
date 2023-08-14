@@ -94,13 +94,6 @@ DATABASES = {
     }
 }
 
-# TODO: make migrations and migrate and choose which method of caching to use
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.db.DatabaseCache",
-        "LOCATION": "rom_checker_cache",
-    }
-}
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
