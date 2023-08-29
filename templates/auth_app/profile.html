@@ -28,33 +28,15 @@
                         </td>
                     </tr>
                 </table>
+            {% if request.user.is_staff %}
+                {% if title %}
                 <button class="w3-button w3-green w3-padding-large w3-large w3-margin-top w3-center"
-                        onclick="document.getElementById('id01').style.display='block';">Show last {{ links_to_show }} links
+                        onclick="document.location.href='{% url 'update_telegram' %}'">Send {{ title }} to Telegram
                 </button>
-            </div>
-
-            <br>
-
-
-            <div id="id01" class="w3-panel w3-light-grey w3-display-container" style="display:none">
-  <span onclick="this.parentElement.style.display='none'"
-        class="w3-button w3-display-topright">X</span>
-                {% if not links.all %}
-                    <h3>No saved links</h3>
-
                 {% endif %}
-
-                <ul class="w3-ul w3-hoverable w3-center" style="list-style: none">
-                    {% for item in links.all %}
-                        <a href="{% url 'link_details' user_id=request.user.id slug=item.slug %}">
-                            <li>{{ item.link_name }} </li>
-                        </a>
-                    {% endfor %}
-                </ul>
-
+            {% endif %}
             </div>
         </div>
-    </div>
     </div>
 
 

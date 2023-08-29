@@ -137,6 +137,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 FIXTURE_DIRS = (
     BASE_DIR / 'core.fixtures',
     BASE_DIR / 'theme.fixtures',
+    BASE_DIR / 'auth_app.fixtures',
 )
 
 LOGIN_REDIRECT_URL = reverse_lazy('index')

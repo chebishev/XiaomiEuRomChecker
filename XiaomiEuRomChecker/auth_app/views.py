@@ -7,7 +7,8 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView
 from XiaomiEuRomChecker.auth_app.forms import ProfileEditForm, RegisterUserForm, LoginUserForm
 from XiaomiEuRomChecker.core.models import AvailableDevicesModel
-from XiaomiEuRomChecker.links.models import LinksModel
+from .models import ThreadTitle
+from .xiaomi_eu_new_thread_checker import telegram_message
 
 UserModel = get_user_model()
 
@@ -60,7 +61,12 @@ class LogoutUserView(LogoutView):
 
 @login_required
 def profile_details(request, pk):
-    links_to_show = 5
+    current_title = telegram_message()[0]
+    title = ""
+    try:
+        all_threads = ThreadTitle.objects.get(title=current_title)
+    except ThreadTitle.DoesNotExist:
+        title = current_title
     current_user = UserModel.objects.get(pk=pk)
 
     # Check if the logged-in user matches the requested user's profile or has appropriate permissions.
@@ -68,11 +74,9 @@ def profile_details(request, pk):
         # You can customize the error message or response as needed.
         return redirect('index')
 
-    links = LinksModel.objects.filter(user_id=pk).order_by('-updated_at').all()[:links_to_show]
     context = {
         "user": current_user,
-        'links': links,
-        'links_to_show': links_to_show
+        'title': title
     }
     return render(request, 'auth_app/profile.html', context)
 
@@ -112,3 +116,14 @@ def my_device(request, pk):
     else:
         chosen_device = AvailableDevicesModel.objects.get(market_name=user_device)
         return render(request, 'core/device_info.html', {'chosen_device': chosen_device})
+
+
+@login_required
+def update_telegram(request):
+    message = telegram_message()
+    title = message[0]
+    # TODO: fix sending to telegram:
+    # https://www.guguweb.com/2019/12/09/automate-your-telegram-channel-with-a-django-telegram-bot/
+
+    ThreadTitle.objects.create(title=title)
+    return redirect('profile_details', pk=request.user.id)
