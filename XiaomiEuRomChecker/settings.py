@@ -12,9 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 from django.urls import reverse_lazy
-from dotenv import load_dotenv
 
-load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY', None)
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG') == 'True'
@@ -86,11 +84,11 @@ WSGI_APPLICATION = 'XiaomiEuRomChecker.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": 'django.db.backends.postgresql',
-        "NAME": os.getenv("DB_NAME", 'xiaomi.eu_rom_checker_db'),
-        "USER": os.getenv("DB_USER", 'postgres-user'),
-        "PASSWORD": os.getenv("DB_PASSWORD", 'password'),
-        "HOST": os.getenv("DB_HOST", "127.0.0.1"),
-        "PORT": os.getenv("DB_PORT", 5432),
+        "NAME": os.getenv('DB_NAME'),
+        "USER": os.getenv('DB_USER'),
+        "PASSWORD": os.getenv('DB_PASSWORD'),
+        "HOST": os.getenv('DB_HOST'),
+        "PORT": os.getenv('DB_PORT'),
     }
 }
 
@@ -127,6 +125,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -147,6 +146,7 @@ LOGIN_URL = reverse_lazy('login')
 AUTH_USER_MODEL = 'auth_app.AuthUser'
 
 TELEGRAM = {
-    'bot_token': os.getenv('TOKEN', None),
-    'channel_name': os.getenv('CHANNEL_NAME', None),
+    'bot_token': os.getenv('TOKEN'),
+    'channel_name': os.getenv('CHANNEL_NAME'),
 }
+

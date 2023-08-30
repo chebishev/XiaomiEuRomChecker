@@ -2,12 +2,10 @@
 
 import os
 import pyshorteners
-from dotenv import load_dotenv
-load_dotenv()
 
 
 def shorten_url(url):
-    key = os.getenv('BITLY_API', None)
+    key = os.getenv('BITLY_API')
 
     service = pyshorteners.Shortener(api_key=key)
     short_url = service.bitly.short(url)
