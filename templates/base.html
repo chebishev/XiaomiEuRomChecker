@@ -108,7 +108,7 @@
                class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-{{ color.navbar_hover }}">My
                 device</a>
             {% if request.user.is_staff %}
-                <a href="{% url 'admin:index' %}"
+                <a href="{% url 'admin:index' %}" target="_blank" rel="noopener noreferrer"
                    class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-{{ color.navbar_hover }}">Admin
                     panel</a>
             {% endif %}
@@ -137,7 +137,7 @@
             <a href="{% url 'profile_details' pk=request.user.id %}" class="w3-bar-item w3-button w3-padding-large">My
                 profile</a>
             {% if request.user.is_staff %}
-                <a href="{% url 'admin:index' %}" class="w3-bar-item w3-button w3-padding-large">Admin panel</a>
+                <a href="{% url 'admin:index' %}" target="_blank" rel="noopener noreferrer" class="w3-bar-item w3-button w3-padding-large">Admin panel</a>
             {% endif %}
             <a href="{% url 'logout' %}" class="w3-bar-item w3-button w3-padding-large">Sign out</a>
         {% else %}

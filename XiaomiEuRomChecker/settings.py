@@ -145,3 +145,8 @@ LOGOUT_REDIRECT_URL = reverse_lazy('index')
 LOGIN_URL = reverse_lazy('login')
 
 AUTH_USER_MODEL = 'auth_app.AuthUser'
+
+TELEGRAM = {
+    'bot_token': os.getenv('TOKEN', None),
+    'channel_name': os.getenv('CHANNEL_NAME', None),
+}

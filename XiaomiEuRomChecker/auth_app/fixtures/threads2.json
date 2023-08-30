@@ -1,16 +1,4 @@
-[
-  {
-    "model": "auth_app.ThreadTitle",
-    "fields": {
-      "title": "MIUI 14 MIUI 14 STABLE RELEASE"
-    }
-  },
-  {
-    "model": "auth_app.ThreadTitle",
-    "fields": {
-      "title": "MIUI 14 23.8.21"
-    }
-  },
+
   {
     "model": "auth_app.ThreadTitle",
     "fields": {

@@ -1,3 +1,5 @@
+from telegram import Bot
+import asyncio
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LogoutView, LoginView
@@ -8,7 +10,8 @@ from django.views.generic import CreateView, DeleteView
 from XiaomiEuRomChecker.auth_app.forms import ProfileEditForm, RegisterUserForm, LoginUserForm
 from XiaomiEuRomChecker.core.models import AvailableDevicesModel
 from .models import ThreadTitle
-from .xiaomi_eu_new_thread_checker import telegram_message
+from .xiaomi_eu_new_thread_checker import telegram_message, fix_title
+from django.conf import settings
 
 UserModel = get_user_model()
 
@@ -119,11 +122,19 @@ def my_device(request, pk):
 
 
 @login_required
-def update_telegram(request):
+def update_telegram_channel(request):
     message = telegram_message()
     title = message[0]
-    # TODO: fix sending to telegram:
-    # https://www.guguweb.com/2019/12/09/automate-your-telegram-channel-with-a-django-telegram-bot/
+    telegram_settings = settings.TELEGRAM
+    bot = Bot(token=telegram_settings['bot_token'])
+    message[0] = f"#{fix_title(title)}"
+
+    async def send_telegram_message():
+        for m in message:
+            await bot.send_message(chat_id="@%s" % telegram_settings['channel_name'],
+                                   text=m)
+
+    asyncio.run(send_telegram_message())
 
     ThreadTitle.objects.create(title=title)
     return redirect('profile_details', pk=request.user.id)

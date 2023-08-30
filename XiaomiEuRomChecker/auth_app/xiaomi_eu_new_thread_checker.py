@@ -1,4 +1,14 @@
+import unicodedata
+
 from XiaomiEuRomChecker.auth_app.scraper import scrape_config_by_url
+
+
+def fix_title(string):
+    string = unicodedata.normalize('NFKD', string)
+    lst = string.split()
+    if len(lst[1]) > 2:
+        return lst[1] + "." + lst[2]
+    return lst[1] + ".0." + lst[2]
 
 
 def telegram_message():
@@ -16,7 +26,6 @@ def telegram_message():
         if current_result[0].startswith("CHANGELOG"):
             output.append(current_result[0])
     return output
-
 
 # or print the result directly in the console:
 # print(*telegram_message(), sep="\n")
