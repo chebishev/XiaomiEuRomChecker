@@ -125,16 +125,16 @@ def my_device(request, pk):
 def update_telegram_channel(request):
     message = telegram_message()
     title = message[0]
-    telegram_settings = settings.TELEGRAM
-    bot = Bot(token=telegram_settings['bot_token'])
-    message[0] = f"#{fix_title(title)}"
-
-    async def send_telegram_message():
-        for m in message:
-            await bot.send_message(chat_id="@%s" % telegram_settings['channel_name'],
-                                   text=m)
-
-    asyncio.run(send_telegram_message())
+    # telegram_settings = settings.TELEGRAM
+    # bot = Bot(token=telegram_settings['bot_token'])
+    # message[0] = f"#{fix_title(title)}"
+    #
+    # async def send_telegram_message():
+    #     for m in message:
+    #         await bot.send_message(chat_id="@%s" % telegram_settings['channel_name'],
+    #                                text=m)
+    #
+    # asyncio.run(send_telegram_message())
 
     ThreadTitle.objects.create(title=title)
     return redirect('profile_details', pk=request.user.id)

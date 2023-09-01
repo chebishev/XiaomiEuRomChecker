@@ -31,9 +31,13 @@
                 <br>
                 {% if request.user.is_staff %}
                     {% if title %}
+{#                        <button class="w3-button w3-green w3-padding-large w3-large w3-margin-top w3-center"#}
+{#                                onclick="document.location.href='{% url 'update_telegram_channel' %}'">Send {{ title }}#}
+{#                            to Telegram#}
+{#                        </button>#}
                         <button class="w3-button w3-green w3-padding-large w3-large w3-margin-top w3-center"
-                                onclick="document.location.href='{% url 'update_telegram_channel' %}'">Send {{ title }}
-                            to Telegram
+                                onclick="document.location.href='{% url 'update_telegram_channel' %}'">Save {{ title }}
+                            to database
                         </button>
                     {% else %}
                         <br>
