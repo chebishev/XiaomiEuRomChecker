@@ -1,5 +1,5 @@
-from telegram import Bot
-import asyncio
+# from telegram import Bot
+# import asyncio
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LogoutView, LoginView
@@ -10,8 +10,8 @@ from django.views.generic import CreateView, DeleteView
 from XiaomiEuRomChecker.auth_app.forms import ProfileEditForm, RegisterUserForm, LoginUserForm
 from XiaomiEuRomChecker.core.models import AvailableDevicesModel
 from .models import ThreadTitle
-from .xiaomi_eu_new_thread_checker import telegram_message, fix_title
-from django.conf import settings
+from .xiaomi_eu_new_thread_checker import telegram_message  # , fix_title
+# from django.conf import settings
 
 UserModel = get_user_model()
 

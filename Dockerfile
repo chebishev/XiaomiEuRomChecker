@@ -8,5 +8,6 @@ WORKDIR /XiaomiEuRomChecker
 COPY requirements.txt /XiaomiEuRomChecker/
 
 RUN pip install -r requirements.txt
+RUN pip install django-dotenv
 
 COPY . /XiaomiEuRomChecker/
