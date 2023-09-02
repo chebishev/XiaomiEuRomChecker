@@ -14,3 +14,5 @@ Staff users will have an option to use Admin panel based on their permissions
 
 
  You can check the demo here: https://chebishev.pythonanywhere.com/
+ It will be disabled on Thursday 02 November 2023, so I made a deploy on AWS:
+ http://www.rom-checker.site/
