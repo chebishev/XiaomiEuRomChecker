@@ -36,13 +36,10 @@ services:
     volumes:
       - ./certs:/etc/letsencrypt
       - /var/lib/letsencrypt:/var/lib/letsencrypt
-    environment:
-      CERTBOT_EMAIL: atanas.chebishev@gmail.com
-      CERTBOT_DOMAIN: rom-checker.site
     command:
       - certonly
       - --standalone
-      - --email=${CERTBOT_EMAIL}
+      - --email=atanas.chebishev@gmail.com
       - --agree-tos
-      - --domain=${CERTBOT_DOMAIN}
+      - --domain=rom-checker.site
       - --preferred-challenges=http
