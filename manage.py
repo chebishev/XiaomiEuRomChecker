@@ -7,7 +7,6 @@ import dotenv
 
 def main():
     """Run administrative tasks."""
-    dotenv.read_dotenv()
 
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'XiaomiEuRomChecker.settings')
     try:
@@ -22,4 +21,6 @@ def main():
 
 
 if __name__ == '__main__':
+    dotenv.read_dotenv()
     main()
+
