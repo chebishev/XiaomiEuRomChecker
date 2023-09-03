@@ -28,6 +28,8 @@ services:
       - ./certs:/etc/nginx/certs
     links:
       - web
+    depends_on:
+      - certbot
   certbot:
     image: certbot/certbot
     restart: always
