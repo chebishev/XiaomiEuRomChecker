@@ -11,7 +11,7 @@ services:
     env_file:
       - ./.env
     volumes:
-      - static_volume:/home/app/web/staticfiles
+      - /tmp/app-resources/static:/app/staticfiles
     platform: linux/amd64
     command: gunicorn --bind=0.0.0.0:8000 XiaomiEuRomChecker.wsgi:application
   nginx:
@@ -20,7 +20,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - static_volume:/home/app/web/staticfiles
+      - /tmp/app-resources/static:/app/staticfiles
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/logs:/var/log/nginx
       #- ./certbot/www:/var/www/certbot/:ro

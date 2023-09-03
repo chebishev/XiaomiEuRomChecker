@@ -13,6 +13,6 @@ COPY manage.py /app/manage.py
 #COPY certbot /app/certbot
 COPY nginx /app/nginx
 COPY templates /app/templates
-COPY static_files /app/staticfiles
+COPY staticfiles /app/staticfiles
 COPY XiaomiEuRomChecker /app/XiaomiEuRomChecker
 COPY xiaomi.eu_rom_checker_db /app/xiaomi.eu_rom_checker_db
