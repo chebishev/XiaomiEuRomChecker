@@ -12,7 +12,6 @@ RUN pip install -r requirements.txt
 COPY manage.py /app/manage.py
 #COPY certbot /app/certbot
 COPY nginx /app/nginx
-COPY static /app/static
 COPY templates /app/templates
 COPY XiaomiEuRomChecker /app/XiaomiEuRomChecker
 COPY xiaomi.eu_rom_checker_db /app/xiaomi.eu_rom_checker_db
