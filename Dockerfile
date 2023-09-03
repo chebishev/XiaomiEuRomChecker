@@ -3,16 +3,16 @@ FROM python:3
 ENV PYTHONDONTWRITEBYDECODE=1
 ENV PYTHONUNBUFFERED=1
 
-WORKDIR /XiaomiEuRomChecker
+WORKDIR /app
 
-COPY requirements.txt /XiaomiEuRomChecker/
+COPY requirements.txt /app/
 
 RUN pip install -r requirements.txt
 
-COPY manage.py /XiaomiEuRomChecker/manage.py
-COPY certbot /XiaomiEuRomChecker/certbot
-COPY nginx /XiaomiEuRomChecker/nginx
-COPY static /XiaomiEuRomChecker/static
-COPY templates /XiaomiEuRomChecker/templates
-COPY XiaomiEuRomChecker /XiaomiEuRomChecker/XiaomiEuRomChecker
-COPY xiaomi.eu_rom_checker_db /XiaomiEuRomChecker/xiaomi.eu_rom_checker_db
+COPY manage.py /app/manage.py
+#COPY certbot /app/certbot
+COPY nginx /app/nginx
+COPY static /app/static
+COPY templates /app/templates
+COPY XiaomiEuRomChecker /app/XiaomiEuRomChecker
+COPY xiaomi.eu_rom_checker_db /app/xiaomi.eu_rom_checker_db
