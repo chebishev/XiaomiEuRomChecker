@@ -23,5 +23,24 @@ services:
       - /tmp/apt-resources/static:/home/app/web/static
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/logs:/var/log/nginx
-      - ./certbot/www:/var/www/certbot/:ro
-      - ./certbot/conf:/etc/nginx/ssl/:ro
+      #- ./certbot/www:/var/www/certbot/:ro
+      #- ./certbot/conf:/etc/nginx/ssl/:ro
+      - ./certs:/etc/nginx/certs
+    links:
+      - web
+  certbot:
+    image: certbot/certbot
+    restart: always
+    volumes:
+      - ./certs:/etc/letsencrypt
+      - /var/lib/letsencrypt:/var/lib/letsencrypt
+    environment:
+      CERTBOT_EMAIL: atanas.chebishev@gmail.com
+      CERTBOT_DOMAIN: rom-checker.site
+    command:
+      - certonly
+      - --standalone
+      - --email=${CERTBOT_EMAIL}
+      - --agree-tos
+      - --domain=${CERTBOT_DOMAIN}
+      - --preferred-challenges=http
