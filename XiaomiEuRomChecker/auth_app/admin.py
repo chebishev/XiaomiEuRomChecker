@@ -35,7 +35,7 @@ class AuthUserAdmin(UserAdmin):
 
     def save_model(self, request, obj, form, change):
         if not change:  # Check if this is a new user being created
-            obj.set_password(form.cleaned_data['password'])  # Use cleaned_data to get the password
+            obj.set_password(form.cleaned_data['password1'])  # Use cleaned_data to get the password
         else:
             user = UserModel.objects.get(pk=obj.pk)
             if form.cleaned_data['password'] != user.password:

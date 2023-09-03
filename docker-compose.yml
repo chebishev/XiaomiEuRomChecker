@@ -2,29 +2,18 @@ version: '3'
 
 services:
   web:
-    image: xiaomi_eu_rom_checker
-    build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    image: chebishev/aws_deploy
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "8000:8000"
     env_file:
       - ./.env
-    depends_on:
-      - db
-    links:
-      - db
-  db:
-    image: postgres:latest
-    restart: always
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_PASSWORD: password
-      POSTGRES_USER: postgres-user
-      POSTGRES_DB: xiaomi.eu_rom_checker_db
-      PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
-      - ./postgresql:/var/lib/postgresql/data
+      - /tmp/app-resources/static:/app/static
+    platform: linux/amd64
+    command: gunicorn --bind=0.0.0.0:8000 XiaomiEuRomChecker.wsgi:application
   nginx:
     image: nginx
     ports:
