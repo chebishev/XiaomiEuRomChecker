@@ -11,7 +11,7 @@ services:
     env_file:
       - ./.env
     volumes:
-      - /tmp/app-resources/static:/app/static_files
+      - static_volume:/home/app/web/staticfiles
     platform: linux/amd64
     command: gunicorn --bind=0.0.0.0:8000 XiaomiEuRomChecker.wsgi:application
   nginx:
@@ -20,7 +20,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - /tmp/apt-resources/static:/home/app/web/static
+      - static_volume:/home/app/web/staticfiles
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/logs:/var/log/nginx
       #- ./certbot/www:/var/www/certbot/:ro
@@ -35,10 +35,10 @@ services:
     restart: always
     volumes:
       - ./certs:/etc/letsencrypt
-      - /var/lib/letsencrypt:/var/lib/letsencrypt
+      - ./letsencrypt_data:/var/lib/letsencrypt
     command:
       - certonly
-      - --standalone
+      - --nginx
       - --email=atanas.chebishev@gmail.com
       - --agree-tos
       - --domain=rom-checker.site
