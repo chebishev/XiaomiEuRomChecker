@@ -81,6 +81,9 @@ WSGI_APPLICATION = 'XiaomiEuRomChecker.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# locally it works perfectly with postgres, but because of missing initial items in the db
+# the project is too hard to run without loading 4 or 5 fixtures and commenting of some code
+# probably it can be done with docker-compose exec web python manage.py loaddata fixtures/*.json
 # DATABASES = {
 #     "default": {
 #         "ENGINE": 'django.db.backends.postgresql',

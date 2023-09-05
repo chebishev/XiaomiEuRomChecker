@@ -2,7 +2,9 @@ version: '3'
 
 services:
   web:
-    image: chebishev/aws_deploy
+    # for using image from dockerhub
+    image: xiaomi.eu_rom_checker # it can be changed to your_hub/your_image:tag
+    # for building the configuration from dockerfile
     build:
       context: .
       dockerfile: Dockerfile
@@ -11,35 +13,17 @@ services:
     env_file:
       - ./.env
     volumes:
-      - /tmp/app_resources/static:/app/static
-    platform: linux/amd64
-    command: gunicorn --bind=0.0.0.0:8000 XiaomiEuRomChecker.wsgi:application
+      - /tmp/app-resources/static:/app/staticfiles
+    command: python manage.py runserver 0.0.0.0:8000
   nginx:
-    image: nginx
+    image: nginx:latest
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - /tmp/app_resources/static:/home/app/web/staticfiles
+      - /tmp/app-resources/static:/home/app/web/staticfiles
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/logs:/var/log/nginx
-      #- ./certbot/www:/var/www/certbot/:ro
-      #- ./certbot/conf:/etc/nginx/ssl/:ro
-      - ./certs:/etc/nginx/certs
+      - ./certbot/www:/var/www/certbot/:ro
     links:
       - web
-    depends_on:
-      - certbot
-  certbot:
-    image: certbot/certbot
-    restart: always
-    volumes:
-      - ./certs:/etc/letsencrypt
-      - ./letsencrypt_data:/var/lib/letsencrypt
-    command:
-      - certonly
-      - --nginx
-      - --email=atanas.chebishev@gmail.com
-      - --agree-tos
-      - --domain=rom-checker.site
-      - --preferred-challenges=http

@@ -10,7 +10,6 @@ COPY requirements.txt /app/
 RUN pip install -r requirements.txt
 
 COPY manage.py /app/manage.py
-#COPY certbot /app/certbot
 COPY nginx /app/nginx
 COPY templates /app/templates
 COPY staticfiles /app/staticfiles
