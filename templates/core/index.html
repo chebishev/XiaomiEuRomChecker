@@ -25,11 +25,15 @@
             </div>
             {% csrf_token %}
         </form>
-        <a href="{% url 'contact' %}" class="w3-text-grey w3-hover-text-black w3-margin-top">Missing or unsupported device?</a>
+        <a href="{% url 'contact' %}" class="w3-text-grey w3-hover-text-black w3-margin-top">Missing or unsupported
+            device?</a>
+        <br>
         <br>
         {% if not request.user.is_authenticated %}
-        <p class="w3-text-grey">Registered users will be able to conveniently view and save all requested links, and to
-            manage them in their profile section.</p>
+            <div class="alert alert-success alert-dismissible fade show">
+                Registered users will be able to conveniently view and save all requested links, and to
+                manage them in their profile section.
+            </div>
         {% endif %}
     </div>
 
