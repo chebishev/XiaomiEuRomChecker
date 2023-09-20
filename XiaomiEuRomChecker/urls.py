@@ -29,5 +29,9 @@ urlpatterns = [
     # path to links_app all urls
     path('links/', include('XiaomiEuRomChecker.links.urls')),
 ]
+
+urlpatterns += [
+       path(r'captcha/', include('captcha.urls')),
+    ]
 # it leads to view that redirects all invalid links to index
 handler404 = 'XiaomiEuRomChecker.core.views.page_not_found'
