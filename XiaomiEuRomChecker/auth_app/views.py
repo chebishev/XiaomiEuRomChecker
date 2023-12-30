@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LogoutView, LoginView
 from django.shortcuts import redirect, render
-from django.contrib.auth import login, get_user_model
+from django.contrib.auth import login, get_user_model, logout
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView
 from XiaomiEuRomChecker.auth_app.forms import ProfileEditForm, RegisterUserForm, LoginUserForm
@@ -55,8 +55,9 @@ class LoginUserView(LoginView):
         return super().dispatch(request_method, *args, **kwargs)
 
 
-class LogoutUserView(LogoutView):
-    pass
+def logout_user(request):
+    logout(request)
+    return redirect('index')
 
 
 @login_required

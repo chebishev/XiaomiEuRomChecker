@@ -148,7 +148,7 @@ FIXTURE_DIRS = (
 )
 
 LOGIN_REDIRECT_URL = reverse_lazy('index')
-LOGOUT_REDIRECT_URL = reverse_lazy('index')
+#LOGOUT_REDIRECT_URL = reverse_lazy('index')
 LOGIN_URL = reverse_lazy('login')
 
 AUTH_USER_MODEL = 'auth_app.AuthUser'
