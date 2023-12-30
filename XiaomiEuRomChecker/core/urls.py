@@ -1,9 +1,7 @@
 from django.urls import path
-from .views import index, downloads, contact, thank_you
+from .views import index, downloads
 
 urlpatterns = [
     path('', index, name='index'),
     path('downloads/<int:pk>/<slug:slug>/', downloads, name='downloads'),
-    path('contact/', contact, name='contact'),
-    path('thank_you/', thank_you, name='thank_you'),
 ]
