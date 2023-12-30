@@ -34,8 +34,8 @@ def get_url(release, folder=''):
 
     available_urls = {
         'stable': static_url + 'MIUI-STABLE-RELEASES/MIUIv14/',
-        'weekly': static_url + 'MIUI-WEEKLY-RELEASES/',
-        'last_weekly': static_url + 'MIUI-WEEKLY-RELEASES/' + folder,
+        'weekly': static_url + 'HyperOS-WEEKLY-RELEASES/',
+        'last_weekly': static_url + 'HyperOS-WEEKLY-RELEASES/' + folder,
     }
     return available_urls[release]
 
