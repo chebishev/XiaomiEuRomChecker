@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'XiaomiEuRomChecker.auth_app',
     'XiaomiEuRomChecker.theme',
     'XiaomiEuRomChecker.links',
+    'captcha'
 ]
 
 MIDDLEWARE = [

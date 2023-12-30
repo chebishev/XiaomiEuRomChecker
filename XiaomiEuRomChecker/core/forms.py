@@ -1,4 +1,5 @@
 from django import forms
+from captcha.fields import CaptchaField
 
 
 # Create your forms here.
@@ -16,3 +17,4 @@ class ContactForm(forms.Form):
     email = forms.EmailField(required=False, label='E-mail',
                              widget=forms.TextInput(attrs={'placeholder': 'Fill in for feedback'}))
     message = forms.CharField(required=False, widget=forms.Textarea, label='Optional message')
+    captcha = CaptchaField()
