@@ -107,7 +107,7 @@ def get_link_for_specific_device(device, release):
 
     for rom in device_roms:
         current_rom = rom.text
-        if f"xiaomi.eu_multi_{device}_V14" in current_rom:
+        if f"xiaomi.eu_multi_{device}_V14" in current_rom or f"xiaomi.eu_multi_{device}_OS" in current_rom:
             return target_url + "/" + current_rom.split()[0]
     else:
         return f"Sorry, no links for device with code name {device} in the {release} folder!"

@@ -74,5 +74,5 @@ def list_to_json():
 
 # Both functions work properly and the json files are filled with needed data
 
-# write_json(excel_to_json('initial_devices_list.xlsx'), 'fixtures/devices.json')
+write_json(excel_to_json('initial_devices_list.xlsx'), 'fixtures/devices.json')
 # write_json(list_to_json(), 'fixtures/folders.json')
