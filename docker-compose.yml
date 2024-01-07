@@ -3,7 +3,7 @@ version: '3'
 services:
   web:
     # for using image from dockerhub
-    image: xiaomi.eu_rom_checker # it can be changed to your_hub/your_image:tag
+    image: aws_deploy # it can be changed to your_hub/your_image:tag
     # for building the configuration from dockerfile
     build:
       context: .
@@ -24,6 +24,7 @@ services:
       - /tmp/app-resources/static:/home/app/web/staticfiles
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/logs:/var/log/nginx
-      - ./certbot/www:/var/www/certbot/:ro
+      - /etc/letsencrypt/live/rom-checker.site/fullchain.pem:/etc/nginx/cert/fullchain.pem:ro
+      - /etc/letsencrypt/live/rom-checker.site/privkey.pem:/etc/nginx/cert/privkey.pem:ro
     links:
       - web
