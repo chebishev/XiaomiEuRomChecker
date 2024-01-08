@@ -2,7 +2,6 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.contrib.auth import get_user_model
-from .models import ThreadTitle
 
 UserModel = get_user_model()
 
@@ -41,11 +40,3 @@ class AuthUserAdmin(UserAdmin):
             if form.cleaned_data['password'] != user.password:
                 obj.set_password(form.cleaned_data['password'])
         obj.save()
-
-
-class ThreadTitleAdmin(admin.ModelAdmin):
-    list_display = ['title']
-    list_per_page = 20
-
-
-admin.site.register(ThreadTitle, ThreadTitleAdmin)

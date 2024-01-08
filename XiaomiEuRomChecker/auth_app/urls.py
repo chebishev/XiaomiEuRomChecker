@@ -1,6 +1,6 @@
 from django.urls import path, include
 from .views import RegisterUserView, LoginUserView, logout_user, \
-    profile_details, profile_edit, ProfileDeleteView, my_device, update_telegram_channel
+    profile_details, profile_edit, ProfileDeleteView, my_device
 
 
 urlpatterns = [
@@ -17,5 +17,4 @@ urlpatterns = [
         path("delete/", ProfileDeleteView.as_view(), name='profile_delete'),
         path("my_device/", my_device, name='my_device'),
     ])),
-    path("update_telegram_channel/", update_telegram_channel, name='update_telegram_channel'),
 ]

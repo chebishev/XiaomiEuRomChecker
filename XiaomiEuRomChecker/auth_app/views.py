@@ -7,8 +7,6 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView
 from XiaomiEuRomChecker.auth_app.forms import ProfileEditForm, RegisterUserForm, LoginUserForm
 from XiaomiEuRomChecker.core.models import AvailableDevicesModel
-from .models import ThreadTitle
-from .xiaomi_eu_new_thread_checker import telegram_message
 
 UserModel = get_user_model()
 
@@ -62,12 +60,6 @@ def logout_user(request):
 
 @login_required
 def profile_details(request, pk):
-    current_title = telegram_message()[0]
-    title = ""
-    try:
-        all_threads = ThreadTitle.objects.get(title=current_title)
-    except ThreadTitle.DoesNotExist:
-        title = current_title
     current_user = UserModel.objects.get(pk=pk)
 
     # Check if the logged-in user matches the requested user's profile or has appropriate permissions.
@@ -77,7 +69,6 @@ def profile_details(request, pk):
 
     context = {
         "user": current_user,
-        'title': title
     }
     return render(request, 'auth_app/profile.html', context)
 
@@ -117,11 +108,3 @@ def my_device(request, pk):
     else:
         chosen_device = AvailableDevicesModel.objects.get(market_name=user_device)
         return render(request, 'core/device_info.html', {'chosen_device': chosen_device})
-
-
-@login_required
-def update_telegram_channel(request):
-    message = telegram_message()
-    title = message[0]
-    ThreadTitle.objects.create(title=title)
-    return redirect('profile_details', pk=request.user.id)
