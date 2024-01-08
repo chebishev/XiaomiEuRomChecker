@@ -26,6 +26,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = int(os.getenv('DEBUG', default=0))
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(' ')
+CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS").split(' ') or []
 
 # Application definition
 
@@ -79,20 +80,6 @@ WSGI_APPLICATION = 'XiaomiEuRomChecker.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-# locally it works perfectly with postgres, but because of missing initial items in the db
-# the project is too hard to run without loading 4 or 5 fixtures and commenting of some code
-# probably it can be done with docker-compose exec web python manage.py loaddata fixtures/*.json
-# DATABASES = {
-#     "default": {
-#         "ENGINE": 'django.db.backends.postgresql',
-#         "NAME": os.getenv('DB_NAME'),
-#         "USER": os.getenv('DB_USER'),
-#         "PASSWORD": os.getenv('DB_PASSWORD'),
-#         "HOST": os.getenv('DB_HOST'),
-#         "PORT": os.getenv('DB_PORT'),
-#     }
-# }
 
 DATABASES = {
     "default": {
@@ -151,4 +138,3 @@ LOGIN_REDIRECT_URL = reverse_lazy('index')
 LOGIN_URL = reverse_lazy('login')
 
 AUTH_USER_MODEL = 'auth_app.AuthUser'
-CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS").split(", ") or []
