@@ -25,6 +25,8 @@
             </div>
             {% csrf_token %}
         </form>
+        <a href="{% url 'contact' %}" class="w3-text-grey w3-hover-text-black w3-margin-top">Missing or unsupported
+            device?</a>
         <br>
         <br>
         {% if not request.user.is_authenticated %}

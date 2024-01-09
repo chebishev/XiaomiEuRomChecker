@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block grids %}
+<div class="alert alert-success alert-dismissible fade show">
+    <strong>Success!</strong> Thank you for your help!
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+</div>
+    <button class="w3-button w3-black w3-padding-large w3-large w3-margin-top w3-center" type="submit" onclick="window.location.href='{% url 'index' %}'">Back home</button>
+{% endblock %}
