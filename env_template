@@ -9,3 +9,14 @@ ALLOWED_HOSTS='127.0.0.1 localhost'
 
 # for deploy with https:
 CSRF_TRUSTED_ORIGINS='https://yourdomain.com https://www.yourdomain.com'
+
+# I am using this to send mails from gmail account
+EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+# enter your smtp host eg mail.yourdomain.com
+EMAIL_HOST='smtp.gmail.com'
+# enter your smtp port eg. 587, 25, 465 etc.
+EMAIL_PORT=587
+# enter your email username eg. username@yourdomain.com
+EMAIL_HOST_USER='username@gmail.com'
+EMAIL_HOST_PASSWORD='password'
+EMAIL_RECIPIENT='receiver@hisdomain.com'

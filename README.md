@@ -1,10 +1,11 @@
 # XiaomiEuRomChecker
-Web application for checking for the latest weekly and/or stable xiaomi.eu MIUI 14 roms in sourceforge cloud folders.
+Web application for checking for the latest xiaomi.eu weekly HyperOS and/or xiaomi.eu stable MIUI 14 roms in sourceforge cloud folders.
 
 All users will have:
 - access to the available devices list
 - an option to get info about selected device
 - access to the download links section
+- to report unsupported or missing devices
   
 Registered users will have additional options:
 - CRUD for the links
