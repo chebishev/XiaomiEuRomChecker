@@ -4,7 +4,7 @@ from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from XiaomiEuRomChecker import settings
-from XiaomiEuRomChecker.core.forms import ContactForm
+from XiaomiEuRomChecker.core.forms import ContactForm, get_devices_dict
 from XiaomiEuRomChecker.core.functionality import get_link_for_specific_device
 from XiaomiEuRomChecker.core.models import AvailableDevicesModel
 
@@ -63,8 +63,10 @@ def contact(request):
         if form.is_valid():
             subject = "Check device information"
             body = {
-                'market_name': form.cleaned_data['market_name'],
-                'rom_options': form.cleaned_data['rom_options'],
+                'market_name': f"Device market name: {form.cleaned_data['market_name']}",
+                'code_name': f"Device code name: {get_devices_dict()[form.cleaned_data['market_name']]}",
+                'status': f"Report type: {form.cleaned_data['status']}",
+                'rom_options': f"Rom option to check: {form.cleaned_data['rom_options']}",
             }
             message = "\n".join(body.values())
             try:

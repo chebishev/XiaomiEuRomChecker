@@ -22,17 +22,26 @@ def get_devices_from_url():
     return result.find_all('td')
 
 
-devices = get_devices_from_url()
-devices_list = []
-for index in range(0, len(devices), 3):
-    market_name = devices[index].text
-    devices_list.append(market_name)
+def get_devices_dict():
+    """
+    :return: dictionary with market names as keys and code names as values
+    """
+    devices = get_devices_from_url()
+    devices_dict = {}
+    for index in range(0, len(devices), 3):
+        market_name = devices[index].text
+        code_name = devices[index + 1].text
+        devices_dict[market_name] = code_name
 
-choices = ((name, name) for name in sorted(devices_list))
+    return devices_dict
+
+
+market_name_choices = ((name, name) for name in sorted(get_devices_dict().keys()))
+status_choices = (("Missing", "Missing"), ("Unsupported", "Unsupported"))
+rom_options_choices = (('stable', 'stable'), ('weekly', 'weekly'), ('both', 'both'))
 
 
 class ContactForm(forms.Form):
-
-    market_name = forms.ChoiceField(choices=choices, label='Market name')
-    rom_options = forms.ChoiceField(choices=(('stable', 'stable'), ('weekly', 'weekly'), ('both', 'both')),
-                                    label='Rom options')
+    market_name = forms.ChoiceField(choices=market_name_choices, label='Market name')
+    status = forms.ChoiceField(choices=status_choices, label='Report type')
+    rom_options = forms.ChoiceField(choices=rom_options_choices, label='Rom options')
