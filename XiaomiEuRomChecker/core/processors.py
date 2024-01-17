@@ -14,9 +14,9 @@ def django_version(request):
     return {'django_current_version': django.__version__}
 
 
-# First checks current date with the last date in the database if there is difference (more than 4 days)
-# gets the latest added folder in the database and compares it with the current last folder in Sourceforge
-# returns the folder name and link to it for the section above the footer
+# First check current date with the last date in the database if there is difference
+# we get the latest added folder in the database and compare it with the current last folder in Sourceforge
+# the function returns the folder name and link to it for the section above the footer
 def latest_weekly(request):
     last_object = FoldersModel.objects.last()
     current_folder = last_object.folder_name
@@ -24,7 +24,7 @@ def latest_weekly(request):
     year, month, day = current_date.year, current_date.month, current_date.day
 
     difference = datetime.now() - datetime(year, month, day)
-    if difference.days > 4:
+    if difference.days:
         info_from_scrapping = get_last_weekly_folder(get_url('weekly'))
         new_folder = info_from_scrapping[0]
         if new_folder not in FoldersModel.objects.values_list('folder_name', flat=True):

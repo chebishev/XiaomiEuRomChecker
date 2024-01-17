@@ -33,7 +33,7 @@ def get_url(release, folder=''):
     static_url = 'https://sourceforge.net/projects/xiaomi-eu-multilang-miui-roms/files/xiaomi.eu/'
 
     available_urls = {
-        'stable': static_url + 'MIUI-STABLE-RELEASES/MIUIv14/',
+        'stable': static_url + 'HyperOS-STABLE-RELEASES/HyperOS1.0/',
         'weekly': static_url + 'HyperOS-WEEKLY-RELEASES/',
         'last_weekly': static_url + 'HyperOS-WEEKLY-RELEASES/' + folder,
     }
@@ -87,7 +87,7 @@ def get_last_weekly_folder(target_url):
             continue
         # after finding the row that contains folder name and date, we break the loop
         # and return the first two elements of the row:
-        # folder name in format "V14.0.23.4.31.DEV" and date in format "2023-04-31 or '<', because of the splitting"
+        # folder name in format "OS1.0.24.1.11.DEV" and date in format "2023-04-31 or '<', because of the splitting"
         return folder.text.split()[:2]
 
 
@@ -107,7 +107,7 @@ def get_link_for_specific_device(device, release):
 
     for rom in device_roms:
         current_rom = rom.text
-        if f"xiaomi.eu_multi_{device}_V14" in current_rom or f"xiaomi.eu_multi_{device}_OS" in current_rom:
+        if f"xiaomi.eu_multi_{device}_OS" in current_rom:
             return target_url + "/" + current_rom.split()[0]
     else:
         return f"Sorry, no links for device with code name {device} in the {release} folder!"
