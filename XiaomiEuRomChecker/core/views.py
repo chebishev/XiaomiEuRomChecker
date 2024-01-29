@@ -67,6 +67,7 @@ def contact(request):
                 'code_name': f"Device code name: {get_devices_dict()[form.cleaned_data['market_name']]}",
                 'status': f"Report type: {form.cleaned_data['status']}",
                 'rom_options': f"Rom option to check: {form.cleaned_data['rom_options']}",
+                'email': f"Email address: {form.cleaned_data['email']}",
             }
             message = "\n".join(body.values())
             try:

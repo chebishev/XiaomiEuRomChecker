@@ -45,3 +45,4 @@ class ContactForm(forms.Form):
     market_name = forms.ChoiceField(choices=market_name_choices, label='Market name')
     status = forms.ChoiceField(choices=status_choices, label='Report type')
     rom_options = forms.ChoiceField(choices=rom_options_choices, label='Rom options')
+    email = forms.EmailField(label='Email address', required=True)
