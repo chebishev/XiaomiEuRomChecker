@@ -2,6 +2,6 @@ beautifulsoup4==4.12.2
 Django==5.0
 pandas==2.1.4
 pyshorteners==1.0.1
-requests==2.31.0
 python-dotenv==1.0.0
+requests==2.31.0
 gunicorn==21.2.0
