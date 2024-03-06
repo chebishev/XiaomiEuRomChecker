@@ -1,0 +1,16 @@
+# certificate generator via docker container:
+sudo docker run -it --rm --name certbot \
+  -v "/etc/letsencrypt:/etc/letsencrypt" \
+  -v "/var/lib/letsencrypt:/var/lib/letsencrypt" \
+  -p "80:80" -p "443:443" \
+  certbot/certbot certonly \
+  --standalone \
+  -d yourdomain.com -d www.yourdomain.com \
+  --staple-ocsp -m your@email.address --agree-tos
+
+# renew certificate (not tested)
+sudo docker run -it --rm --name certbot \
+  -v "/etc/letsencrypt:/etc/letsencrypt" \
+  -v "/var/lib/letsencrypt:/var/lib/letsencrypt" \
+  -p "80:80" -p "443:443" \
+  certbot/certbot renew --dry-run

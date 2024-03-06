@@ -1,9 +1,9 @@
-version: '3'
+version: '3.8'
 
 services:
   web:
     # for using image from dockerhub
-    image: aws_deploy # it can be changed to your_hub/your_image:tag
+    image: chebishev/xiaomi.eu_rom_checker # it can be changed to your_hub/your_image:tag
     # for building the configuration from dockerfile
     build:
       context: .
@@ -14,17 +14,17 @@ services:
       - ./.env
     volumes:
       - /tmp/app-resources/static:/app/staticfiles
-    command: python manage.py runserver 0.0.0.0:8000
-  nginx:
-    image: nginx:latest
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - /tmp/app-resources/static:/home/app/web/staticfiles
-      - ./nginx/conf.d:/etc/nginx/conf.d
-      - ./nginx/logs:/var/log/nginx
-      - /etc/letsencrypt/live/rom-checker.site/fullchain.pem:/etc/nginx/cert/fullchain.pem:ro
-      - /etc/letsencrypt/live/rom-checker.site/privkey.pem:/etc/nginx/cert/privkey.pem:ro
-    links:
-      - web
+    command: python manage.py runserver 0.0.0.0:8000  # access on http://localhost:8000/
+#  nginx:
+#    image: nginx:latest
+#    ports:
+#      - "80:80"
+#      - "443:443"
+#    volumes:
+#      - /tmp/app-resources/static:/home/app/web/staticfiles
+#      - ./nginx/conf.d:/etc/nginx/conf.d
+#      - ./nginx/logs:/var/log/nginx
+#      - /etc/letsencrypt/live/rom-checker.site/fullchain.pem:/etc/nginx/cert/fullchain.pem:ro
+#      - /etc/letsencrypt/live/rom-checker.site/privkey.pem:/etc/nginx/cert/privkey.pem:ro
+#    links:
+#      - web
