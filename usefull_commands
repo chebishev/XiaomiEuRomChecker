@@ -14,3 +14,6 @@ sudo docker run -it --rm --name certbot \
   -v "/var/lib/letsencrypt:/var/lib/letsencrypt" \
   -p "80:80" -p "443:443" \
   certbot/certbot renew --dry-run
+
+# copy file from container to host
+docker cp container_id:/path/to/file /home/user/output_dir/
