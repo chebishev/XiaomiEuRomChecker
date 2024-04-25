@@ -5,9 +5,6 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
-env:
-  REPO_VERSION: ${{ secrets.DOCKERHUB_USERNAME }}/xiaomi.eu_rom_checker:${{ github.run_number }}
-  REPO_LATEST: ${{ secrets.DOCKERHUB_USERNAME }}/xiaomi.eu_rom_checker:latest
 
 jobs:
   build:
@@ -17,9 +14,10 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag $REPO_VERSION
+      run: docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_USERNAME }}/xiaomi.eu_rom_checker:${{ github.run_number }} --tag ${{ secrets.DOCKERHUB_USERNAME }}/xiaomi.eu_rom_checker:latest
   
   push:
+    needs: build
     runs-on: ubuntu-latest
     steps:
     -
@@ -29,8 +27,6 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Push current version to Docker Hub
-      run: docker push $REPO_VERSION
-    - name: Rename to latest
-      run: docker tag $REPO_VERSION $REPO_LATEST
+      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/xiaomi.eu_rom_checker:${{ github.run_number }}
     - name: Push latest version to Docker Hub
-      run: docker push $REPO_LATEST
+      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/xiaomi.eu_rom_checker:latest
