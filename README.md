@@ -14,7 +14,7 @@ Registered users will have additional options:
 Staff users will have an option to use Admin panel based on their permissions
 
  You can check the demo here:
- https://rom-checker.site/
+ https://romchecker.pythonanywhere.com
 
 The project is inspired and based on the functionality of this repo (also mine):
 https://github.com/chebishev/xiaomi.eu-weekly-roms-checker
