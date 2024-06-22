@@ -1,7 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.shortcuts import render, redirect
-from django.core.mail import send_mail, BadHeaderError
-from django.http import HttpResponse
+from django.core.mail import send_mail
 from XiaomiEuRomChecker.core.functionality import get_link_for_specific_device
 from XiaomiEuRomChecker.core.models import AvailableDevicesModel
 from XiaomiEuRomChecker import settings
@@ -73,8 +72,8 @@ def contact(request):
             message = "\n".join(body.values())
             try:
                 send_mail(subject, message, settings.EMAIL_HOST_USER, [settings.EMAIL_RECIPIENT])
-            except BadHeaderError:
-                return HttpResponse('Invalid header found.')
+            except:
+                return redirect("index")
             return redirect("thank_you")
 
     form = ContactForm()
