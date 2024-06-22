@@ -15,8 +15,13 @@ Staff users will have an option to use Admin panel based on their permissions
 
  You can check the demo here:
  https://romchecker.pythonanywhere.com
- Unfortunately, bitly service returns Server Error (500), because of the hosting on pythonanywhere.
+ 
+ Deployment server bugs:
+- Unfortunately, bit.ly service returns Server Error (500), because of the hosting on pythonanywhere.
  So it redirects to index page if when error occurs
+- When sending email for missing/unsupported devices, it returns Server Error (500), but the email is sent.
+- It can't make requests to xiaomiui.net/all-xiaomi-codenames-5137/ because it returns 403. (it can't be whitelisted)
+ So I've made the Market Name field to be free text instead of dynamically generated dropdown
 
 The project is inspired and based on the functionality of this repo (also mine):
 https://github.com/chebishev/xiaomi.eu-weekly-roms-checker
