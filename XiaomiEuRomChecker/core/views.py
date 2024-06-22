@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from XiaomiEuRomChecker.core.functionality import get_link_for_specific_device
 from XiaomiEuRomChecker.core.models import AvailableDevicesModel
 from XiaomiEuRomChecker import settings
-from XiaomiEuRomChecker.core.forms import ContactForm, get_devices_dict
+from XiaomiEuRomChecker.core.forms import ContactForm
 from django.contrib.auth.decorators import login_required
 
 UserModel = get_user_model()
@@ -65,7 +65,7 @@ def contact(request):
             subject = "Check device information"
             body = {
                 'market_name': f"Device market name: {form.cleaned_data['market_name']}",
-                'code_name': f"Device code name: {get_devices_dict()[form.cleaned_data['market_name']]}",
+                # 'code_name': f"Device code name: {get_devices_dict()[form.cleaned_data['market_name']]}",
                 'status': f"Report type: {form.cleaned_data['status']}",
                 'rom_options': f"Rom option to check: {form.cleaned_data['rom_options']}",
                 'email': f"Email address: {form.cleaned_data['email']}",
