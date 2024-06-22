@@ -1,0 +1,5 @@
+BITLY_API=your_bitly_api_key
+
+SECRET_KEY=your_django_secret_key
+
+DEBUG=True_or_False
