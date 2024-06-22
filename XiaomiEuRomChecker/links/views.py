@@ -94,11 +94,7 @@ def create_short_link(request, user_id, slug):
         link.save()
 
     # Will raise if the link doesn't start with the needed from bit.ly prefix (https:// or http://)
-    except AttributeError:
-        pass
-
-    # Will raise if the link is invalid at all. For example: "atanas"
-    except ShorteningErrorException:
-        pass
+    except:
+        return redirect('index')
 
     return redirect("link_details", user_id=request.user.id, slug=link.slug)

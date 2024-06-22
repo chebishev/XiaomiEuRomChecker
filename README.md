@@ -15,6 +15,8 @@ Staff users will have an option to use Admin panel based on their permissions
 
  You can check the demo here:
  https://romchecker.pythonanywhere.com
+ Unfortunately, bitly service returns Server Error (500), because of the hosting on pythonanywhere.
+ So it redirects to index page if this error occurs
 
 The project is inspired and based on the functionality of this repo (also mine):
 https://github.com/chebishev/xiaomi.eu-weekly-roms-checker
