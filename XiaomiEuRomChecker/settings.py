@@ -143,9 +143,9 @@ def get_settings() -> Settings:
     return Settings()
 
 
-settings = get_settings()
+env_settings = get_settings()
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = settings.SECRET_KEY
+SECRET_KEY = env_settings.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = settings.DEBUG
+DEBUG = env_settings.DEBUG
