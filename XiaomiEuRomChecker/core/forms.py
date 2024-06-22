@@ -1,7 +1,7 @@
 from django import forms
 import requests
 from bs4 import BeautifulSoup
-from functionality import get_random_user_agent
+from XiaomiEuRomChecker.core.functionality import get_random_user_agent
 
 
 def get_devices_from_url():
