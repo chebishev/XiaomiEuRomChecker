@@ -72,9 +72,10 @@ def contact(request):
             message = "\n".join(body.values())
             try:
                 send_mail(subject, message, settings.EMAIL_HOST_USER, [settings.EMAIL_RECIPIENT])
+                return redirect("thank_you")
             except:
                 return redirect("index")
-            return redirect("thank_you")
+
 
     form = ContactForm()
     return render(request, "core/contact.html", {'form': form})
