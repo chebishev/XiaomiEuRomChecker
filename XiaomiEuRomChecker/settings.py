@@ -4,7 +4,8 @@ from pathlib import Path
 
 from django.urls import reverse_lazy
 from dotenv import load_dotenv
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic import BaseSettings
+from pydantic_settings import SettingsConfigDict
 import logging
 
 load_dotenv()
