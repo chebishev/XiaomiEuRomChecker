@@ -5,6 +5,7 @@ from pathlib import Path
 from django.urls import reverse_lazy
 from dotenv import load_dotenv
 from pydantic_settings import BaseSettings, SettingsConfigDict
+import logging
 
 load_dotenv()
 
@@ -140,7 +141,10 @@ class Settings(BaseSettings):
 
 @lru_cache
 def get_settings() -> Settings:
-    return Settings()
+    settings = Settings()
+    logging.info(f"SECRET_KEY: {settings.SECRET_KEY}")
+    logging.info(f"DEBUG: {settings.DEBUG}")
+    return settings
 
 
 env_settings = get_settings()
