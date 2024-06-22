@@ -1,6 +1,7 @@
 from django import forms
 import requests
 from bs4 import BeautifulSoup
+from functionality import get_random_user_agent
 
 
 def get_devices_from_url():
@@ -15,7 +16,8 @@ def get_devices_from_url():
     "Unnecessary data"
     """
     url = "https://xiaomiui.net/all-xiaomi-codenames-5137/"
-    page = requests.get(url)
+    headers = {'User-Agent': get_random_user_agent()}
+    page = requests.get(url, headers=headers)
     soup = BeautifulSoup(page.content, "html.parser")
     result = soup.find(id="post-5137")
     return result.find_all('td')
