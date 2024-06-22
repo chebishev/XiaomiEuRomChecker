@@ -3,3 +3,10 @@ BITLY_API=your_bitly_api_key
 SECRET_KEY=your_django_secret_key
 
 DEBUG=True_or_False
+
+# gmail example
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_HOST_USER=username@gmail.com
+EMAIL_HOST_PASSWORD='password -> it works with password generated here: https://myaccount.google.com/apppasswords'
+EMAIL_RECIPIENT='receiver@hisdomain.com'
