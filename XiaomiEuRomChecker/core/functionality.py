@@ -102,6 +102,7 @@ def get_link_for_specific_device(device, release):
     if release == "weekly":
         target_url = get_url('last_weekly', (get_last_weekly_folder(get_url('weekly'))[0]))
     else:
+        # make it target_url = get_url('stable')[:-1] if the link is broken because of the "//"
         target_url = get_url('stable')
 
     device_roms = files_list_info(target_url, 'tr', "file")
@@ -112,3 +113,6 @@ def get_link_for_specific_device(device, release):
             return target_url + "/" + current_rom.split()[0]
     else:
         return f"Sorry, no links for device with code name {device} in the {release} folder!"
+
+
+print(get_link_for_specific_device('FUXI', 'stable'))
