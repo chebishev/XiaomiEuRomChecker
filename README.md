@@ -22,6 +22,8 @@ Staff users will have an option to use Admin panel based on their permissions
 - When sending email for missing/unsupported devices, it returns Server Error (500), but the email is sent.
 - It can't make requests to xiaomiui.net/all-xiaomi-codenames-5137/ because it returns 403. (it can't be whitelisted)
  So I've made the Market Name field to be free text instead of dynamically generated dropdown
+- You can't use the Import button in the admin panel, because it also returns Server Error (500). 
+ The needed requirements are installed, but the error is still there
 
 The project is inspired and based on the functionality of this repo (also mine):
 https://github.com/chebishev/xiaomi.eu-weekly-roms-checker
