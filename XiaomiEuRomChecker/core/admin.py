@@ -1,5 +1,8 @@
 from django.contrib import admin
 from XiaomiEuRomChecker.core.models import AvailableDevicesModel, FoldersModel
+from import_export import resources
+from import_export.admin import ImportExportActionModelAdmin
+
 
 # changing admin header
 admin.site.site_header = "xiaomi.eu Rom Checker Admin Panel"
@@ -29,10 +32,14 @@ change_rom_both.short_description = 'Change rom_options to "both"'
 change_rom_weekly.short_description = 'Change rom_options to "weekly"'
 change_rom_stable.short_description = 'Change rom_options to "stable"'
 
+# necessary class for import-export module
+class AvailableDevicesModelResource(resources.ModelResource):
+    class Meta:
+        model = AvailableDevicesModel
 
 # Register your models here.
 @admin.register(AvailableDevicesModel)
-class DevicesAdmin(admin.ModelAdmin):
+class DevicesAdmin(ImportExportActionModelAdmin, admin.ModelAdmin):
     list_display = ['code_name', 'market_name', 'rom_name', 'rom_options', 'slug']
     filter_fields = ['code_name', 'market_name', 'rom_name', 'rom_options', 'slug']
     # ordering = ['id', 'code_name', 'market_name', 'rom_name', 'rom_options']
@@ -42,6 +49,7 @@ class DevicesAdmin(admin.ModelAdmin):
     actions = [change_rom_both, change_rom_weekly, change_rom_stable]
     list_per_page = ITEMS_PER_PAGE
 
+    resource_classes = [AvailableDevicesModelResource]
 
 @admin.register(FoldersModel)
 class FoldersAdmin(admin.ModelAdmin):

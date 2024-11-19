@@ -27,17 +27,21 @@ def files_list_info(url, tag, class_name):
 def get_url(release, folder=''):
     """
     Gives a link for the chosen release
-    if it is 'weekly' or 'stable' second parameters isn't used,
+    if it is 'weekly' or 'stable' second parameters aren't used,
     otherwise it is used in order to concatenate it at the end of the generated link
-    :return: URL
+    :return: weekly folder url or tuple with stable folder urls
     """
-    # initial URL that can be modified with various suffixes depending on the release
     static_url = 'https://sourceforge.net/projects/xiaomi-eu-multilang-miui-roms/files/xiaomi.eu/'
-
+    stable_url = static_url + 'HyperOS-STABLE-RELEASES/'
+    # at this point it can't be retrieved dynamically, because of the continuous changing of the folder contents,
+    # which moves the folder with the newest content on the first position
+    stable_folders = ("HyperOS2.0", "HyperOS1.0")
+    stable_urls = tuple(stable_url + folder for folder in stable_folders )
+    weekly_url = static_url + 'HyperOS-WEEKLY-RELEASES/'
     available_urls = {
-        'stable': static_url + 'HyperOS-STABLE-RELEASES/HyperOS1.0/',
-        'weekly': static_url + 'HyperOS-WEEKLY-RELEASES/',
-        'last_weekly': static_url + 'HyperOS-WEEKLY-RELEASES/' + folder,
+        'stable': stable_urls,
+        'weekly': weekly_url,
+        'last_weekly': weekly_url + folder
     }
     return available_urls[release]
 
@@ -78,7 +82,6 @@ def get_date_difference(date):
     difference = datetime.now() - datetime(*get_date(date))
     return difference
 
-
 def get_last_weekly_folder(target_url):
     # getting all table rows with this class in order to get the folder name and last modification date (or hours)
     folders = files_list_info(target_url, "tr", "folder")
@@ -92,6 +95,14 @@ def get_last_weekly_folder(target_url):
         # folder name in format "OS1.0.24.1.11.DEV" and date in format "2023-04-31 or '<', because of the splitting"
         return folder.text.split()[:2]
 
+def loop_through_specific_folder(url, device):
+    device_roms = files_list_info(url, 'tr', "file")
+    for rom in device_roms:
+        current_rom = rom.text
+        if f"_{device}_OS" in current_rom:
+            return url + "/" + current_rom.split()[0]
+    else:
+        return False
 
 def get_link_for_specific_device(device, release):
     """
@@ -99,20 +110,17 @@ def get_link_for_specific_device(device, release):
     :param release: is needed for the right url to be given to the driver
     :return: download link or None
     """
+    message = ""
     if release == "weekly":
         target_url = get_url('last_weekly', (get_last_weekly_folder(get_url('weekly'))[0]))
+        message = loop_through_specific_folder(target_url, device)
     else:
-        # make it target_url = get_url('stable')[:-1] if the link is broken because of the "//"
-        target_url = get_url('stable')
-
-    device_roms = files_list_info(target_url, 'tr', "file")
-
-    for rom in device_roms:
-        current_rom = rom.text
-        if f"_{device}_OS" in current_rom:
-            return target_url + "/" + current_rom.split()[0]
-    else:
+        target_urls = get_url('stable')
+        for url in target_urls:
+            message =  loop_through_specific_folder(url, device)
+            if message:
+                break
+    if not message:
         return f"Sorry, no links for device with code name {device} in the {release} folder!"
-
-
-print(get_link_for_specific_device('FUXI', 'stable'))
+    else:
+        return message
