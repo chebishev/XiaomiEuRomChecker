@@ -1,10 +1,9 @@
 """
 core functionality needed for my web scrapping
-including driver, url, date checking
+like url, date checking
 """
 
 from datetime import datetime
-import random
 
 import requests
 from bs4 import BeautifulSoup
@@ -82,18 +81,14 @@ def get_date_difference(date):
     difference = datetime.now() - datetime(*get_date(date))
     return difference
 
-def get_last_weekly_folder(target_url):
-    # getting all table rows with this class in order to get the folder name and last modification date (or hours)
-    folders = files_list_info(target_url, "tr", "folder")
+def get_last_hyperos_thread(target_url):
+    page = requests.get(target_url)
+    soup = BeautifulSoup(page.content, "html.parser")
 
-    # getting all the rows, but we need only the first valid one since it is the folder that we are checking
-    for folder in folders:
-        if "Parent" in folder.text:
-            continue
-        # after finding the row that contains folder name and date, we break the loop
-        # and return the first two elements of the row:
-        # folder name in format "OS1.0.24.1.11.DEV" and date in format "2023-04-31 or '<', because of the splitting"
-        return folder.text.split()[:2]
+    thread = soup.find("div", class_="structItem-title")
+    title = thread.find("a").text
+    url = f"https://xiaomi.eu{thread.find("a")['href']}"
+    return (title, url)
 
 def loop_through_specific_folder(url, device):
     device_roms = files_list_info(url, 'tr', "file")
@@ -107,19 +102,15 @@ def loop_through_specific_folder(url, device):
 def get_link_for_specific_device(device, release):
     """
     :param device: gets device rom name in order to search for it in the folder and to find the first match
-    :param release: is needed for the right url to be given to the driver
+    :param release: is needed for the right url to be given to the parser
     :return: download link or None
     """
     message = ""
-    if release == "weekly":
-        target_url = get_url('last_weekly', (get_last_weekly_folder(get_url('weekly'))[0]))
-        message = loop_through_specific_folder(target_url, device)
-    else:
-        target_urls = get_url('stable')
-        for url in target_urls:
-            message =  loop_through_specific_folder(url, device)
-            if message:
-                break
+    target_urls = get_url('stable')
+    for url in target_urls:
+        message =  loop_through_specific_folder(url, device)
+        if message:
+            break
     if not message:
         return f"Sorry, no links for device with code name {device} in the {release} folder!"
     else:

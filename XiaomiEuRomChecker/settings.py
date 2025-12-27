@@ -59,7 +59,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'XiaomiEuRomChecker.core.processors.django_version',
-                'XiaomiEuRomChecker.core.processors.latest_weekly',
+                'XiaomiEuRomChecker.core.processors.latest_hyperos_thread',
                 'XiaomiEuRomChecker.core.processors.all_devices',
                 'XiaomiEuRomChecker.theme.processors.theme_colors',
                 'XiaomiEuRomChecker.theme.processors.tip_of_the_day',
@@ -137,7 +137,6 @@ class Settings(BaseSettings):
         env_file=".env", env_ignore_empty=True, extra="ignore"
     )
     SECRET_KEY: str
-    BITLY_API: str
     DEBUG: bool
 
 
