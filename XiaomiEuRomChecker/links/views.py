@@ -5,7 +5,6 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView, ListView
 from XiaomiEuRomChecker.links.forms import SaveLinkForm, EditLinkForm
-from XiaomiEuRomChecker.links.functionality import shorten_url
 from XiaomiEuRomChecker.links.models import LinksModel
 
 UserModel = get_user_model()
@@ -82,18 +81,3 @@ class MyLinksView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['links'] = LinksModel.objects.filter(user=self.request.user).order_by('-created_at').all()
         return context
-
-
-@login_required
-def create_short_link(request, user_id, slug):
-    link = LinksModel.objects.get(slug=slug)
-
-    try:
-        link.short_link = shorten_url(link.link_url)
-        link.save()
-
-    # Will raise if the link doesn't start with the needed from bit.ly prefix (https:// or http://)
-    except:
-        return redirect('index')
-
-    return redirect("link_details", user_id=request.user.id, slug=link.slug)

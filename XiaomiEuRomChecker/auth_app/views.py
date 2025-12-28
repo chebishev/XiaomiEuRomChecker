@@ -6,7 +6,6 @@ from django.contrib.auth import login, get_user_model, logout
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView
 from XiaomiEuRomChecker.auth_app.forms import ProfileEditForm, RegisterUserForm, LoginUserForm
-from XiaomiEuRomChecker.core.models import AvailableDevicesModel
 
 UserModel = get_user_model()
 
@@ -106,5 +105,5 @@ def my_device(request, pk):
     if user_device == "No Device":
         return redirect('index')
     else:
-        chosen_device = AvailableDevicesModel.objects.get(market_name=user_device)
+        chosen_device = "Това ще видим дали ще го има изобщо"
         return render(request, 'core/device_info.html', {'chosen_device': chosen_device})

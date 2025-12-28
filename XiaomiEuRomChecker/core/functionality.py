@@ -1,9 +1,7 @@
 """
-core functionality needed for my web scrapping
-like url, date checking
+core functionality needed for the web scrapping
+reading jsons
 """
-
-from datetime import datetime
 
 import requests
 from bs4 import BeautifulSoup
@@ -44,42 +42,6 @@ def get_url(release, folder=''):
     }
     return available_urls[release]
 
-
-def get_date(string):
-    """
-    Extracts year, month and day from string in format YYYY-MM-DD
-    :param string:
-    :return: list of integers [2023, 06, 29]
-    """
-    date_for_splitting = string
-    if "<" in date_for_splitting:
-        date_for_splitting = datetime.today().strftime("%Y-%m-%d")
-    return [int(x) for x in date_for_splitting.split("-")]
-
-
-def get_date_as_string(date):
-    """
-    :param date: it can be a string in format "2023-06-29" or string in format "< n hours ago"
-    :return: string in format "2023-06-29"
-    """
-    # just in case if the rom "modified" field doesn't contain date
-    # it will have something like: "< 5 hours ago" so I am converting it to today's date
-    # in order to have a date in the format "2023-06-29"
-    if "<" in date:
-        return f"{datetime.now().year}-{datetime.now().month}-{datetime.now().day}"
-
-    return date
-
-
-def get_date_difference(date):
-    """
-    :param date: is a string in format "2023-06-29"
-    :return: timedelta in days, seconds and microseconds as kwargs
-    """
-    # getting the difference in days (it gave something like "2 days, 14:05:28.657927", which is translated to
-    # number with ".days" in the "if" statement)
-    difference = datetime.now() - datetime(*get_date(date))
-    return difference
 
 def get_last_hyperos_thread(target_url):
     page = requests.get(target_url)

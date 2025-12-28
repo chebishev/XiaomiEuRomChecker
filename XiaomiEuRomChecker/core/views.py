@@ -3,7 +3,6 @@ from django.shortcuts import render, redirect
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse
 from XiaomiEuRomChecker.core.functionality import get_link_for_specific_device
-from XiaomiEuRomChecker.core.models import AvailableDevicesModel
 from XiaomiEuRomChecker import settings
 from XiaomiEuRomChecker.core.forms import ContactForm
 from django.contrib.auth.decorators import login_required
@@ -16,7 +15,7 @@ def index(request):
         if request.POST.get('device') == "0":
             request.method = 'GET'
         else:
-            chosen_device = AvailableDevicesModel.objects.get(id=request.POST.get('device'))
+            chosen_device = "Тук ще има списък с устройства като го направя"
             return render(request, 'core/device_info.html', {'chosen_device': chosen_device})
 
     return render(request, 'core/index.html')

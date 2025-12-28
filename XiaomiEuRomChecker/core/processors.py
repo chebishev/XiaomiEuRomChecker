@@ -4,9 +4,7 @@ The results from both are added to the context
 """
 
 import django
-from XiaomiEuRomChecker.core.models import AvailableDevicesModel, FoldersModel
-from XiaomiEuRomChecker.core.functionality import get_last_hyperos_thread, get_url, get_date_as_string
-from datetime import datetime
+from XiaomiEuRomChecker.core.functionality import get_last_hyperos_thread
 
 
 # just returns current installed django version for the footer
@@ -30,5 +28,5 @@ def latest_hyperos_thread(request):
 
 # It gives me access to all devices as a list in the templates. Currently used in index.html
 def all_devices(request):
-    device_list = AvailableDevicesModel.objects.all().order_by('market_name')
+    device_list = "core -> processors.py -> all_devices -> device_list"
     return {'device_list': device_list}
