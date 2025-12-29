@@ -16,13 +16,7 @@ class LoginUserForm(AuthenticationForm):
 
 
 class ProfileEditForm(forms.ModelForm):
-    devices_query = "Auth_app -> Forms.py -> ProfileEditForm -> devices_query"
-    devices_query_choices = [("", 'No Device')] + [(market_name, market_name) for market_name in devices_query]
-    change_preferred_device = forms.ChoiceField(choices=devices_query_choices, required=False, widget=forms.Select)
-
     class Meta:
         model = UserModel
-        fields = ('preferred_device', 'change_preferred_device')
-        labels = {
-            "preferred_device": "Current preferred device",
-        }
+        fields = ('username',)
+        

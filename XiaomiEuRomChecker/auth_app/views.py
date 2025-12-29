@@ -96,14 +96,3 @@ class ProfileDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'auth_app/profile_delete.html'
     pk_url_kwarg = 'pk'
     success_url = reverse_lazy('index')
-
-
-@login_required
-def my_device(request, pk):
-    user = UserModel.objects.get(pk=request.user.id)
-    user_device = user.preferred_device
-    if user_device == "No Device":
-        return redirect('index')
-    else:
-        chosen_device = "Това ще видим дали ще го има изобщо"
-        return render(request, 'core/device_info.html', {'chosen_device': chosen_device})

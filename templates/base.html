@@ -101,12 +101,6 @@
                 class="fa fa-bars"></i></a>
         <a href="{% url 'index' %}" class="w3-bar-item w3-button w3-padding-large w3-{{ color.navbar_hover }}">Home</a>
         {% if request.user.is_authenticated %}
-            <a href="{% url 'my_links' user_id=request.user.id %}"
-               class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-{{ color.navbar_hover }}">My
-                links</a>
-            <a href="{% url 'my_device' pk=request.user.id %}"
-               class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-{{ color.navbar_hover }}">My
-                device</a>
             {% if request.user.is_staff %}
                 <a href="{% url 'admin:index' %}" target="_blank" rel="noopener noreferrer"
                    class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-{{ color.navbar_hover }}">Admin
@@ -130,10 +124,6 @@
     <div id="navDemo"
          class="w3-bar-block w3-{{ color.small_screens_navbar }} w3-hide w3-hide-large w3-hide-medium w3-large">
         {% if request.user.is_authenticated %}
-            <a href="{% url 'my_links' user_id=request.user.id %}" class="w3-bar-item w3-button w3-padding-large">My
-                links</a>
-            <a href="{% url 'my_device' pk=request.user.id %}" class="w3-bar-item w3-button w3-padding-large">My
-                device</a>
             <a href="{% url 'profile_details' pk=request.user.id %}" class="w3-bar-item w3-button w3-padding-large">My
                 profile</a>
             {% if request.user.is_staff %}
@@ -150,7 +140,9 @@
 <!-- Header -->
 <header class="w3-container w3-{{ color.header }} w3-center" style="padding:80px 10px">
     <h1 class="w3-margin w3-jumbo">Find latest xiaomi.eu rom for your device</h1>
-    <p class="w3-xlarge">Currently supported HyperOS Weekly and HyperOS x.0 Stable</p>
+    <p class="w3-xlarge">Currently supported STABLE MIUI 12, 13, 14 and HyperOS 1, 2, 3</p>
+    <p class="w3-xlarge">Check if recursive folder listing is available</p>
+
 
     <button class="w3-button w3-black w3-padding-large w3-large w3-margin-top"
             onclick="window.open('https://xiaomi.eu/', '_blank')">Visit xiaomi.eu
@@ -179,13 +171,13 @@
                 <h1>Did you know?</h1>
                 <h5 class="w3-padding-32">{{ tip.main_text }}</h5>
 
-                <p class="w3-text-{{ colors.second_grid_p_color }}">{{ tip.additional_text }}</p>
+                <p class="w3-text-{{ color.second_grid_p_color }}">{{ tip.additional_text }}</p>
             </div>
         </div>
     </div>
 {% endif %}
 <div class="w3-container w3-{{ color.rom_version_container }} w3-center w3-opacity w3-padding-64">
-    <h1 class="w3-margin w3-xlarge">Latest HyperOS ROM: <a href="{{ thread_link }}" target="_blank">{{ title }}</a></h1>
+    <h1 class="w3-margin w3-xlarge">LLatest HyperOS thread: <a href="{{ thread_link }}" target="_blank">{{ title }}</a></h1>
 </div>
 
 <footer class="w3-container w3-padding-64 w3-center w3-opacity">

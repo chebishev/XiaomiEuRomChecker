@@ -1,10 +1,4 @@
-from django.db import models
-from django.contrib.auth import models as auth_models
+from django.contrib.auth.models import AbstractUser
 
-
-# Create your models here.
-class AuthUser(auth_models.AbstractUser):
-    preferred_device = models.CharField(max_length=40, default='No Device', blank=True, null=True)
-
-    def __str__(self):
-        return self.username
+class AuthUser(AbstractUser):
+    pass

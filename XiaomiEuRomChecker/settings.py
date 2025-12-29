@@ -31,8 +31,6 @@ INSTALLED_APPS = [
     'XiaomiEuRomChecker.core',
     'XiaomiEuRomChecker.auth_app',
     'XiaomiEuRomChecker.theme',
-    'XiaomiEuRomChecker.links',
-    'import_export',
 ]
 
 MIDDLEWARE = [
@@ -162,9 +160,3 @@ EMAIL_PORT = os.getenv('EMAIL_PORT')
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_RECIPIENT = os.getenv('EMAIL_RECIPIENT')
-
-# multiple import options
-IMPORT_FORMATS = [CSV, XLSX]
-
-# single export options
-EXPORT_FORMATS = [XLSX]

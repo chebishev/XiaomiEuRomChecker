@@ -1,0 +1,342 @@
+{
+  "Redmi K40": {
+    "codename": "alioth",
+    "rom_name": "HMK40_POCOF3"
+  },
+  "POCO F3": {
+    "codename": "alioth",
+    "rom_name": "HMK40_POCOF3"
+  },
+  "Mi 11X (India)": {
+    "codename": "alioth",
+    "rom_name": "HMK40_POCOF3"
+  },
+  "Redmi K30S Ultra": {
+    "codename": "apollo",
+    "rom_name": "HMK30SUltra_MI10T"
+  },
+  "Mi 10T": {
+    "codename": "apollo",
+    "rom_name": "HMK30SUltra_MI10T"
+  },
+  "Mi 10T Pro": {
+    "codename": "apollopro",
+    "rom_name": "HMK30SUltra_MI10T"
+  },
+  "POCO X3 Pro (India)": {
+    "codename": "bhima",
+    "rom_name": "POCOX3Pro"
+  },
+  "Mi 10 Ultra": {
+    "codename": "cas",
+    "rom_name": "MI10Ultra"
+  },
+  "POCO M3": {
+    "codename": "citrus",
+    "rom_name": "POCOM3"
+  },
+  "Mi 10 Pro": {
+    "codename": "cmi",
+    "rom_name": "MI10Pro"
+  },
+  "Mi 11 Lite (4G)": {
+    "codename": "courbet(in)",
+    "rom_name": "MI11Lite"
+  },
+  "Xiaomi 12": {
+    "codename": "cupid",
+    "rom_name": "XM12"
+  },
+  "Redmi Note 9S": {
+    "codename": "curtana",
+    "rom_name": "HMNote9Pro_HMNote9S"
+  },
+  "Redmi Note 9 Pro (India)": {
+    "codename": "curtana",
+    "rom_name": "HMNote9Pro_HMNote9S"
+  },
+  "Redmi K50 Ultra": {
+    "codename": "diting",
+    "rom_name": "DITING"
+  },
+  "Xiaomi 12T Pro": {
+    "codename": "ditingp",
+    "rom_name": "DITING"
+  },
+  "Xiaomi 13": {
+    "codename": "fuxi",
+    "rom_name": "FUXI"
+  },
+  "Redmi Note 13 Pro 5G": {
+    "codename": "garnet",
+    "rom_name": "GARNET"
+  },
+  "POCO X6 5G": {
+    "codename": "garnetp",
+    "rom_name": "GARNET"
+  },
+  "Mi 10T Lite": {
+    "codename": "gauguin",
+    "rom_name": "HMNote9Pro5G_MI10TLite"
+  },
+  "Redmi Note 9 Pro 5G": {
+    "codename": "gauguinpro",
+    "rom_name": "HMNote9Pro5G_MI10TLite"
+  },
+  "Redmi K40 Pro": {
+    "codename": "haydn",
+    "rom_name": "HMK40Pro_MI11i"
+  },
+  "Redmi K40 Pro+": {
+    "codename": "haydnpro",
+    "rom_name": "HMK40Pro_MI11i"
+  },
+  "Mi 11i": {
+    "codename": "haydnpro",
+    "rom_name": "HMK40Pro_MI11i"
+  },
+  "Mi 11X Pro (India)": {
+    "codename": "haydnin",
+    "rom_name": "HMK40Pro_MI11i"
+  },
+  "Redmi K50G": {
+    "codename": "ingres",
+    "rom_name": "INGRES"
+  },
+  "POCO F4 GT": {
+    "codename": "ingres",
+    "rom_name": "INGRES"
+  },
+  "Xiaomi 13 Ultra": {
+    "codename": "ishtar",
+    "rom_name": "ISHTAR"
+  },
+  "Redmi Note 9 Pro (Global)": {
+    "codename": "joyeuse",
+    "rom_name": "HMNote9ProEU"
+  },
+  "POCO X3 (India)": {
+    "codename": "karna",
+    "rom_name": "POCOX3NFC"
+  },
+  "Redmi 9T (NFC)": {
+    "codename": "lemon",
+    "rom_name": "HMNote94G_HM9T"
+  },
+  "Redmi Note 9 (4G)": {
+    "codename": "lime",
+    "rom_name": "HMNote94G_HM9T"
+  },
+  "Redmi 9T (Latin America)": {
+    "codename": "pomelo",
+    "rom_name": "HMNote94G_HM9T"
+  },
+  "Mi 11 LE": {
+    "codename": "lisa",
+    "rom_name": "MI11LE_XM11Lite5GNE"
+  },
+  "Xiaomi 11 Lite 5G NE": {
+    "codename": "lisa",
+    "rom_name": "MI11LE_XM11Lite5GNE"
+  },
+  "Redmi K30 Pro": {
+    "codename": "lmi",
+    "rom_name": "HMK30Pro"
+  },
+  "POCO F2 Pro": {
+    "codename": "lmi",
+    "rom_name": "HMK30Pro"
+  },
+  "Redmi K30 Pro Zoom Edition": {
+    "codename": "lmipro",
+    "rom_name": "HMK30Pro"
+  },
+  "Redmi Note 12 Turbo": {
+    "codename": "marble(in)",
+    "rom_name": "MARBLE"
+  },
+  "POCO F5": {
+    "codename": "marble(in)",
+    "rom_name": "MARBLE"
+  },
+  "Mi 11 Pro": {
+    "codename": "mars",
+    "rom_name": "MI11Pro_MI11Ultra"
+  },
+  "Xiaomi 12S": {
+    "codename": "mayfly",
+    "rom_name": "MAYFLY"
+  },
+  "Xiaomi Civi": {
+    "codename": "mona",
+    "rom_name": "XMCivi"
+  },
+  "Redmi K60": {
+    "codename": "mondrian",
+    "rom_name": "MONDRIAN"
+  },
+  "POCO F5 Pro": {
+    "codename": "mondrian",
+    "rom_name": "MONDRIAN"
+  },
+  "POCO X5 5G": {
+    "codename": "moonstone_p",
+    "rom_name": "MOONSTONE"
+  },
+  "Redmi K40S": {
+    "codename": "munch",
+    "rom_name": "MUNCH"
+  },
+  "POCO F4": {
+    "codename": "munch",
+    "rom_name": "MUNCH"
+  },
+  "Xiaomi 13 Pro": {
+    "codename": "nuwa",
+    "rom_name": "NUWA"
+  },
+  "Xiaomi MIX 4": {
+    "codename": "odin",
+    "rom_name": "MIX4"
+  },
+  "Redmi Note 11 Pro+ 5G (India)": {
+    "codename": "peux",
+    "rom_name": "VEUXG"
+  },
+  "POCO X4 Pro 5G (India 64MP)": {
+    "codename": "peux_p",
+    "rom_name": "VEUXG"
+  },
+  "Redmi Note 12 Pro Speed": {
+    "codename": "redwood(in)",
+    "rom_name": "REDWOOD"
+  },
+  "POCO X5 Pro 5G": {
+    "codename": "redwood(in)",
+    "rom_name": "REDWOOD"
+  },
+  "Mi 11 Lite (5G)": {
+    "codename": "renoir",
+    "rom_name": "MI11Lite5G"
+  },
+  "Redmi 12 5G (NFC)": {
+    "codename": "river",
+    "rom_name": "SKY"
+  },
+  "Redmi 12 5G": {
+    "codename": "sky",
+    "rom_name": "SKY"
+  },
+  "Redmi 12R": {
+    "codename": "sky",
+    "rom_name": "SKY"
+  },
+  "Redmi Note 12R": {
+    "codename": "sky",
+    "rom_name": "SKY"
+  },
+  "POCO M6 Pro 5G (India)": {
+    "codename": "sky",
+    "rom_name": "SKY"
+  },
+  "Redmi K60 Pro": {
+    "codename": "socrates",
+    "rom_name": "SOCRATES"
+  },
+  "Redmi Note 11 (Global 4G)": {
+    "codename": "spes",
+    "rom_name": "HMNote11"
+  },
+  "Redmi Note 11 (Global 4G NFC)": {
+    "codename": "spesn",
+    "rom_name": "HMNote11"
+  },
+  "Mi 11 Ultra": {
+    "codename": "star",
+    "rom_name": "MI11Pro_MI11Ultra"
+  },
+  "Redmi Note 10 (Global 4G)": {
+    "codename": "sunny",
+    "rom_name": "HMNote10"
+  },
+  "Redmi Note 12 5G": {
+    "codename": "sunstone",
+    "rom_name": "SUNSTONE"
+  },
+  "Redmi Note 12R Pro": {
+    "codename": "sunstone",
+    "rom_name": "SUNSTONE"
+  },
+  "POCO X3 NFC (Global)": {
+    "codename": "surya",
+    "rom_name": "POCOX3NFC"
+  },
+  "Redmi Note 10 Pro (Global 4G)": {
+    "codename": "sweet",
+    "rom_name": "HMNote10Pro"
+  },
+  "Redmi Note 12 Pro (Global 4G)": {
+    "codename": "sweet_k6a",
+    "rom_name": "SWEETK6A"
+  },
+  "Xiaomi 12 Lite": {
+    "codename": "taoyao",
+    "rom_name": "TAOYAO"
+  },
+  "Redmi Note 12 (Global 4G)": {
+    "codename": "tapas",
+    "rom_name": "TAPAS"
+  },
+  "Xiaomi 12S Ultra": {
+    "codename": "thor",
+    "rom_name": "THOR"
+  },
+  "Mi 10S": {
+    "codename": "thyme",
+    "rom_name": "MI10S"
+  },
+  "Redmi Note 12 (Global 4G NFC)": {
+    "codename": "topaz",
+    "rom_name": "TOPAZ"
+  },
+  "Mi 10": {
+    "codename": "umi",
+    "rom_name": "MI10"
+  },
+  "Xiaomi 12S Pro": {
+    "codename": "unicorn",
+    "rom_name": "UNICORN"
+  },
+  "POCO X3 Pro (Global)": {
+    "codename": "vayu",
+    "rom_name": "POCOX3Pro"
+  },
+  "Mi 11": {
+    "codename": "venus",
+    "rom_name": "MI11"
+  },
+  "Redmi Note 11E Pro": {
+    "codename": "veux",
+    "rom_name": "VEUX"
+  },
+  "Redmi Note 11 Pro 5G (Global)": {
+    "codename": "veux",
+    "rom_name": "VEUXG"
+  },
+  "POCO X4 Pro 5G (Global 108MP)": {
+    "codename": "veux_p",
+    "rom_name": "VEUXG"
+  },
+  "Xiaomi 11T Pro": {
+    "codename": "vili",
+    "rom_name": "XM11TPro"
+  },
+  "Xiaomi 12 Pro": {
+    "codename": "zeus",
+    "rom_name": "XM12Pro"
+  },
+  "Xiaomi 13 Lite": {
+    "codename": "ziyi",
+    "rom_name": "ZIYIG"
+  }
+}

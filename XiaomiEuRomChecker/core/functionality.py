@@ -18,6 +18,8 @@ def files_list_info(url, tag, class_name):
     result = soup.find(id="files_list")
 
     # returns all tags with the class name provided
+    print("In files_list_info:")
+    print(result.find_all(tag, class_=class_name))
     return result.find_all(tag, class_=class_name)
 
 
@@ -40,6 +42,8 @@ def get_url(release, folder=''):
         'weekly': weekly_url,
         'last_weekly': weekly_url + folder
     }
+    print("In get_url:")
+    print(available_urls[release])
     return available_urls[release]
 
 

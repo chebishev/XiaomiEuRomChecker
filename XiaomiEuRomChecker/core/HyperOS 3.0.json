@@ -1,0 +1,122 @@
+{
+  "Redmi Note 14 Pro+ 5G": {
+    "codename": "amethyst",
+    "rom_name": "AMETHYST"
+  },
+  "REDMI K90": {
+    "codename": "annibale",
+    "rom_name": "ANNIBALE"
+  },
+  "POCO F8 Pro": {
+    "codename": "annibale",
+    "rom_name": "ANNIBALE"
+  },
+  "Xiaomi 14 Ultra": {
+    "codename": "aurora",
+    "rom_name": "AURORA"
+  },
+  "Redmi 15 (4G)": {
+    "codename": "creek(_n)",
+    "rom_name": "CREEK"
+  },
+  "POCO M7 (4G)": {
+    "codename": "creek_p",
+    "rom_name": "CREEK"
+  },
+  "Xiaomi 15": {
+    "codename": "dada",
+    "rom_name": "DADA"
+  },
+  "Xiaomi 13": {
+    "codename": "fuxi",
+    "rom_name": "FUXI"
+  },
+  "Redmi Note 13 Pro 5G": {
+    "codename": "garnet",
+    "rom_name": "GARNET"
+  },
+  "POCO X6 5G": {
+    "codename": "garnetp",
+    "rom_name": "GARNET"
+  },
+  "Xiaomi 15 Pro": {
+    "codename": "haotian",
+    "rom_name": "HAOTIAN"
+  },
+  "Xiaomi 14": {
+    "codename": "houji",
+    "rom_name": "HOUJI"
+  },
+  "Xiaomi 13 Ultra": {
+    "codename": "ishtar",
+    "rom_name": "ISHTAR"
+  },
+  "Redmi K70 Pro": {
+    "codename": "manet",
+    "rom_name": "MANET"
+  },
+  "REDMI K80 Pro": {
+    "codename": "miro",
+    "rom_name": "MIRO"
+  },
+  "POCO F7 Ultra": {
+    "codename": "miro",
+    "rom_name": "MIRO"
+  },
+  "REDMI K90 Pro Max": {
+    "codename": "myron",
+    "rom_name": "MYRON"
+  },
+  "POCO F8 Ultra": {
+    "codename": "myron",
+    "rom_name": "MYRON"
+  },
+  "Xiaomi 13 Pro": {
+    "codename": "nuwa",
+    "rom_name": "NUWA"
+  },
+  "REDMI Turbo 4 Pro": {
+    "codename": "onyx",
+    "rom_name": "ONYX"
+  },
+  "POCO F7": {
+    "codename": "onyx",
+    "rom_name": "ONYX"
+  },
+  "Xiaomi 17 Pro": {
+    "codename": "pandora",
+    "rom_name": "PANDORA"
+  },
+  "Xiaomi 17 Pro Max": {
+    "codename": "popsicle",
+    "rom_name": "POPSICLE"
+  },
+  "Xiaomi 17": {
+    "codename": "pudding",
+    "rom_name": "PUDDING"
+  },
+  "Xiaomi 14 Pro": {
+    "codename": "shennong",
+    "rom_name": "SHENNONG"
+  },
+  "Redmi K70": {
+    "codename": "vermeer",
+    "rom_name": "VERMEER"
+  },
+  "POCO F6 Pro": {
+    "codename": "vermeer",
+    "rom_name": "VERMEER"
+  },
+  "Xiaomi 15 Ultra": {
+    "codename": "xuanyuan",
+    "rom_name": "XUANYUAN"
+  },
+  "REDMI K80": {
+    "codename": "zorn",
+    "rom_name": "ZORN"
+  },
+  "POCO F7 Pro": {
+    "codename": "zorn",
+    "rom_name": "ZORN"
+  }
+}

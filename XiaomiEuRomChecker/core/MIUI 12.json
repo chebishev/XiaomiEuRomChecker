@@ -1,0 +1,246 @@
+{
+  "Redmi K40": {
+    "codename": "alioth",
+    "rom_name": "HMK40_POCOF3"
+  },
+  "POCO F3": {
+    "codename": "alioth",
+    "rom_name": "HMK40_POCOF3"
+  },
+  "Redmi K30S Ultra": {
+    "codename": "apollo",
+    "rom_name": "HMK30SUltra_MI10T"
+  },
+  "Mi 10T": {
+    "codename": "apollo",
+    "rom_name": "HMK30SUltra_MI10T"
+  },
+  "Mi 10T Pro": {
+    "codename": "apollopro",
+    "rom_name": ""
+  },
+  "POCO F1": {
+    "codename": "beryllium",
+    "rom_name": "POCOF1"
+  },
+  "POCO X3 Pro (India)": {
+    "codename": "bhima",
+    "rom_name": "POCOX3Pro"
+  },
+  "Mi 10 Ultra": {
+    "codename": "cas",
+    "rom_name": "MI10Ultra"
+  },
+  "Mi 9": {
+    "codename": "cepheus",
+    "rom_name": "MI9"
+  },
+  "POCO M3": {
+    "codename": "citrus",
+    "rom_name": "POCOM3"
+  },
+  "Mi 10 Pro": {
+    "codename": "cmi",
+    "rom_name": "MI10Pro"
+  },
+  "Mi 11 Lite (4G)": {
+    "codename": "courbet",
+    "rom_name": "MI11Lite"
+  },
+  "Mi 9 Pro 5G": {
+    "codename": "crux",
+    "rom_name": "MI9Pro5G"
+  },
+  "Redmi Note 9S": {
+    "codename": "curtana",
+    "rom_name": "HMNote9Pro_HMNote9S"
+  },
+  "Redmi Note 9 Pro (India)": {
+    "codename": "curtana",
+    "rom_name": "HMNote9Pro_HMNote9S"
+  },
+  "Redmi K20": {
+    "codename": "davinci",
+    "rom_name": "HMK20MI9T"
+  },
+  "Mi 9 SE": {
+    "codename": "grus",
+    "rom_name": "MI9SE"
+  },
+  "Redmi K40 Pro": {
+    "codename": "haydn",
+    "rom_name": "HMK40Pro_MI11i"
+  },
+  "Redmi K40 Pro+": {
+    "codename": "haydnpro",
+    "rom_name": "HMK40Pro_MI11i"
+  },
+  "Mi 11i": {
+    "codename": "haydnpro",
+    "rom_name": "HMK40Pro_MI11i"
+  },
+  "Redmi Note 9 Pro (Global)": {
+    "codename": "joyeuse",
+    "rom_name": "HMNote9ProEU"
+  },
+  "POCO X3 (India)": {
+    "codename": "karna",
+    "rom_name": "POCOX3NFC"
+  },
+  "Redmi Note 7": {
+    "codename": "lavender",
+    "rom_name": "HMNote7"
+  },
+  "Redmi 9T (NFC)": {
+    "codename": "lemon",
+    "rom_name": "HMNote94G_HM9T"
+  },
+  "Redmi Note 9 (4G)": {
+    "codename": "lime",
+    "rom_name": "HMNote94G_HM9T"
+  },
+  "Redmi 9T (Latin America)": {
+    "codename": "pomelo",
+    "rom_name": "HMNote94G_HM9T"
+  },
+  "Mi 11 LE": {
+    "codename": "lisa",
+    "rom_name": "MI11LE_XM11Lite5GNE"
+  },
+  "Xiaomi Civi": {
+    "codename": "mona",
+    "rom_name": "XMCivi"
+  },
+  "Mi 10 Lite 5G": {
+    "codename": "monet",
+    "rom_name": "MI10LITE5G"
+  },
+  "Mi Max 3": {
+    "codename": "nitrogen",
+    "rom_name": "MIMAX3"
+  },
+  "Xiaomi MIX 4": {
+    "codename": "odin",
+    "rom_name": "MIX4"
+  },
+  "Mi MIX 3": {
+    "codename": "perseus",
+    "rom_name": "MIMix3"
+  },
+  "Redmi K30": {
+    "codename": "phoenix",
+    "rom_name": "HMK30"
+  },
+  "Redmi K30 5G": {
+    "codename": "picasso",
+    "rom_name": "HMK305G"
+  },
+  "Redmi K30i 5G": {
+    "codename": "picasso_48m",
+    "rom_name": "HMK30i5G"
+  },
+  "Mi 8 Lite": {
+    "codename": "platina",
+    "rom_name": "MI8LITE"
+  },
+  "Mi MIX 2S": {
+    "codename": "polaris",
+    "rom_name": "MIMix2S"
+  },
+  "Mi 10": {
+    "codename": "umi",
+    "rom_name": "MI10"
+  },
+  "Mi 9 Lite": {
+    "codename": "pyxis",
+    "rom_name": "MI9LiteMICC9"
+  },
+  "Mi CC9": {
+    "codename": "pyxis",
+    "rom_name": "MI9LiteMICC9"
+  },
+  "Redmi K20 Pro": {
+    "codename": "raphael",
+    "rom_name": "HMK20ProMI9TPro"
+  },
+  "Redmi K20 Pro Premium": {
+    "codename": "raphael",
+    "rom_name": "HMK20ProMI9TPro"
+  },
+  "Mi 9T Pro": {
+    "codename": "raphael",
+    "rom_name": "HMK20ProMI9TPro"
+  },
+  "Mi 11 Lite (5G)": {
+    "codename": "renoir",
+    "rom_name": "MI11Lite5G"
+  },
+  "Mi 8 SE": {
+    "codename": "sirius",
+    "rom_name": "MI8SE"
+  },
+  "Mi 11 Ultra": {
+    "codename": "star",
+    "rom_name": "MI11Pro_MI11Ultra"
+  },
+  "Redmi Note 10 (Global 4G)": {
+    "codename": "sunny",
+    "rom_name": "HMNote10"
+  },
+  "POCO X3 NFC (Global)": {
+    "codename": "surya",
+    "rom_name": "POCOX3NFC"
+  },
+  "Redmi Note 10 Pro (Global 4G)": {
+    "codename": "sweet",
+    "rom_name": "HMNote10Pro"
+  },
+  "Mi 10S": {
+    "codename": "thyme",
+    "rom_name": "MI10S"
+  },
+  "Mi Note 10 Lite": {
+    "codename": "toco",
+    "rom_name": "MINote10LITE"
+  },
+  "Mi Note 10": {
+    "codename": "tucana",
+    "rom_name": "MINote10_MICC9Pro"
+  },
+  "Mi Note 10 Pro": {
+    "codename": "tucana",
+    "rom_name": "MINote10_MICC9Pro"
+  },
+  "Mi CC9 Pro": {
+    "codename": "tucana",
+    "rom_name": "MINote10_MICC9Pro"
+  },
+  "Mi 8 Explorer Edition": {
+    "codename": "ursa",
+    "rom_name": "MI8Explorer"
+  },
+  "Mi 10 Lite Zoom": {
+    "codename": "vangogh",
+    "rom_name": "MI10LiteZoom"
+  },
+  "POCO X3 Pro (Global)": {
+    "codename": "vayu",
+    "rom_name": "POCOX3Pro"
+  },
+  "Mi 11": {
+    "codename": "venus",
+    "rom_name": "MI11"
+  },
+  "Xiaomi 11T Pro": {
+    "codename": "vili",
+    "rom_name": "XM11TPro"
+  },
+  "Redmi Note 7 Pro": {
+    "codename": "violet",
+    "rom_name": "HMNote7Pro"
+  },
+  "Redmi Note 8T": {
+    "codename": "willow",
+    "rom_name": "HMNote8T"
+  }
+}

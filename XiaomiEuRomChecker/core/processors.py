@@ -22,7 +22,6 @@ def latest_hyperos_thread(request):
     context = {
         'title': title,
         'thread_link': url,}
-
     return context
 
 

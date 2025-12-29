@@ -29,8 +29,7 @@
         <br>
         <div class="alert alert-success alert-dismissible fade show">
             {% if not request.user.is_authenticated %}
-                Registered users will be able to conveniently view and save all requested links, and to
-                manage them in their profile section.
+                Registered users will be able to report missing or unsupported devices.
             {% else %}
                 <a href="{% url 'contact' %}" class="w3-text-grey w3-hover-text-black w3-margin-top">Missing or
                     unsupported

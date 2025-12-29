@@ -25,9 +25,6 @@ urlpatterns = [
 
     # path to auth_app all urls
     path('', include('XiaomiEuRomChecker.auth_app.urls')),
-
-    # path to links_app all urls
-    path('links/', include('XiaomiEuRomChecker.links.urls')),
 ]
 
 # it leads to view that redirects all invalid links to index

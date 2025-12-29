@@ -1,21 +1,22 @@
 import random
-from XiaomiEuRomChecker.theme.models import ThemeModel, TipOfTheDayModel
+import json
 
 
 def theme_colors(request):
-    color = ThemeModel.objects.first()
-    return {'color': color}
+    # change the file to default_theme.json to load default colors
+    with open("XiaomiEuRomChecker/theme/custom_theme.json", "r", encoding="utf-8") as theme_file:
+        colors = json.load(theme_file)
+    return {'color': colors}
 
 
 def tip_of_the_day(request):
-    # get a random tip if any tips in the db
-    try:
-        all_tips = TipOfTheDayModel.objects.all()
-        start = 1
-        stop = len(all_tips)
-        tip_to_show = TipOfTheDayModel.objects.get(id=random.randint(start, stop))
+    with open("XiaomiEuRomChecker/theme/tips.json", "r", encoding="utf-8") as tips_file:
+        all_tips = json.load(tips_file)
+        # get a random tip
+        start = 0
+        stop = len(all_tips) - 1
+        index = random.randint(start, stop)
+        tip_to_show = all_tips[index]
+        print(index)
         return {'tip': tip_to_show}
-    
-    # if there is nothing in the database send None to the context
-    except TipOfTheDayModel.DoesNotExist:
-        return {'tip': None}
+

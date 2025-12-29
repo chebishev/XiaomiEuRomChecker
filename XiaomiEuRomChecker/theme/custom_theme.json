@@ -1,0 +1,14 @@
+{
+    "navbar": "light-green",
+    "navbar_hover": "white",
+    "small_screens_navbar": "white",
+    "small_screens_menu": "light-green",
+    "small_screens_menu_hover": "white",
+    "header": "light-green",
+    "first_grid_icon": "light-green",
+    "second_grid_icon": "light-green",
+    "second_grid_background": "light-grey",
+    "second_grid_p_color": "grey",
+    "rom_version_container": "black",
+    "back_home_button": "black"
+}
