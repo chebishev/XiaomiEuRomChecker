@@ -1,83 +1,74 @@
 """
 core functionality needed for the web scrapping
-reading jsons
+reading jsons, reading sourceforge folders etc.
 """
 
 import requests
 from bs4 import BeautifulSoup
+import json
 
+session = requests.Session()
+cache = {}
 
-def files_list_info(url, tag, class_name):
-    # it gets url for weekly or stable folder of sourceforge server
-    page = requests.get(url)
+def get_soup(url):
+    if url in cache:
+        return cache[url]
 
-    # BeautifulSoup instance that gets url and parser as arguments
-    soup = BeautifulSoup(page.content, "html.parser")
+    r = session.get(url, timeout=10)
+    r.raise_for_status()
+    soup = BeautifulSoup(r.content, "html.parser")
 
-    # getting the info directly from the html by id of the table
-    result = soup.find(id="files_list")
-
-    # returns all tags with the class name provided
-    print("In files_list_info:")
-    print(result.find_all(tag, class_=class_name))
-    return result.find_all(tag, class_=class_name)
-
-
-def get_url(release, folder=''):
-    """
-    Gives a link for the chosen release
-    if it is 'weekly' or 'stable' second parameters aren't used,
-    otherwise it is used in order to concatenate it at the end of the generated link
-    :return: weekly folder url or tuple with stable folder urls
-    """
-    static_url = 'https://sourceforge.net/projects/xiaomi-eu-multilang-miui-roms/files/xiaomi.eu/'
-    stable_url = static_url + 'HyperOS-STABLE-RELEASES/'
-    # at this point it can't be retrieved dynamically, because of the continuous changing of the folder contents,
-    # which moves the folder with the newest content on the first position
-    stable_folders = ("HyperOS2.0", "HyperOS1.0")
-    stable_urls = tuple(stable_url + folder for folder in stable_folders )
-    weekly_url = static_url + 'HyperOS-WEEKLY-RELEASES/'
-    available_urls = {
-        'stable': stable_urls,
-        'weekly': weekly_url,
-        'last_weekly': weekly_url + folder
-    }
-    print("In get_url:")
-    print(available_urls[release])
-    return available_urls[release]
-
+    cache[url] = soup
+    return soup
 
 def get_last_hyperos_thread(target_url):
-    page = requests.get(target_url)
-    soup = BeautifulSoup(page.content, "html.parser")
-
+    soup = get_soup(target_url)
     thread = soup.find("div", class_="structItem-title")
     title = thread.find("a").text
     url = f"https://xiaomi.eu{thread.find("a")['href']}"
     return (title, url)
 
-def loop_through_specific_folder(url, device):
-    device_roms = files_list_info(url, 'tr', "file")
-    for rom in device_roms:
-        current_rom = rom.text
-        if f"_{device}_OS" in current_rom:
-            return url + "/" + current_rom.split()[0]
-    else:
-        return False
 
-def get_link_for_specific_device(device, release):
+main_link = "https://sourceforge.net/projects/xiaomi-eu-multilang-miui-roms/files/xiaomi.eu/"
+links_to_files = {
+    "HyperOS 1.0.json": f"{main_link}HyperOS-STABLE-RELEASES/HyperOS1.0/",
+    "HyperOS 2.0.json": f"{main_link}HyperOS-STABLE-RELEASES/HyperOS2.0/",
+    "HyperOS 3.0.json": f"{main_link}HyperOS-STABLE-RELEASES/HyperOS3.0/",
+    "MIUI 12.json": f"{main_link}MIUI-STABLE-RELEASES/MIUIv12/",
+    "MIUI 13.json": f"{main_link}MIUI-STABLE-RELEASES/MIUIv13/",
+    "MIUI 14.json": f"{main_link}MIUI-STABLE-RELEASES/MIUIv14/",
+
+}
+def get_link_for_specific_device(file_name, device):
     """
-    :param device: gets device rom name in order to search for it in the folder and to find the first match
-    :param release: is needed for the right url to be given to the parser
+    :param file_name: json file name where the market names, code names and urls are stored
+    :param device:  device market name which is key for the ROM name and code name
     :return: download link or None
     """
-    message = ""
-    target_urls = get_url('stable')
-    for url in target_urls:
-        message =  loop_through_specific_folder(url, device)
-        if message:
-            break
-    if not message:
-        return f"Sorry, no links for device with code name {device} in the {release} folder!"
+    rom_name = None
+    with open(f"XiaomiEuRomChecker/core/json/{file_name}", "r", encoding="utf-8") as json_file:
+        data = json.load(json_file)
+        rom_name = data[device]["rom_name"]
+
+    soup = get_soup(links_to_files[file_name])
+    rows = soup.find_all("tr", class_="file")
+
+    for row in rows:
+        a = row.find("a", href=True)
+        if not a:
+            continue
+    
+        current_name = a["href"]
+        # skip the "Parent folder" row
+        if current_name == "..":
+            continue
+
+        if rom_name not in current_name:
+            continue
+
+        return current_name
     else:
-        return message
+        print("no such model found")
+
+# test json file manually
+# print(get_link_for_specific_device("MIUI 14.json", "POCO F3"))
