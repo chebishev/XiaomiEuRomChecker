@@ -6,25 +6,26 @@ from django.shortcuts import redirect, render
 
 from XiaomiEuRomChecker import settings
 from XiaomiEuRomChecker.core.forms import ContactForm
-from XiaomiEuRomChecker.core.functionality import get_link_for_specific_device
-
+from XiaomiEuRomChecker.core.functionality import get_link_for_specific_device, get_rom_versions_names
 UserModel = get_user_model()
 
 
 def index(request):
-    if request.method == 'POST':
-        if request.POST.get('device') == "0":
-            request.method = 'GET'
-        else:
-            chosen_device = "Тук ще има списък с устройства като го направя"
-            return render(request, 'core/device_info.html', {'chosen_device': chosen_device})
+    # Get list of ROM versions
+    rom_versions_names = list(get_rom_versions_names())
 
-    return render(request, 'core/index.html')
+    if request.method == 'POST':
+        chosen_rom = request.POST.get('rom')  # name="device" in your <select>
+        if chosen_rom and chosen_rom != "0":
+            # do something with the chosen ROM
+            pass  # e.g., redirect, lookup device info, etc.
+
+    return render(request, 'core/index.html', {'rom_versions_names': rom_versions_names})
 
 
 def downloads(request, pk, slug):
     # get required device by pk
-    device = AvailableDevicesModel.objects.get(id=pk)
+    device = "to be filled in downloads view"
     if device.rom_options == "both":
         # this dictionary saves information for both types of roms, and it is used in the template
         # as iterable in order to have more dynamic content

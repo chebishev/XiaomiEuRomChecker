@@ -11,12 +11,13 @@
 
         <form id="device" class="row row-cols-lg-auto g-3 align-items-center" action="{% url 'index' %}" method="post">
             <div class="col-12">
-                <label class="visually-hidden" for="device">Preference</label>
-                <select class="form-select" id="device" name="device" required>
+                <label class="visually-hidden" for="rom">Preference</label>
+                <select class="form-select" id="rom" name="rom" required>
                     <option selected value="0">Choose...</option>
-                    {% for device in device_list %}
-                        <option value="{{ device.id }}">{{ device.market_name }}</option>
+                    {% for rom_version in rom_versions_names %}
+                        <option value="{{ rom_version }}">{{ rom_version }}</option>
                     {% endfor %}
+                </select>
                 </select>
             </div>
             <div class="col-12">

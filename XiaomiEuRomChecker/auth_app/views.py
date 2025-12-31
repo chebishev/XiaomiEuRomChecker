@@ -5,7 +5,6 @@ from django.contrib.auth.views import LoginView
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView
-
 from XiaomiEuRomChecker.auth_app.forms import (LoginUserForm, ProfileEditForm,
                                                RegisterUserForm)
 
@@ -81,10 +80,6 @@ def profile_edit(request, pk):
 
     if form.is_valid():
         instance = form.save(commit=False)
-        chosen_device = form.cleaned_data['change_preferred_device']
-        if not chosen_device:
-            chosen_device = "No Device"
-        instance.preferred_device = chosen_device
         instance.save()
         return redirect('profile_details', pk=pk)
     else:

@@ -58,7 +58,6 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'XiaomiEuRomChecker.core.processors.django_version',
                 'XiaomiEuRomChecker.core.processors.latest_hyperos_thread',
-                'XiaomiEuRomChecker.core.processors.all_devices',
                 'XiaomiEuRomChecker.theme.processors.theme_colors',
                 'XiaomiEuRomChecker.theme.processors.tip_of_the_day',
             ],
@@ -116,13 +115,6 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# Manually added, this option will provide manage.py to load data from json files in order to populate the database
-FIXTURE_DIRS = (
-    BASE_DIR / 'core.fixtures',
-    BASE_DIR / 'theme.fixtures',
-    BASE_DIR / 'auth_app.fixtures',
-)
 
 LOGIN_REDIRECT_URL = reverse_lazy('index')
 LOGIN_URL = reverse_lazy('login')

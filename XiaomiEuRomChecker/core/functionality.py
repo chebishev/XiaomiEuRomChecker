@@ -39,7 +39,6 @@ links_to_files = {
     "MIUI 12.json": f"{main_link}MIUI-STABLE-RELEASES/MIUIv12/",
     "MIUI 13.json": f"{main_link}MIUI-STABLE-RELEASES/MIUIv13/",
     "MIUI 14.json": f"{main_link}MIUI-STABLE-RELEASES/MIUIv14/",
-
 }
 def get_link_for_specific_device(file_name, device):
     """
@@ -70,7 +69,84 @@ def get_link_for_specific_device(file_name, device):
 
         return current_link
     else:
-        print("no such model found")
+        return "no such model found"
 
 # test json file manually
 # print(get_link_for_specific_device("HyperOS 1.0.json", "Redmi Turbo 3"))
+
+def parse_folder(name):
+    if name.startswith("HyperOS"):
+        return "HyperOS", float(name.replace("HyperOS", ""))
+    if name.startswith("MIUIv"):
+        return "MIUI", int(name.replace("MIUIv", ""))
+    return None, None
+
+
+def get_subfolders(url):
+    """
+    Returns list of (folder_name, folder_url) tuples.
+    Skips "Parent folder".
+    """
+    soup = get_soup(url)
+
+    rows = soup.find_all("tr", class_="folder")
+
+    subfolders = []
+
+    for row in rows:
+        a = row.find("a", href=True)
+        if not a:
+            continue
+
+        name = a.text.strip()
+
+        # skip the "Parent folder" row
+        if name.lower().startswith("parent"):
+            continue
+
+        folder_url = urljoin("https://sourceforge.net", a["href"])
+        subfolders.append((name, folder_url))
+
+    return subfolders
+
+
+def crawl_all(url, result=None):
+    """
+    Recursively crawl all nested folders and return dict:
+    { folder_name: folder_url }
+    """
+    if result is None:
+        result = {}
+
+    for name, suburl in get_subfolders(url):
+
+        # Store this folder
+        if name.endswith("RELEASES"):
+            crawl_all(suburl, result)
+            continue
+
+        family, version = parse_folder(name)
+        if family is None:
+            crawl_all(suburl, result)
+            continue
+
+        if family not in result:
+            result[family] = {"min": version, "max": version}
+        else:
+            result[family]["min"] = min(result[family]["min"], version)
+            result[family]["max"] = max(result[family]["max"], version)
+
+        crawl_all(suburl, result)
+
+    return result
+
+def get_rom_versions_names():
+    for file_name in links_to_files.keys():
+        rom_version = file_name.replace(".json", "")
+        yield rom_version
+
+# test crawl_all manually
+# root_url = "https://sourceforge.net/projects/xiaomi-eu-multilang-miui-roms/files/xiaomi.eu/"
+# print(crawl_all(root_url))
+for rom in get_rom_versions_names():
+    print(rom)
