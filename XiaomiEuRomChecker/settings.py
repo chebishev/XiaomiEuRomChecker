@@ -1,12 +1,12 @@
+import logging
 import os
 from functools import lru_cache
 from pathlib import Path
 
 from django.urls import reverse_lazy
 from dotenv import load_dotenv
-from pydantic_settings import BaseSettings, SettingsConfigDict
-import logging
 from import_export.formats.base_formats import CSV, XLSX
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 load_dotenv()
 

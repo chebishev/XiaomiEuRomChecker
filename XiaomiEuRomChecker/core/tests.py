@@ -1,5 +1,7 @@
 from datetime import datetime
+
 from django.test import TestCase
+
 from .functionality import get_date, get_date_as_string
 from .models import FoldersModel
 

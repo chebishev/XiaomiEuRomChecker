@@ -1,6 +1,5 @@
 from django import forms
 
-
 status_choices = (("Missing", "Missing"), ("Unsupported", "Unsupported"))
 
 

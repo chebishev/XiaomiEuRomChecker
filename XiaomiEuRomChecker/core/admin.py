@@ -1,6 +1,5 @@
 from django.contrib import admin
 
-
 # changing admin header
 admin.site.site_header = "xiaomi.eu Rom Checker Admin Panel"
 # changing admin title

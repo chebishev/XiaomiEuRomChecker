@@ -1,11 +1,12 @@
 from django.contrib.auth import get_user_model
-from django.shortcuts import render, redirect
-from django.core.mail import send_mail, BadHeaderError
+from django.contrib.auth.decorators import login_required
+from django.core.mail import BadHeaderError, send_mail
 from django.http import HttpResponse
-from XiaomiEuRomChecker.core.functionality import get_link_for_specific_device
+from django.shortcuts import redirect, render
+
 from XiaomiEuRomChecker import settings
 from XiaomiEuRomChecker.core.forms import ContactForm
-from django.contrib.auth.decorators import login_required
+from XiaomiEuRomChecker.core.functionality import get_link_for_specific_device
 
 UserModel = get_user_model()
 

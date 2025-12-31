@@ -1,7 +1,7 @@
-from django.urls import path, include
-from .views import RegisterUserView, LoginUserView, logout_user, \
-    profile_details, profile_edit, ProfileDeleteView
+from django.urls import include, path
 
+from .views import (LoginUserView, ProfileDeleteView, RegisterUserView,
+                    logout_user, profile_details, profile_edit)
 
 urlpatterns = [
     path("auth/", include([

@@ -3,9 +3,11 @@ core functionality needed for the web scrapping
 reading jsons, reading sourceforge folders etc.
 """
 
+import json
+from urllib.parse import urljoin
+
 import requests
 from bs4 import BeautifulSoup
-import json
 
 session = requests.Session()
 cache = {}
@@ -58,17 +60,17 @@ def get_link_for_specific_device(file_name, device):
         if not a:
             continue
     
-        current_name = a["href"]
+        current_link = a["href"]
         # skip the "Parent folder" row
-        if current_name == "..":
+        if current_link == "..":
             continue
 
-        if rom_name not in current_name:
+        if rom_name not in current_link:
             continue
 
-        return current_name
+        return current_link
     else:
         print("no such model found")
 
 # test json file manually
-# print(get_link_for_specific_device("MIUI 14.json", "POCO F3"))
+# print(get_link_for_specific_device("HyperOS 1.0.json", "Redmi Turbo 3"))
