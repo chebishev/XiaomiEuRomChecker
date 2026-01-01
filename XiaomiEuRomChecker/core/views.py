@@ -1,53 +1,47 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.core.mail import BadHeaderError, send_mail
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 
 from XiaomiEuRomChecker import settings
 from XiaomiEuRomChecker.core.forms import ContactForm
-from XiaomiEuRomChecker.core.functionality import get_link_for_specific_device, get_rom_versions_names
+from XiaomiEuRomChecker.core.functionality import (
+    get_link_for_specific_device, get_rom_versions_names, get_devices_for_rom
+    )
 UserModel = get_user_model()
 
 
 def index(request):
     # Get list of ROM versions
     rom_versions_names = list(get_rom_versions_names())
-
-    if request.method == 'POST':
-        chosen_rom = request.POST.get('rom')  # name="device" in your <select>
-        if chosen_rom and chosen_rom != "0":
-            # do something with the chosen ROM
-            pass  # e.g., redirect, lookup device info, etc.
-
     return render(request, 'core/index.html', {'rom_versions_names': rom_versions_names})
 
+def ajax(request):
+    rom = request.GET.get("rom")
+    devices = get_devices_for_rom(rom)
+    return JsonResponse({"devices": devices})
 
-def downloads(request, pk, slug):
+
+
+def ajax_download(request):
+    rom = request.GET["rom"]
+    device = request.GET["device"]
+    link = get_link_for_specific_device(rom, device)
+    return JsonResponse({"download": link})
+
+def downloads(request):
     # get required device by pk
-    device = "to be filled in downloads view"
-    if device.rom_options == "both":
-        # this dictionary saves information for both types of roms, and it is used in the template
-        # as iterable in order to have more dynamic content
-        roms_result = {
-            'stable': get_link_for_specific_device(device.rom_name, 'stable'),
-            'weekly': get_link_for_specific_device(device.rom_name, 'weekly'),
-        }
-    else:
-        # here we dynamically get the supported rom version for the device without showing unnecessary
-        # information in the template
-        roms_result = {
-            device.rom_options: get_link_for_specific_device(device.rom_name, device.rom_options)
-        }
+    market_name = "Xiaomi 13"
+    file_name = "HyperOS 3.0.json"
+    link, rom_name = get_link_for_specific_device(file_name, market_name)
 
     context = {
-        'roms': roms_result,
-        'device': device
+        'download_link': link,
+        'rom_name': rom_name,
+        'device': market_name
     }
-    if request.method == 'POST':
-        if request.POST.get('save_link'):
-            request.session['uid'] = request.POST.get('save_link')
-            return redirect('link_add')
+    print(context)
 
     return render(request, 'core/downloads.html', context)
 

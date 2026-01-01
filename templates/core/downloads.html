@@ -3,27 +3,16 @@
     <div class="w3-twothird">
         <ul class="w3-ul">
             <li><p>
-                <span class="w3-tag w3-red">Valid ROM link for {{ device.market_name }} MUST CONTAIN </span>
-                <span class="w3-tag w3-green">_{{ device.rom_name }}_</span>
+                <span class="w3-tag w3-red">Valid ROM link for {{ device }} MUST CONTAIN </span>
+                <span class="w3-tag w3-green">_{{ rom_name }}_</span>
             </p>
             </li>
-            {% for rom_type, link in roms.items %}<br>
-                <li><h4>Latest {{ rom_type }} rom:</h4>
-                    {% if not 'zip' in link %}
-                        {{ link }} <br>
-                        </li>
-                    {% else %}
-                        <a href="{{ link }}" target="_blank" rel="noopener noreferrer">{{ link }}</a>
-                        <form method="POST">
-                            {% csrf_token %}
-                            <input type="hidden" name="save_link" value="{{ link }}">
-                            <button class="w3-button w3-green w3-padding-large w3-large w3-margin-top w3-center"
-                                    type="submit">Save to my links
-                            </button>
-                        </form>
-                        </li>
-                    {% endif %}
-            {% endfor %}
+            <li>
+                <h4>
+                    Latest stable rom:
+                </h4>
+                <a href="{{ download_link }}" target="_blank" rel="noopener noreferrer">{{ download_link }}</a>
+            </li>
         </ul>
     </div>
     <div class="w3-third w3-center">
