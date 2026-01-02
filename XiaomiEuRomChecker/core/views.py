@@ -9,8 +9,10 @@ from XiaomiEuRomChecker.core.forms import ContactForm
 from XiaomiEuRomChecker.core.functionality import (
     get_link_for_specific_device, get_rom_versions_names, get_devices_for_rom
     )
+from XiaomiEuRomChecker.core.roms import ROMS
 UserModel = get_user_model()
 
+rom_names = ROMS.keys()
 
 def index(request):
     # Get list of ROM versions
@@ -27,7 +29,8 @@ def ajax(request):
 def ajax_download(request):
     rom = request.GET["rom"]
     device = request.GET["device"]
-    link = get_link_for_specific_device(rom, device)
+    sourceforge_url = ROMS[rom]["sourceforge"]
+    link = get_link_for_specific_device(rom, device, sourceforge_url)
     return JsonResponse({"download": link})
 
 def downloads(request):
