@@ -1,47 +1,121 @@
 {% extends 'base.html' %}
 
-
 {% block grids %}
 
-    <div class="w3-twothird">
-        <h1>Choose your device</h1>
-        <h5 class="w3-padding-32">In this dropdown menu you will find all available/supported devices that have
-            xiaomi.eu rom. After you choose a device, you will receive info about the code name, rom name and rom
-            options that you will have for download.</h5>
+<div class="w3-twothird">
+    <h1>Choose your device</h1>
+    <h5 class="w3-padding-32">
+        In this dropdown menu you will find all available/supported devices that have
+        xiaomi.eu rom. After you choose a device, you will receive info about the code name,
+        rom name and rom options that you will have for download.
+    </h5>
 
-        <form id="device" class="row row-cols-lg-auto g-3 align-items-center" action="{% url 'index' %}" method="post">
-            <div class="col-12">
-                <label class="visually-hidden" for="rom">Preference</label>
-                <select class="form-select" id="rom" name="rom" required>
-                    <option selected value="0">Choose...</option>
-                    {% for rom_version in rom_versions_names %}
-                        <option value="{{ rom_version }}">{{ rom_version }}</option>
-                    {% endfor %}
-                </select>
-                </select>
-            </div>
-            <div class="col-12">
-                <input name="get-device-info" type="submit" class="btn btn-primary w3-{{ color.first_grid_icon }}"
-                       value="Submit">
-            </div>
-            {% csrf_token %}
-        </form>
-        <br>
-        <br>
-        <div class="alert alert-success alert-dismissible fade show">
-            {% if not request.user.is_authenticated %}
-                Registered users will be able to report missing or unsupported devices.
-            {% else %}
-                <a href="{% url 'contact' %}" class="w3-text-grey w3-hover-text-black w3-margin-top">Missing or
-                    unsupported
-                    device?</a>
-            {% endif %}
+    <div id="device" class="row row-cols-lg-auto g-3 align-items-center">
+
+        <!-- ROM dropdown -->
+        <div class="col-12">
+            <label class="visually-hidden" for="rom">ROM</label>
+            <select class="form-select" id="rom">
+                <option value="">Choose ROM...</option>
+                {% for rom_version in rom_versions_names %}
+                    <option value="{{ rom_version }}">{{ rom_version }}</option>
+                {% endfor %}
+            </select>
         </div>
+
+        <!-- Device dropdown -->
+        <div class="col-12">
+            <label class="visually-hidden" for="device-select">Device</label>
+            <select class="form-select" id="device-select" disabled>
+                <option value="">Choose device...</option>
+            </select>
+        </div>
+
+        <!-- Download button -->
+        <div class="col-12">
+            <button id="download-btn"
+                    class="btn btn-primary w3-{{ color.first_grid_icon }}"
+                    disabled>
+                Get download
+            </button>
+        </div>
+
+        <!-- Result -->
+        <div class="col-12">
+            <p id="download-result" class="w3-margin-top"></p>
+        </div>
+
     </div>
 
-    <div class="w3-third w3-center">
+    <br><br>
 
-        <i class="fa fa-size fa-mobile w3-padding-64 w3-text-{{ color.first_grid_icon }}"></i>
+    <div class="alert alert-success alert-dismissible fade show">
+        {% if not request.user.is_authenticated %}
+            Registered users will be able to report missing or unsupported devices.
+        {% else %}
+            <a href="{% url 'contact' %}"
+               class="w3-text-grey w3-hover-text-black w3-margin-top">
+                Missing or unsupported device?
+            </a>
+        {% endif %}
     </div>
+</div>
+
+<div class="w3-third w3-center">
+    <i class="fa fa-size fa-mobile w3-padding-64 w3-text-{{ color.first_grid_icon }}"></i>
+</div>
+
+<script>
+const romSelect = document.getElementById("rom");
+const deviceSelect = document.getElementById("device-select");
+const downloadBtn = document.getElementById("download-btn");
+const result = document.getElementById("download-result");
+
+romSelect.addEventListener("change", () => {
+    const rom = romSelect.value;
+
+    deviceSelect.innerHTML = '<option value="">Choose device...</option>';
+    deviceSelect.disabled = true;
+    downloadBtn.disabled = true;
+    result.textContent = "";
+
+    if (!rom) return;
+
+    fetch(`/ajax/devices/?rom=${encodeURIComponent(rom)}`)
+        .then(r => r.json())
+        .then(data => {
+            data.devices.forEach(device => {
+                const opt = document.createElement("option");
+                opt.value = device;
+                opt.textContent = device;
+                deviceSelect.appendChild(opt);
+            });
+            deviceSelect.disabled = false;
+        });
+});
+
+deviceSelect.addEventListener("change", () => {
+    downloadBtn.disabled = !deviceSelect.value;
+});
+
+downloadBtn.addEventListener("click", () => {
+    const rom = romSelect.value;
+    const device = deviceSelect.value;
+
+    fetch(`/ajax/download/?rom=${encodeURIComponent(rom)}&device=${encodeURIComponent(device)}`)
+        .then(r => r.json())
+        .then(data => {
+            if (data.download) {
+                result.innerHTML = `
+                    <a href="${data.download}" target="_blank" class="w3-text-green">
+                        Download ROM
+                    </a>
+                `;
+            } else {
+                result.textContent = "Download not found.";
+            }
+        });
+});
+</script>
 
 {% endblock %}

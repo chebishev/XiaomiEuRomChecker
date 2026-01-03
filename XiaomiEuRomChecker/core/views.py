@@ -6,47 +6,24 @@ from django.shortcuts import redirect, render
 
 from XiaomiEuRomChecker import settings
 from XiaomiEuRomChecker.core.forms import ContactForm
-from XiaomiEuRomChecker.core.functionality import (
-    get_link_for_specific_device, get_rom_versions_names, get_devices_for_rom
-    )
-from XiaomiEuRomChecker.core.roms import ROMS
+from XiaomiEuRomChecker.core.functionality import (get_rom_versions_names, get_devices_for_rom, get_download_link)
+
 UserModel = get_user_model()
 
-rom_names = ROMS.keys()
-
 def index(request):
-    # Get list of ROM versions
-    rom_versions_names = list(get_rom_versions_names())
-    return render(request, 'core/index.html', {'rom_versions_names': rom_versions_names})
+    roms = get_rom_versions_names()
+    return render(request, "core/index.html", {"roms": roms})
 
-def ajax(request):
+
+def ajax_devices(request):
     rom = request.GET.get("rom")
-    devices = get_devices_for_rom(rom)
-    return JsonResponse({"devices": devices})
-
+    return JsonResponse({"devices": get_devices_for_rom(rom)})
 
 
 def ajax_download(request):
-    rom = request.GET["rom"]
-    device = request.GET["device"]
-    sourceforge_url = ROMS[rom]["sourceforge"]
-    link = get_link_for_specific_device(rom, device, sourceforge_url)
-    return JsonResponse({"download": link})
-
-def downloads(request):
-    # get required device by pk
-    market_name = "Xiaomi 13"
-    file_name = "HyperOS 3.0.json"
-    link, rom_name = get_link_for_specific_device(file_name, market_name)
-
-    context = {
-        'download_link': link,
-        'rom_name': rom_name,
-        'device': market_name
-    }
-    print(context)
-
-    return render(request, 'core/downloads.html', context)
+    rom = request.GET.get("rom")
+    device = request.GET.get("device")
+    return JsonResponse({"download": get_download_link(rom, device)})
 
 
 # in Debug=False it redirects all wrong pages (404) to index
