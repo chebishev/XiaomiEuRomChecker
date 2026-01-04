@@ -30,7 +30,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'XiaomiEuRomChecker.core',
     'XiaomiEuRomChecker.auth_app',
-    'XiaomiEuRomChecker.theme',
 ]
 
 MIDDLEWARE = [
@@ -58,8 +57,8 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'XiaomiEuRomChecker.core.processors.django_version',
                 'XiaomiEuRomChecker.core.processors.latest_hyperos_thread',
-                'XiaomiEuRomChecker.theme.processors.theme_colors',
-                'XiaomiEuRomChecker.theme.processors.tip_of_the_day',
+                'XiaomiEuRomChecker.core.processors.theme_colors',
+                'XiaomiEuRomChecker.core.processors.tip_of_the_day',
             ],
         },
     },
