@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import index, ajax_devices, ajax_download, contact, thank_you
+from .views import ajax_devices, ajax_download, contact, index, thank_you
 
 urlpatterns = [
     path("", index, name="index"),

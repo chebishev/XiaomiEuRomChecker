@@ -6,7 +6,9 @@ from django.shortcuts import redirect, render
 
 from XiaomiEuRomChecker import settings
 from XiaomiEuRomChecker.core.forms import ContactForm
-from XiaomiEuRomChecker.core.functionality import (get_rom_versions_names, get_devices_for_rom, get_download_link)
+from XiaomiEuRomChecker.core.functionality import (get_devices_for_rom,
+                                                   get_download_link,
+                                                   get_rom_versions_names)
 
 UserModel = get_user_model()
 

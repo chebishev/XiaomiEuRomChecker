@@ -4,8 +4,8 @@ The results from both are added to the context
 """
 
 import django
-from XiaomiEuRomChecker.core.functionality import (
-    get_last_hyperos_thread) 
+
+from XiaomiEuRomChecker.core.functionality import get_last_hyperos_thread
 
 
 # just returns current installed django version for the footer

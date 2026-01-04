@@ -7,6 +7,7 @@ import json
 
 import requests
 from bs4 import BeautifulSoup
+
 from .roms import ROMS
 
 session = requests.Session()
