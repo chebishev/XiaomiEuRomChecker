@@ -17,16 +17,6 @@
                             </button>
                         </td>
                     </tr>
-                    <tr>
-                        <td><h2>Device:</h2></td>
-                        <td><h1 class="w3-center"> {{ user.preferred_device }}</h1></td>
-                        <td>
-                            <button class="w3-btn w3-orange" type="submit"
-                                    onclick="window.location.href='{% url 'profile_edit' pk=request.user.id %}';">Edit
-                                Device
-                            </button>
-                        </td>
-                    </tr>
                 </table>
                 <br>
             </div>

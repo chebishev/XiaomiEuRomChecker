@@ -40,9 +40,8 @@ def contact(request):
             subject = "Check device information"
             body = {
                 'market_name': f"Device market name: {form.cleaned_data['market_name']}",
-                # 'code_name': f"Device code name: {get_devices_dict()[form.cleaned_data['market_name']]}",
+                'rom_version': f"Rom version name: {form.cleaned_data['rom_versions']}",
                 'status': f"Report type: {form.cleaned_data['status']}",
-                'rom_options': f"Rom option to check: {form.cleaned_data['rom_options']}",
                 'email': f"Email address: {form.cleaned_data['email']}",
             }
             message = "\n".join(body.values())

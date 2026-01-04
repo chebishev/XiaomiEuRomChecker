@@ -2,12 +2,38 @@
 
 {% block grids %}
 
+<style>
+/* Download ROM button glow effect */
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 5px rgba(40, 167, 69, 0.6);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(40, 167, 69, 1);
+    }
+    100% {
+        box-shadow: 0 0 5px rgba(40, 167, 69, 0.6);
+    }
+}
+
+.download-highlight {
+    display: inline-block;
+    padding: 12px 20px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: white !important;
+    background-color: #8bc34a;
+    border-radius: 6px;
+    text-decoration: none;
+    animation: glow 1.5s infinite;
+}
+</style>
+
 <div class="w3-twothird">
     <h1>Choose your device</h1>
     <h5 class="w3-padding-32">
-        In this dropdown menu you will find all available/supported devices that have
-        xiaomi.eu rom. After you choose a device, you will receive info about the code name,
-        rom name and rom options that you will have for download.
+        In this dropdown menu you will find all supported xiaomi.eu ROMS.
+        After you choose a rom, you will activate the second dropdown so you can now choose a device as well.
     </h5>
 
     <div id="device" class="row row-cols-lg-auto g-3 align-items-center">
@@ -17,7 +43,7 @@
             <label class="visually-hidden" for="rom">ROM</label>
             <select class="form-select" id="rom">
                 <option value="">Choose ROM...</option>
-                {% for rom_version in rom_versions_names %}
+                {% for rom_version in roms %}
                     <option value="{{ rom_version }}">{{ rom_version }}</option>
                 {% endfor %}
             </select>
@@ -36,7 +62,7 @@
             <button id="download-btn"
                     class="btn btn-primary w3-{{ color.first_grid_icon }}"
                     disabled>
-                Get download
+                Search ROM
             </button>
         </div>
 
@@ -95,10 +121,15 @@ romSelect.addEventListener("change", () => {
 });
 
 deviceSelect.addEventListener("change", () => {
-    downloadBtn.disabled = !deviceSelect.value;
+    if (deviceSelect.value) {
+        downloadBtn.disabled = false;
+    } else {
+        downloadBtn.disabled = true;
+    }
 });
 
 downloadBtn.addEventListener("click", () => {
+    
     const rom = romSelect.value;
     const device = deviceSelect.value;
 
@@ -107,10 +138,12 @@ downloadBtn.addEventListener("click", () => {
         .then(data => {
             if (data.download) {
                 result.innerHTML = `
-                    <a href="${data.download}" target="_blank" class="w3-text-green">
-                        Download ROM
-                    </a>
-                `;
+                <a href="${data.download}"
+                target="_blank"
+                class="download-highlight">
+                    Download ROM
+                </a>
+            `;
             } else {
                 result.textContent = "Download not found.";
             }
