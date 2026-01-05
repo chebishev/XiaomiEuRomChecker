@@ -51,7 +51,7 @@ def get_last_hyperos_thread(target_url):
     soup = get_soup(target_url)
     thread = soup.find("div", class_="structItem-title")
     title = thread.find("a").text
-    url = f"https://xiaomi.eu{thread.find("a")['href']}"
+    url = f"https://xiaomi.eu{thread.find('a')['href']}"
     return (title, url)
 
 
