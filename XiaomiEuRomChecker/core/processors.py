@@ -7,9 +7,7 @@ import json
 import random
 
 import django
-
-from XiaomiEuRomChecker.core.functionality import get_last_hyperos_thread
-
+from .json_loader import load_json
 
 # just returns current installed django version for the footer
 def django_version(request):
@@ -20,10 +18,9 @@ def django_version(request):
 # we get the latest added folder in the database and compare it with the current last folder in Sourceforge
 # the function returns the folder name and link to it for the section above the footer
 def latest_hyperos_thread(request):
-    title, url = get_last_hyperos_thread("https://xiaomi.eu/community/forums/hyperos.228/")
     context = {
-        'title': title,
-        'thread_link': url,}
+        'title': "HyperOS 3.0",
+        'folder_link': "https://sourceforge.net/projects/xiaomi-eu-multilang-miui-roms/files/xiaomi.eu/HyperOS-STABLE-RELEASES/HyperOS3.0/",}
     return context
 
 
@@ -38,9 +35,7 @@ def theme_colors(request):
 
     The function takes a request object as an argument, but it does not use it.
     """
-    with open("XiaomiEuRomChecker/core/json/custom_theme.json", "r", encoding="utf-8") as theme_file:
-        colors = json.load(theme_file)
-    return {'color': colors}
+    return {"color": load_json("custom_theme.json")}
 
 
 # TIP OF THE DAY
@@ -51,11 +46,10 @@ def tip_of_the_day(request):
     The tips are read from the file, and a random index is generated to select one of the tips.
     The selected tip is then returned as a dictionary with the key 'tip'.
     """
-    with open("XiaomiEuRomChecker/core/json/tips.json", "r", encoding="utf-8") as tips_file:
-        all_tips = json.load(tips_file)
-        # get a random tip
-        start = 0
-        stop = len(all_tips) - 1
-        index = random.randint(start, stop)
-        tip_to_show = all_tips[index]
-        return {'tip': tip_to_show}
+    all_tips = load_json("tips.json")
+    # get a random tip
+    start = 0
+    stop = len(all_tips) - 1
+    index = random.randint(start, stop)
+    tip_to_show = all_tips[index]
+    return {'tip': tip_to_show}

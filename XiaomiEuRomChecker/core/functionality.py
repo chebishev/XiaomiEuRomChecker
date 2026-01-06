@@ -9,6 +9,8 @@ import requests
 from bs4 import BeautifulSoup
 
 from .roms import ROMS
+from .json_loader import load_json
+
 
 session = requests.Session()
 cache = {}
@@ -68,9 +70,8 @@ def get_devices_for_rom(rom_name):
     rom = ROMS.get(rom_name)
     if not rom:
         return []
-
-    with open(f"XiaomiEuRomChecker/core/json/{rom['json']}", encoding="utf-8") as f:
-        return list(json.load(f).keys())
+    file = load_json(rom["json"])
+    return list(file.keys())
 
 
 def get_download_link(rom_name, device):
@@ -88,8 +89,7 @@ def get_download_link(rom_name, device):
     if not rom:
         return None
 
-    with open(f"XiaomiEuRomChecker/core/json/{rom['json']}", encoding="utf-8") as f:
-        data = json.load(f)
+    data = load_json(rom["json"])
 
     rom_file_name = data[device]["rom_name"]
 

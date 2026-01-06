@@ -5,7 +5,6 @@ from pathlib import Path
 
 from django.urls import reverse_lazy
 from dotenv import load_dotenv
-from import_export.formats.base_formats import CSV, XLSX
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 load_dotenv()

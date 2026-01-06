@@ -6,9 +6,11 @@ from django.shortcuts import redirect, render
 
 from XiaomiEuRomChecker import settings
 from XiaomiEuRomChecker.core.forms import ContactForm
+from XiaomiEuRomChecker.core.json_loader import load_json
 from XiaomiEuRomChecker.core.functionality import (get_devices_for_rom,
                                                    get_download_link,
                                                    get_rom_versions_names)
+                                                   
 
 UserModel = get_user_model()
 
