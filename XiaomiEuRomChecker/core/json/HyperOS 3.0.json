@@ -87,6 +87,14 @@
     "codename": "pandora",
     "rom_name": "PANDORA"
   },
+  "Redmi Turbo 3": {
+    "codename": "peridot",
+    "rom_name": "PERIDOT"
+  },
+  "POCO F6": {
+    "codename": "peridot",
+    "rom_name": "PERIDOT"
+  },
   "Xiaomi 17 Pro Max": {
     "codename": "popsicle",
     "rom_name": "POPSICLE"
