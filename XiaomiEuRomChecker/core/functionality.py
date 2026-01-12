@@ -8,9 +8,8 @@ import json
 import requests
 from bs4 import BeautifulSoup
 
-from .roms import ROMS
 from .json_loader import load_json
-
+from .roms import ROMS
 
 session = requests.Session()
 cache = {}

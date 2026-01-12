@@ -1,29 +1,32 @@
 # XiaomiEuRomChecker
-Web application for checking for the latest xiaomi.eu weekly or stable HyperOS roms in sourceforge cloud folders.
+Web application for checking for the latest xiaomi.eu stable MIUI or HyperOS roms in sourceforge cloud folders.
+It uses requests and BeautifulSoup for web scrapping and json for data storage.
+Latest HyperOS Json is automatically updated with github actions and reads the forum image with listed devices using openai.
+The list is parsed to json and uploaded to the server.
 
 All users will have:
+- access to the available ROMs list
 - access to the available devices list
-- an option to get info about selected device
-- access to the download links section
+- get the download links
   
 Registered users will have additional options:
-- CRUD for the links
-- option to shorten the links with bit.ly API
 - to report unsupported or missing devices
+(registration doesn't require any personal data and it is only there to prevent bots from filling the form)
 
 Staff users will have an option to use Admin panel based on their permissions
 
  You can check the demo here:
  https://romchecker.pythonanywhere.com
  
- Deployment server bugs:
-- Unfortunately, bit.ly service returns Server Error (500), because of the hosting on pythonanywhere.
- So it redirects to index page if when error occurs
-- When sending email for missing/unsupported devices, it returns Server Error (500), but the email is sent.
-- It can't make requests to xiaomiui.net/all-xiaomi-codenames-5137/ because it returns 403. (it can't be whitelisted)
- So I've made the Market Name field to be free text instead of dynamically generated dropdown
-- You can't use the Import button in the admin panel, because it also returns Server Error (500). 
- The needed requirements are installed, but the error is still there
 
 The project is inspired and based on the functionality of this repo (also mine):
 https://github.com/chebishev/xiaomi.eu-weekly-roms-checker
+
+
+The initial version was with educational purposes and some additional features were included, but it wasn't suitable for this free deployment.
+There were 5 models (users, devices, links, themes, tips), bit.ly link shortener, registered users had CRUD operations on links, 10 views (some of them with classes), tests, etc. (Requirements of the exam were met),
+Functional database with additional tables was used to store the data. For the exam it was postgreSQL.
+Fixtures to fill the database with updated devices and ROMs was also used.
+It had dockerimage for deployment in aws ec2.
+
+Enjoy the lite version!
