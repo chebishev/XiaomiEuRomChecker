@@ -3,8 +3,6 @@ core functionality needed for the web scrapping
 reading jsons, reading sourceforge folders etc.
 """
 
-import json
-
 import requests
 from bs4 import BeautifulSoup
 
