@@ -7,7 +7,9 @@ import json
 import random
 
 import django
+
 from .json_loader import load_json
+
 
 # just returns current installed django version for the footer
 def django_version(request):
