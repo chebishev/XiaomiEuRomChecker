@@ -7,6 +7,7 @@ import random
 import django
 
 from .json_loader import load_json
+from .functionality import get_last_updated_hyperos_folder
 
 
 # just returns current installed django version for the footer
@@ -15,10 +16,12 @@ def django_version(request):
 
 
 # Goes to the sourceforge hyperos folder and gets the latest updated folder title and link
-def latest_updated_hyperos(request):
+def latest_updated_folder(request):
+    title, folder_link = get_last_updated_hyperos_folder()
     context = {
-        'title': "HyperOS 3.0",
-        'folder_link': "https://sourceforge.net/projects/xiaomi-eu-multilang-miui-roms/files/xiaomi.eu/HyperOS-STABLE-RELEASES/HyperOS3.0/",}
+        'title': title,
+        'folder_link': folder_link
+        }
     return context
 
 
