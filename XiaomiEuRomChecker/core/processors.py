@@ -2,8 +2,6 @@
 All the functions here are added as paths in django.settings -> TEMPLATES
 The results from both are added to the context
 """
-
-import json
 import random
 
 import django
@@ -16,10 +14,8 @@ def django_version(request):
     return {'django_current_version': django.__version__}
 
 
-# First check current date with the last date in the database if there is difference
-# we get the latest added folder in the database and compare it with the current last folder in Sourceforge
-# the function returns the folder name and link to it for the section above the footer
-def latest_hyperos_thread(request):
+# Goes to the sourceforge hyperos folder and gets the latest updated folder title and link
+def latest_updated_hyperos(request):
     context = {
         'title': "HyperOS 3.0",
         'folder_link': "https://sourceforge.net/projects/xiaomi-eu-multilang-miui-roms/files/xiaomi.eu/HyperOS-STABLE-RELEASES/HyperOS3.0/",}

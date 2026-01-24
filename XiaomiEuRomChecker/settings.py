@@ -60,7 +60,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'XiaomiEuRomChecker.core.processors.django_version',
-                'XiaomiEuRomChecker.core.processors.latest_hyperos_thread',
+                'XiaomiEuRomChecker.core.processors.latest_updated_folder',
                 'XiaomiEuRomChecker.core.processors.theme_colors',
                 'XiaomiEuRomChecker.core.processors.tip_of_the_day',
             ],

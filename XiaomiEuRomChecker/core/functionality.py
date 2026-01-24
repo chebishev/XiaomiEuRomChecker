@@ -37,20 +37,13 @@ def get_rom_versions_names():
     return ROMS.keys()
 
 
-def get_last_hyperos_thread(target_url):
-    """
-    Gets the title and URL of the latest HyperOS thread from a given Xiaomi EU forum URL.
-
-    Args:
-        target_url (str): The URL of the Xiaomi EU forum page from which to get the latest HyperOS thread.
-
-    Returns:
-        tuple: A tuple containing the title and URL of the latest HyperOS thread.
-    """
+def get_last_updated_hyperos_folder():
+    target_url = "https://sourceforge.net/projects/xiaomi-eu-multilang-miui-roms/files/xiaomi.eu/HyperOS-STABLE-RELEASES/"
     soup = get_soup(target_url)
-    thread = soup.find("div", class_="structItem-title")
-    title = thread.find("a").text
-    url = f"https://xiaomi.eu{thread.find('a')['href']}"
+    folders = soup.findAll("tr", class_="folder")
+    folder = folders[1]  # the first folder is always Parent Directory
+    title = folder.find("a").text.strip()
+    url = target_url + title
     return (title, url)
 
 
